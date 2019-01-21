@@ -13,8 +13,11 @@
 
 Route::get('page-404', function(){
 	return response()->view('errors.404', [], 404);
-})->name('404'); 
+})->name('404');
 
+
+
+Route::get('/', 'HomeController@index');
 
 $adminPath = config('admin.path');
 

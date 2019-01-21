@@ -212,13 +212,13 @@ function adminMenu()
             'edit' => 'Edit'
         ],
 
-        'settings' => [
-            'name' => 'Settings',
-            'icon' => '<i class="fa fa-sliders" aria-hidden="true"></i>',
-            'link' => '/'.config('admin.path').'/settings/',
-            'view' => true,
-            'edit' => 'Edit'
-        ],
+//        'settings' => [
+//            'name' => 'Settings',
+//            'icon' => '<i class="fa fa-sliders" aria-hidden="true"></i>',
+//            'link' => '/'.config('admin.path').'/settings/',
+//            'view' => true,
+//            'edit' => 'Edit'
+//        ],
 
         'constants' => [
             'name' => 'Constants',
