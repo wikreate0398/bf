@@ -9,20 +9,21 @@
 	   	<div class="col-md-12">  
 			@if($data->count())
 
-				@foreach($data as $type => $auctions)
-					<h2>{{ ucfirst($type) }}</h2>
+
 					<table class="table table-bordered">
 						<tbody>
 							<tr>
 								<th style="width:5%;"></th>
 								<th style="width:5%; text-align: center"><i class="fa fa-eye"></i></th>
-								<th>Code</th>
-								<th style="width:85%;">Name</th>
+								<th class="nw">Auction ID</th>
+								<th style="width:85%;">Product Name</th>
+								<th class="nw">Stock Left</th>
+								<th class="nw">Stock Sold</th>
 								<th style="width:5%;"><i class="fa fa-cogs" aria-hidden="true"></i></th>
 							</tr>
 						</tbody>
 						<tbody id="sort-items" data-table="{{ $table }}" data-action="{{ route('depth_sort') }}">
-							@foreach($auctions as $item)
+							@foreach($data as $item)
 								<tr id="<?=$item['id']?>">
 									<td style="width:50px; text-align:center;" class="handle"> </td>
 									<td style="width:5px;">
@@ -34,6 +35,8 @@
 									</td>
 									<td><span class="badge badge-warning">{{ $item->code }}</span></td>
 									<td>{{ $item->name_en }}</td>
+									<td class="nw"></td>
+									<td class="nw"></td>
 									<td style="width: 5px; white-space: nowrap">
 										<a style="margin-left: 5px;" href="/{{ $method }}/{{ $item['id'] }}/edit/" class="btn btn-primary btn-xs">Edit</a>
 										<a class="btn btn-danger btn-xs" data-toggle="modal" href="#deleteModal_{{ $table }}_{{ $item['id'] }}">Delete</a>
@@ -45,7 +48,6 @@
 							@endforeach
 						</tbody>
 					</table>
-				@endforeach
 			@else
 				<div class="alert alert-warning">No auctions</div>
 			@endif

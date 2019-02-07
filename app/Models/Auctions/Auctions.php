@@ -14,9 +14,9 @@ class Auctions extends Model
     protected $table = 'auctions';
 
     protected $casts = [
-        'bid_limit_people' => 'integer',
-        'quantity'         => 'integer',
-        'bid_limit_date'   => 'date'
+        'personal_bid_limit' => 'integer',
+        'quantity'           => 'integer',
+        'total_bid_limit'    => 'integer'
     ];
 
     protected $dates = ['deleted_at'];
@@ -26,8 +26,8 @@ class Auctions extends Model
         'auction_type',
         'product_type',
         'retail_price',
-        'bid_limit_date',
-        'bid_limit_people',
+        'personal_bid_limit',
+        'total_bid_limit',
         'quantity',
         'name_ru',
         'name_ro',

@@ -274,7 +274,10 @@
                      <?php if (!empty($value['childs'])): ?>
                         <ul class="sub-menu">
                            <?php foreach ($value['childs'] as $key2 => $value2): ?>
-                              <?php if (uri(3) == $key2) { $active = 'active'; }else{ $active = ''; } ?> 
+                               <?php
+                                    $byFullUrl = \Request::path() == rtrim(trim($value2['link'], '/'), '/') ? true : false;
+                               ?>
+                              <?php if ($byFullUrl) { $active = 'active'; }else{ $active = ''; } ?>
                               <li class="<?=$active?>">
                                  <a href="<?=$value2['link']?>">
                                     <?=$value2['name']?>

@@ -364,3 +364,7 @@ select option:disabled {
 .actions_float_none .actions{
   float: none !important;
 }
+
+.nw{
+    white-space: nowrap;
+}

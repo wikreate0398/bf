@@ -102,77 +102,68 @@ function adminMenu()
             'edit' => 'Edit'
         ], 
 
-//       'slider' => [
-//            'name'   => 'Слайдер',
-//            'icon'   => '<i class="fa fa-cogs" aria-hidden="true"></i>',
-//            'link'   => '/'.config('admin.path').'/slider/',
-//            'view'   => true,
-//            'edit'   => 'Редактировать'
-//        ],
-//
- 
-        // 'users' => [
-        //     'name'   => 'Пользователи', 
-        //     'icon'   => '<i class="fa fa-users" aria-hidden="true"></i>',
-        //     'link'   => '/'.config('admin.path').'/users/',
-        //     'view'   => true,
-        //     'edit'   => 'Редактировать',
-        //     'childs' => [
-        //         'pupil' => [
-        //             'name' => 'Ученики', 
-        //             'icon' => '<i class="fa fa-book" aria-hidden="true"></i>',
-        //             'link' => '/'.config('admin.path').'/users/pupil/',
-        //             'view' => true,
-        //             'edit' => 'Редактировать' 
-        //         ],
-
-        //         'teachers' => [
-        //             'name' => 'Преподаватели', 
-        //             'icon' => '<i class="fa fa-book" aria-hidden="true"></i>',
-        //             'link' => '/'.config('admin.path').'/users/teachers/',
-        //             'view' => true,
-        //             'edit' => 'Редактировать' 
-        //         ],
-
-        //         'university' => [
-        //             'name' => 'Учебные заведения', 
-        //             'icon' => '<i class="fa fa-book" aria-hidden="true"></i>',
-        //             'link' => '/'.config('admin.path').'/users/university/',
-        //             'view' => true,
-        //             'edit' => 'Редактировать' 
-        //         ],
-        //     ]
-        // ],
-
-        'auctions' => [
-            'name'   => 'Classical/Specific Auctions',
+        'classical-auctions' => [
+            'name'   => 'Classical Auctions',
             'icon'   => '<i class="fa fa-gavel" aria-hidden="true"></i>',
             'link'   => '/'.config('admin.path').'/front-page/',
             'view'   => true,
             'edit'   => 'Редактировать',
             'childs' => [
                 'auctions' => [
-                    'name' => 'Auctions',
+                    'name' => 'Current Auctions',
                     'icon' => '<i class="fa fa-book" aria-hidden="true"></i>',
-                    'link' => '/'.config('admin.path').'/auctions/auctions/',
+                    'link' => '/'.config('admin.path').'/classical-auctions/auctions/',
                     'view' => true,
                     'edit' => 'Редактировать'
                 ],
 
-                'auction-types' => [
-                    'name' => 'Auction types',
-                    'icon' => '<i class="fa fa-list-ol" aria-hidden="true"></i>',
-                    'link' => '/'.config('admin.path').'/auctions/auction-types/',
+                'add-auctions' => [
+                    'name' => 'Add Auction',
+                    'icon' => '<i class="fa fa-book" aria-hidden="true"></i>',
+                    'link' => '/'.config('admin.path').'/classical-auctions/auctions/add',
                     'view' => true,
-                    'edit' => 'Edit'
+                    'edit' => 'Редактировать'
                 ],
 
-                'product-types' => [
-                    'name' => 'Product types',
-                    'icon' => '<i class="fa fa-list-ol" aria-hidden="true"></i>',
-                    'link' => '/'.config('admin.path').'/auctions/product-types/',
+//                'auction-types' => [
+//                    'name' => 'Auction types',
+//                    'icon' => '<i class="fa fa-list-ol" aria-hidden="true"></i>',
+//                    'link' => '/'.config('admin.path').'/auctions/auction-types/',
+//                    'view' => true,
+//                    'edit' => 'Edit'
+//                ],
+//
+//                'product-types' => [
+//                    'name' => 'Product types',
+//                    'icon' => '<i class="fa fa-list-ol" aria-hidden="true"></i>',
+//                    'link' => '/'.config('admin.path').'/auctions/product-types/',
+//                    'view' => true,
+//                    'edit' => 'Edit'
+//                ],
+            ]
+        ],
+
+        'specific-auctions' => [
+            'name'   => 'Specific Auctions',
+            'icon'   => '<i class="fa fa-gavel" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i>',
+            'link'   => '/'.config('admin.path').'/front-page/',
+            'view'   => true,
+            'edit'   => 'Редактировать',
+            'childs' => [
+                'auctions' => [
+                    'name' => 'Current Auctions',
+                    'icon' => '<i class="fa fa-book" aria-hidden="true"></i>',
+                    'link' => '/'.config('admin.path').'/specific-auctions/auctions/',
                     'view' => true,
-                    'edit' => 'Edit'
+                    'edit' => 'Редактировать'
+                ],
+
+                'add-auctions' => [
+                    'name' => 'Add Auction',
+                    'icon' => '<i class="fa fa-book" aria-hidden="true"></i>',
+                    'link' => '/'.config('admin.path').'/specific-auctions/auctions/add',
+                    'view' => true,
+                    'edit' => 'Редактировать'
                 ],
             ]
         ],

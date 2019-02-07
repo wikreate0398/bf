@@ -67,32 +67,20 @@ Route::group(['prefix' => $adminPath, 'namespace' => 'Admin', 'middleware' => 'a
         Route::post('{id}/update', 'EvouchersController@update');
     });
 
-
-    Route::group(['prefix' => 'auctions'], function() {
-        Route::group(['prefix' => 'auctions'], function() {
-            Route::get('/', 'AuctionsController@show')->name('admin_auctions');
-            Route::get('{id}/edit', 'AuctionsController@showeditForm');
-            Route::get('add', 'AuctionsController@showAddForm');
-            Route::post('create', 'AuctionsController@create');
-            Route::post('{id}/update', 'AuctionsController@update');
+    $auctionTypes = ['specific', 'classical'];
+    foreach($auctionTypes as $key => $type)
+    {
+        Route::group(['prefix' => $type . '-auctions'], function() use($type) {
+            Route::group(['prefix' => 'auctions'], function() use($type) {
+                Route::get('/', 'AuctionsController@show')->name($type.'_admin_auctions');
+                Route::get('{id}/edit', 'AuctionsController@showeditForm');
+                Route::get('add', 'AuctionsController@showAddForm');
+                Route::post('create', 'AuctionsController@create');
+                Route::post('{id}/update', 'AuctionsController@update');
+            });
         });
+    }
 
-        Route::group(['prefix' => 'auction-types'], function() {
-            Route::get('/', 'AuctionTypesController@show')->name('admin_auction_types');
-            Route::get('{id}/edit', 'AuctionTypesController@showeditForm');
-            Route::get('add', 'AuctionTypesController@showAddForm');
-            Route::post('create', 'AuctionTypesController@create');
-            Route::post('{id}/update', 'AuctionTypesController@update');
-        });
-
-        Route::group(['prefix' => 'product-types'], function() {
-            Route::get('/', 'ProductTypesController@show')->name('admin_product_types');
-            Route::get('{id}/edit', 'ProductTypesController@showeditForm');
-            Route::get('add', 'ProductTypesController@showAddForm');
-            Route::post('create', 'ProductTypesController@create');
-            Route::post('{id}/update', 'ProductTypesController@update');
-        });
-    });
 
     Route::group(['prefix' => 'banners'], function() {
         Route::get('/', 'BannerController@show')->name('admin_banner');

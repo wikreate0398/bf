@@ -11,20 +11,21 @@ use App\Utils\UploadImage;
 
 class AuctionsController extends Controller
 {
-
-    private $method = 'auctions/auctions';
+    private $method = 'specific-auctions/auctions';
 
     private $folder = 'auctions';
 
     private $uploadFolder = 'auctions';
 
-    private $redirectRoute = 'admin_auctions';
+    private $redirectRoute = 'specific_admin_auctions';
 
     private $returnDataFields = ['name', 'description', 'seo_keywords', 'seo_description', 'seo_title'];
 
     private $requiredFields = ['product_type', 'auction_type', 'name_en'];
 
     private $input;
+
+    private static $auction_type = 'specific';
 
     /**
      * Create a new controller instance.
@@ -34,6 +35,14 @@ class AuctionsController extends Controller
     public function __construct() 
     {
         $this->model  = new Auctions;
+
+        if(\Request::segment(2) == 'classical-auctions')
+        {
+            self::$auction_type  = 'classical';
+            $this->method        = 'classical-auctions/auctions';
+            $this->redirectRoute = 'classical_admin_auctions';
+        }
+
         $this->method = config('admin.path') . '/' . $this->method;
     }
 
@@ -45,7 +54,7 @@ class AuctionsController extends Controller
     public function show()
     { 
         $data = [
-            'data'   => $this->model->orderByRaw('page_up asc, id desc')->get()->groupBy('auction_type'),
+            'data'   => $this->model->orderByRaw('page_up asc, id desc')->where('auction_type', self::$auction_type)->get(),
             'table'  => $this->model->getTable(),
             'method' => $this->method
         ]; 
@@ -59,6 +68,7 @@ class AuctionsController extends Controller
             'method' => $this->method,
             'auction_types' => AuctionTypes::orderByRaw('page_up asc, id desc')->get(),
             'product_types' => ProductTypes::orderByRaw('page_up asc, id desc')->get(),
+            'auction_type'  => self::$auction_type
         ]);
     }
 
@@ -87,6 +97,7 @@ class AuctionsController extends Controller
             'data'          => $this->model->findOrFail($id),
             'auction_types' => AuctionTypes::orderByRaw('page_up asc, id desc')->get(),
             'product_types' => ProductTypes::orderByRaw('page_up asc, id desc')->get(),
+            'auction_type'  => self::$auction_type
         ]);
     }
 
@@ -123,8 +134,6 @@ class AuctionsController extends Controller
         }
 
         $input['url']   = !empty($input['url']) ? str_slug($input['url'], '-') : str_slug($input['name_en'], '-');
-        $input['bid_limit_date'] = date('Y-m-d', strtotime($input['bid_limit_date']));
-
         return $input;
     }
 

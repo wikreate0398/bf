@@ -40,18 +40,7 @@
 
 							@include('admin.utils.textarea', ['label' => 'Description', 'data' => $data, 'lang' => true, 'name' => 'description'])
 
-							<div class="form-group">
-								<label class="col-md-12 control-label">Auction Type: <span class="req">*</span>
-								</label>
-								<div class="col-md-12">
-									<select class="form-control" name="auction_type">
-										<option value="0">Select...</option>
-										@foreach($auction_types as $item)
-											<option {{ ($data->auction_type == $item->key) ? 'selected' : '' }} value="{{ $item['key'] }}">{{ $item["name_en"] }}</option>
-										@endforeach
-									</select>
-								</div>
-							</div>
+							<input type="hidden" name="auction_type" value="{{ $auction_type }}">
 
 							<div class="form-group">
 								<label class="col-md-12 control-label">Product Type: <span class="req">*</span>
@@ -84,13 +73,20 @@
 								</div>
 								<div class="col-md-3">
 									<div class="form-group">
-										<label class="control-label col-md-12"><i class="fa fa-clock-o" aria-hidden="true"></i> Bid limit</label>
+										<label class="control-label col-md-12"><i class="fa fa-users" aria-hidden="true"></i> Total Bid limit</label>
 										<div class="col-md-12">
-											<div class="input-group input-medium date date-picker" data-date="{{ date('d.m.Y', strtotime($data->bid_limit_date)) }}" data-date-format="dd.mm.yyyy" data-date-viewmode="years">
-												<input type="text" class="form-control" name="bid_limit_date" value="{{ date('d.m.Y', strtotime($data->bid_limit_date)) }}" readonly>
-												<span class="input-group-btn">
-													<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-													</span>
+											<div class="spiner__3">
+												<div class="input-group">
+													<input type="text" value="{{ $data->total_bid_limit }}" name="total_bid_limit" value="1" class="spinner-input form-control" maxlength="1000000000">
+													<div class="spinner-buttons input-group-btn">
+														<button type="button" class="btn spinner-up default">
+															<i class="fa fa-angle-up"></i>
+														</button>
+														<button type="button" class="btn spinner-down default">
+															<i class="fa fa-angle-down"></i>
+														</button>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -117,11 +113,11 @@
 								</div>
 								<div class="col-md-3">
 									<div class="form-group">
-										<label class="control-label col-md-12"><i class="fa fa-clock-o" aria-hidden="true"></i> <i class="fa fa-users" aria-hidden="true"></i> Bid Limit</label>
+										<label class="control-label col-md-12"><i class="fa fa-user" aria-hidden="true"></i> Personal Bid Limit</label>
 										<div class="col-md-12">
 											<div class="spiner__3">
 												<div class="input-group">
-													<input type="text" name="bid_limit_people" class="spinner-input form-control" maxlength="1000000000" value="{{ $data->bid_limit_people }} ">
+													<input type="text" name="personal_bid_limit" class="spinner-input form-control" maxlength="1000000000" value="{{ $data->personal_bid_limit }} ">
 													<div class="spinner-buttons input-group-btn">
 														<button type="button" class="btn spinner-up default">
 															<i class="fa fa-angle-up"></i>
