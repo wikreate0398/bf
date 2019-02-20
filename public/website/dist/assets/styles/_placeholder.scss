@@ -1,0 +1,17 @@
+%background-image{
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+%bg-contain{
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+%display_flex{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}

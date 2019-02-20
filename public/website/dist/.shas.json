@@ -1,0 +1,533 @@
+[
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "index.html",
+        "sha": "2b308df57c6441cb3af18178bef67c3a79724d39"
+      }
+    ],
+    "outputSha": "c6ad0d0644f23960d12b1648379dd49edb422f40",
+    "input": "index.html",
+    "output": [
+      "index.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "pages/home_content.html",
+        "sha": "60fd4df5fb525382af2bbea0fd1fc50c9846e42e"
+      }
+    ],
+    "outputSha": "2485ce0254b66d50fa9367cfa3a9fa033863d010",
+    "input": "pages/home_content.html",
+    "output": [
+      "pages/home_content.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "pages/item_1_empty.html",
+        "sha": "1b6e630220779138dbfb4cea03f957a3e61f974e"
+      }
+    ],
+    "outputSha": "4c362a36e4b5b9906d89a27882402c7d600dfedd",
+    "input": "pages/item_1_empty.html",
+    "output": [
+      "pages/item_1_empty.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "pages/item_2_take_over.html",
+        "sha": "3282273f76ca9e710dccaa3a8b6eee3e3f8d79e3"
+      }
+    ],
+    "outputSha": "a4e1e69588c4338c93e83e7d828b35f327440425",
+    "input": "pages/item_2_take_over.html",
+    "output": [
+      "pages/item_2_take_over.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "pages/item_3_table_type_a.html",
+        "sha": "fd579aec8f4cd85b6944762bdc75b2839436db77"
+      }
+    ],
+    "outputSha": "0a1e5b9bef21fdd93da92b93b975d51811216bee",
+    "input": "pages/item_3_table_type_a.html",
+    "output": [
+      "pages/item_3_table_type_a.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "pages/item_4_table_type_b.html",
+        "sha": "105ca779308f72d996b45980ad0882d3d879b720"
+      }
+    ],
+    "outputSha": "3239cab9202806d012e9f7eb701d3bfb4ac2b15c",
+    "input": "pages/item_4_table_type_b.html",
+    "output": [
+      "pages/item_4_table_type_b.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "pages/licitatii_specifice.html",
+        "sha": "16310d283940412d0c07e963d92003fe9b665aaa"
+      }
+    ],
+    "outputSha": "f82fbc6bb9dc5f6b4d259767c3bbe9c003e0162a",
+    "input": "pages/licitatii_specifice.html",
+    "output": [
+      "pages/licitatii_specifice.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "pages/results.html",
+        "sha": "fac364d5f31b64a1db3ac6ebb57c9acbfc0dea2e"
+      }
+    ],
+    "outputSha": "79219589c452c95568e09bed809b04d75d1cc43a",
+    "input": "pages/results.html",
+    "output": [
+      "pages/results.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "pages/terms_conditions.html",
+        "sha": "fa01c0e6e8358d20dc4ffa3d9ed11b3e256a72e9"
+      }
+    ],
+    "outputSha": "70c4ab3e219f0dfd495e3bf0a7f84488af66f6f9",
+    "input": "pages/terms_conditions.html",
+    "output": [
+      "pages/terms_conditions.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "partials/footer.html",
+        "sha": "a89923ac092bcb3731b3f3fbb031494c5d506206"
+      }
+    ],
+    "outputSha": "3b62af7a04c699dde3b57b4fdd2f43ab72ad6aa0",
+    "input": "partials/footer.html",
+    "output": [
+      "partials/footer.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "partials/header_not_registered.html",
+        "sha": "be870a580af4a0ec0c784d1f57af23c1774685ed"
+      }
+    ],
+    "outputSha": "3723262c90ee92f4bb4039325416b63f9117b3e0",
+    "input": "partials/header_not_registered.html",
+    "output": [
+      "partials/header_not_registered.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "partials/header_registered.html",
+        "sha": "e16680722176594866c13afb5368ebe06fdabe22"
+      }
+    ],
+    "outputSha": "ec9a495fec40967b551426ff3ae0dc35fd5634e4",
+    "input": "partials/header_registered.html",
+    "output": [
+      "partials/header_registered.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "assets/scripts/main.js",
+        "sha": "24d5839cd1ff4266190da42194aff2235c0edbff"
+      }
+    ],
+    "outputSha": "53b470f105fe0adfa8922cbb3182ef98a04a5403",
+    "input": "assets/scripts/main.js",
+    "output": [
+      "assets/scripts/main.js.map",
+      "assets/scripts/main.js"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "assets/styles/_fonts.scss",
+        "sha": "34e5492b4d86e91015db87745bc088a70acdab62"
+      }
+    ],
+    "outputSha": "34e5492b4d86e91015db87745bc088a70acdab62",
+    "input": "assets/styles/_fonts.scss",
+    "output": [
+      "assets/styles/_fonts.scss"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "assets/styles/_mixins.scss",
+        "sha": "7476e2a780079388a47e83fde07120861c78b17d"
+      }
+    ],
+    "outputSha": "7476e2a780079388a47e83fde07120861c78b17d",
+    "input": "assets/styles/_mixins.scss",
+    "output": [
+      "assets/styles/_mixins.scss"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "assets/styles/_placeholder.scss",
+        "sha": "1a86462cf43879d3b9aa63524995c758ab9c01ac"
+      }
+    ],
+    "outputSha": "1a86462cf43879d3b9aa63524995c758ab9c01ac",
+    "input": "assets/styles/_placeholder.scss",
+    "output": [
+      "assets/styles/_placeholder.scss"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "assets/styles/_vars.scss",
+        "sha": "b90d2d72db8841e8c6334b0d5e32970aca2c9ec5"
+      }
+    ],
+    "outputSha": "b90d2d72db8841e8c6334b0d5e32970aca2c9ec5",
+    "input": "assets/styles/_vars.scss",
+    "output": [
+      "assets/styles/_vars.scss"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "assets/styles/circle.css",
+        "sha": "324c72b9f326c9e6f4f035416afd46c912757c8b"
+      }
+    ],
+    "outputSha": "c77e2d068607feb87eace9235c83f7c8434addf3",
+    "input": "assets/styles/circle.css",
+    "output": [
+      "assets/styles/circle.css.map",
+      "assets/styles/circle.css"
+    ]
+  },
+  {
+    "type": "node-sass@4.11.0::map::minify",
+    "inputSha": [
+      {
+        "file": "assets/styles/main.scss",
+        "sha": "bb6733daa8d0c6c8d1b86efce2d20bc671622b52"
+      },
+      {
+        "file": "assets/styles/pages/product.scss",
+        "sha": "e32a667a6effe79e5665501711802a9198bcedec"
+      },
+      {
+        "file": "assets/styles/pages/home.scss",
+        "sha": "755c2baf512589befb1b526196346c48931c7b22"
+      },
+      {
+        "file": "assets/styles/_fonts.scss",
+        "sha": "34e5492b4d86e91015db87745bc088a70acdab62"
+      },
+      {
+        "file": "assets/styles/_mixins.scss",
+        "sha": "7476e2a780079388a47e83fde07120861c78b17d"
+      },
+      {
+        "file": "assets/styles/_vars.scss",
+        "sha": "b90d2d72db8841e8c6334b0d5e32970aca2c9ec5"
+      },
+      {
+        "file": "assets/styles/pages/licitatii_specifice.scss",
+        "sha": "44621b74abae4bf5d78d62c29a0cbe13c8031c3a"
+      },
+      {
+        "file": "assets/styles/pages/oferte_plasate.scss",
+        "sha": "bcd124ff27b8941a9a7f764a28f61f6ee1cf1a48"
+      },
+      {
+        "file": "assets/styles/pages/results.scss",
+        "sha": "e40f8bfe40580ae737cd44816747a8bf5a66579f"
+      },
+      {
+        "file": "assets/styles/pages/terms_conditions.scss",
+        "sha": "3911f768d43c3c28a0fb4cb4ba40443744a36b87"
+      },
+      {
+        "file": "assets/styles/pages/change_pass.scss",
+        "sha": "bc4ef22279b6d0cec2be57113bf5c82173970104"
+      },
+      {
+        "file": "assets/styles/pages/checkout.scss",
+        "sha": "ea9dd3ef47dd196741a607270cb8ef17c482e0d8"
+      }
+    ],
+    "outputSha": "7ee26e5b95f04a7978a118934168b7fa308bcee6",
+    "input": "assets/styles/main.scss",
+    "output": [
+      "assets/styles/main.css.map",
+      "assets/styles/main.css"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "pages/registered/change_pass.html",
+        "sha": "623b089edce8633d1249aadf239f7806e416cc4c"
+      }
+    ],
+    "outputSha": "a06f5ee4feb2a0d189442d2e656fbc56857de65f",
+    "input": "pages/registered/change_pass.html",
+    "output": [
+      "pages/registered/change_pass.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "pages/registered/checkout_1.html",
+        "sha": "fb74bf0a5919a47bd47f2c5d84f734c9e28c8348"
+      }
+    ],
+    "outputSha": "1b907b5c67b151b03f5be0e608fbe9c25d6884f8",
+    "input": "pages/registered/checkout_1.html",
+    "output": [
+      "pages/registered/checkout_1.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "pages/registered/checkout_2.html",
+        "sha": "340deb3a4e2cf3e77f00d199fe9da3df0beb5e1a"
+      }
+    ],
+    "outputSha": "1211ca2dfeb569eb857847f6e0045516768c275d",
+    "input": "pages/registered/checkout_2.html",
+    "output": [
+      "pages/registered/checkout_2.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "pages/registered/checkout_empty.html",
+        "sha": "d1dd1b16da95d6db9fbe1d7a189f6b0b7e18271c"
+      }
+    ],
+    "outputSha": "03c658b9750cd91e7611526cbe5d1c8e41581c7f",
+    "input": "pages/registered/checkout_empty.html",
+    "output": [
+      "pages/registered/checkout_empty.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "pages/registered/oferte_plasate.html",
+        "sha": "99b54550dd62a1f37767aca959a9ddb266d96956"
+      }
+    ],
+    "outputSha": "6ba541127222c68df624919840e4e1d9803eb88e",
+    "input": "pages/registered/oferte_plasate.html",
+    "output": [
+      "pages/registered/oferte_plasate.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "pages/registered/oferte_plasate_1.html",
+        "sha": "5022c2ba4e28f93ca7ffbc49327bf187bd9752d9"
+      }
+    ],
+    "outputSha": "4640ed47cd1b95889dce1bf317efcf319aa1b0b3",
+    "input": "pages/registered/oferte_plasate_1.html",
+    "output": [
+      "pages/registered/oferte_plasate_1.html"
+    ]
+  },
+  {
+    "type": "::map::minify",
+    "inputSha": [
+      {
+        "file": "pages/registered/oferte_plasate_2.html",
+        "sha": "d318d095687e7ca261ebde1efa3802c5dcac1c87"
+      }
+    ],
+    "outputSha": "60721c491222c5dd07722dd162438f87732a9bf5",
+    "input": "pages/registered/oferte_plasate_2.html",
+    "output": [
+      "pages/registered/oferte_plasate_2.html"
+    ]
+  },
+  {
+    "type": "node-sass@4.11.0::map::minify",
+    "inputSha": [
+      {
+        "file": "assets/styles/pages/change_pass.scss",
+        "sha": "bc4ef22279b6d0cec2be57113bf5c82173970104"
+      }
+    ],
+    "outputSha": "6dab18f2138e9d57bced4316c721fc9e59ef0347",
+    "input": "assets/styles/pages/change_pass.scss",
+    "output": [
+      "assets/styles/pages/change_pass.css.map",
+      "assets/styles/pages/change_pass.css"
+    ]
+  },
+  {
+    "type": "node-sass@4.11.0::map::minify",
+    "inputSha": [
+      {
+        "file": "assets/styles/pages/checkout.scss",
+        "sha": "ea9dd3ef47dd196741a607270cb8ef17c482e0d8"
+      }
+    ],
+    "outputSha": "411bde75d62ed6c621818bf7c3dcb548a39086f8",
+    "input": "assets/styles/pages/checkout.scss",
+    "output": [
+      "assets/styles/pages/checkout.css.map",
+      "assets/styles/pages/checkout.css"
+    ]
+  },
+  {
+    "type": "node-sass@4.11.0::map::minify",
+    "inputSha": [
+      {
+        "file": "assets/styles/pages/home.scss",
+        "sha": "755c2baf512589befb1b526196346c48931c7b22"
+      }
+    ],
+    "outputSha": "5eaf02b62426a5ee8043089e517baa563b1d390b",
+    "input": "assets/styles/pages/home.scss",
+    "output": [
+      "assets/styles/pages/home.css.map",
+      "assets/styles/pages/home.css"
+    ]
+  },
+  {
+    "type": "node-sass@4.11.0::map::minify",
+    "inputSha": [
+      {
+        "file": "assets/styles/pages/licitatii_specifice.scss",
+        "sha": "44621b74abae4bf5d78d62c29a0cbe13c8031c3a"
+      }
+    ],
+    "outputSha": "cf65924008bc2b934af45d86e19861937e3ac191",
+    "input": "assets/styles/pages/licitatii_specifice.scss",
+    "output": [
+      "assets/styles/pages/licitatii_specifice.css.map",
+      "assets/styles/pages/licitatii_specifice.css"
+    ]
+  },
+  {
+    "type": "node-sass@4.11.0::map::minify",
+    "inputSha": [
+      {
+        "file": "assets/styles/pages/oferte_plasate.scss",
+        "sha": "bcd124ff27b8941a9a7f764a28f61f6ee1cf1a48"
+      }
+    ],
+    "outputSha": "554f7b25f4c5c1a79ef9fa3987ce81c778292395",
+    "input": "assets/styles/pages/oferte_plasate.scss",
+    "output": [
+      "assets/styles/pages/oferte_plasate.css.map",
+      "assets/styles/pages/oferte_plasate.css"
+    ]
+  },
+  {
+    "type": "node-sass@4.11.0::map::minify",
+    "inputSha": [
+      {
+        "file": "assets/styles/pages/product.scss",
+        "sha": "e32a667a6effe79e5665501711802a9198bcedec"
+      }
+    ],
+    "outputSha": "eabfe1e2474308c93da120f2539f895106c14e5f",
+    "input": "assets/styles/pages/product.scss",
+    "output": [
+      "assets/styles/pages/product.css.map",
+      "assets/styles/pages/product.css"
+    ]
+  },
+  {
+    "type": "node-sass@4.11.0::map::minify",
+    "inputSha": [
+      {
+        "file": "assets/styles/pages/results.scss",
+        "sha": "e40f8bfe40580ae737cd44816747a8bf5a66579f"
+      }
+    ],
+    "outputSha": "5c762dc1093c1d72fd15a0d50b4f5268821d54e0",
+    "input": "assets/styles/pages/results.scss",
+    "output": [
+      "assets/styles/pages/results.css.map",
+      "assets/styles/pages/results.css"
+    ]
+  },
+  {
+    "type": "node-sass@4.11.0::map::minify",
+    "inputSha": [
+      {
+        "file": "assets/styles/pages/terms_conditions.scss",
+        "sha": "3911f768d43c3c28a0fb4cb4ba40443744a36b87"
+      }
+    ],
+    "outputSha": "69ec8fa5dfd457b547ce02d9c1ebdd4d5a8a0d53",
+    "input": "assets/styles/pages/terms_conditions.scss",
+    "output": [
+      "assets/styles/pages/terms_conditions.css.map",
+      "assets/styles/pages/terms_conditions.css"
+    ]
+  }
+]
