@@ -6,13 +6,25 @@ use App\Models\Languages;
 
 class Language  
 {
-	function __construct() {} 
 
+    public function __construct() {}
+
+    /*
+     * Select all languages
+     */
 	public static function get()
 	{
 		return Languages::orderByRaw('page_up asc, id desc')->get();
 	}
 
+    /*
+     * Select all languages
+     *
+     * @param $fields
+     * @param $post
+     *
+     * @return array
+     */
 	public static function returnData($fields, $post = false)
 	{
 		if (empty($post)) 
@@ -29,5 +41,5 @@ class Language
 		}
 
 		return $post;
-	} 	
+	}
 }

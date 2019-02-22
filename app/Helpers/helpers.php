@@ -203,13 +203,13 @@ function adminMenu()
             'edit' => 'Edit'
         ],
 
-//        'settings' => [
-//            'name' => 'Settings',
-//            'icon' => '<i class="fa fa-sliders" aria-hidden="true"></i>',
-//            'link' => '/'.config('admin.path').'/settings/',
-//            'view' => true,
-//            'edit' => 'Edit'
-//        ],
+        'settings' => [
+            'name' => 'Settings',
+            'icon' => '<i class="fa fa-sliders" aria-hidden="true"></i>',
+            'link' => '/'.config('admin.path').'/settings/',
+            'view' => true,
+            'edit' => 'Edit'
+        ],
 
         'constants' => [
             'name' => 'Constants',
@@ -236,9 +236,53 @@ function adminMenu()
 //    ];
 //}
 
+function setting($key)
+{
+    return \App\Utils\Settings::get($key);
+}
+
+function key_to_id($array) {
+    if (empty($array)) {
+        return array();
+    }
+    $new_arr = array();
+    foreach ($array as $id => &$node) {
+        $new_arr[$node['id']] =& $node;
+    }
+    return $new_arr;
+}
+
+
+
+function tree($dataset)
+{
+    if($dataset instanceof Illuminate\Database\Eloquent\Collection){
+        $dataset = $dataset->toArray();
+    }
+    $dataset = key_to_id($dataset);
+    $tree    = array();
+    foreach ($dataset as $id => &$node) {
+        if (!$node['parent_id']) {
+            $tree[$id] =& $node;
+        } else {
+            $dataset[$node['parent_id']]['childs'][$id] =& $node;
+        }
+    }
+    return $tree;
+}
+
 function uri($segment)
 {
     return request()->segment($segment);
+}
+
+function lang()
+{
+    return \App::getLocale();
+}
+
+function setUri($uri){
+    return '/' . lang() . '/' . $uri;
 }
 
 function priceString($price){ 
@@ -266,6 +310,16 @@ function uploadBase64($base64, $path){
     $data = str_replace(' ', '+', $data);
     $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));    
     file_put_contents($path, $data); 
+}
+
+function setLangUri($lang){
+    $url  = \Request::path();
+
+    $a    = array_slice(explode('/', $url), 1);
+    $b    = implode('/', $a);
+    $link = $b.(!empty(\Request::server('QUERY_STRING')) ? '?'.\Request::server('QUERY_STRING') : '');
+
+    return "/$lang/" .$link;
 }
 
 function imageThumb($image, $path, $width, $height, $v)

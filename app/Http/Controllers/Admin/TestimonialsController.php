@@ -18,7 +18,7 @@ class TestimonialsController extends Controller
 
     private $redirectRoute = 'admin_testimonials';
 
-    private $returnDataFields = ['name', 'review'];
+    private $returnDataFields = ['name', 'review', 'short'];
 
     private $requiredFields = ['name_en'];
 

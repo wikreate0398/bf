@@ -18,7 +18,11 @@
 
 				<div class="form-body" style="padding-top: 20px;"> 
 					@include('admin.utils.input', ['label' => 'Name', 'lang' => true, 'name' => 'name'])
- 
+
+					@include('admin.utils.input', ['label' => 'Video link', 'name' => 'video'])
+
+					@include('admin.utils.textarea', ['label' => 'Short review', 'lang' => true, 'name' => 'short'])
+
 					@include('admin.utils.textarea', ['label' => 'Review', 'lang' => true, 'name' => 'review'])
 
 					@include('admin.utils.image', ['inputName' => 'image'])

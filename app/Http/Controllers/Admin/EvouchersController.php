@@ -53,7 +53,7 @@ class EvouchersController extends Controller
     public function create(Request $request, UploadImage $uploadImage)
     {
         $input = \Language::returnData($this->returnDataFields); 
-        $input['image'] = $uploadImage->upload('image', 'slider');
+        $input['image'] = $uploadImage->upload('image', 'evouchers');
         $this->model->create($input);
         return \App\Utils\JsonResponse::success(['redirect' => route($this->redirectRoute)], trans('admin.save')); 
     }
@@ -67,7 +67,7 @@ class EvouchersController extends Controller
     { 
         $data  = $this->model->findOrFail($id); 
         $input = \Language::returnData($this->returnDataFields);   
-        $image = $uploadImage->upload('image', 'slider');
+        $image = $uploadImage->upload('image', 'evouchers');
 
         if (!empty($image)) {
             $input['image'] = $image;

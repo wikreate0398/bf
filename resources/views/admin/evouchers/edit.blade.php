@@ -24,7 +24,7 @@
 						@include('admin.utils.image', [
 						'inputName' => 'image', 
 						'table' => $table, 
-						'folder' => 'slider', 
+						'folder' => 'evouchers',
 						'id' => $data['id'], 
 						'filename' => $data['image']])
 					</div>

@@ -255,6 +255,8 @@ var Ajax = {
                     }else{
                         $(element).closest(parent).find('#thumb-img').attr('src', 'http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image');
                     }
+
+                    $('.target_image_' + id).remove();
                  
                     $(element).closest(parent).find('.del_btn').hide();
                 }

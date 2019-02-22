@@ -95,7 +95,13 @@ class AjaxController extends Controller
     {
         $id        = $request->input('id');
         $table     = $request->input('table'); 
-        $nameField = $request->input('name') ? $request->input('name') : 'image'; 
+        $nameField = $request->input('name') ? $request->input('name') : 'image';
+
+        if($table == 'settings')
+        {
+            $nameField = 'value';
+        }
+
         if (Schema::hasColumn($table, $nameField)) {
             DB::table($table)->where('id', $id)->update([$nameField => '']);   
         }

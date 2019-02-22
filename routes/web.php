@@ -16,9 +16,6 @@ Route::get('page-404', function(){
 })->name('404');
 
 
-
-Route::get('/', 'HomeController@index');
-
 $adminPath = config('admin.path');
 
 Route::get($adminPath . '/login', 'Admin\LoginController@showLoginForm', ['guard' => 'admin'])->name('admin_login');
@@ -90,6 +87,11 @@ Route::group(['prefix' => $adminPath, 'namespace' => 'Admin', 'middleware' => 'a
         Route::post('{id}/update', 'BannerController@update');
     });
 
+    Route::group(['prefix' => 'settings'], function() {
+        Route::get('/', 'SettingsController@show')->name('admin_settings');
+        Route::post('save', 'SettingsController@save');
+    });
+
     Route::group(['prefix' => 'front-page'], function() {
         Route::group(['prefix' => 'testimonials'], function() {
             Route::get('/', 'TestimonialsController@show')->name('admin_testimonials');
@@ -125,3 +127,11 @@ Route::group(['prefix' => $adminPath, 'namespace' => 'Admin', 'middleware' => 'a
 
 
 
+Route::get('/', 'HomeController@index')->middleware('lang');
+
+Route::group(['prefix' => '{lang}', 'middleware' => 'lang'], function() {
+
+    Route::get('/', 'HomeController@index');
+
+    Route::get('{any}', 'HomeController@page');
+});

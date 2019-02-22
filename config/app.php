@@ -179,6 +179,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+
     ],
 
     /*
@@ -231,7 +232,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'ImageOptimizer'  => Spatie\LaravelImageOptimizer\ImageOptimizerFacade::class,
         'LogsReportAgent' => App\Utils\LogsReportAgent::class,
-        'JsonResponse'    => App\Utils\JsonResponse::class
+        'JsonResponse'    => App\Utils\JsonResponse::class,
+        'Pages'    => App\Utils\Pages::class
     ],
 
 ];
