@@ -52,6 +52,6 @@ class ForgotPasswordController extends Controller
 
         $user->notify(new ResetPassword($newPassword));
 
-        return \JsonResponse::success(['message' => \Constant::get('NEW_PASS_SEND')]);
+        return \JsonResponse::success(['messages' => \Constant::get('NEW_PASS_SEND')]);
     }
 }

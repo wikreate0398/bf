@@ -65,7 +65,7 @@ class RegisterController extends Controller
 
         if(User::where('email', $request->email)->count())
         {
-            return \JsonResponse::error(['messages' => \Constant::get('USER_NOT_EXIST')]);
+            return \JsonResponse::error(['messages' => \Constant::get('USER_EXIST')]);
         }
 
         $confirm_hash = md5(microtime());
