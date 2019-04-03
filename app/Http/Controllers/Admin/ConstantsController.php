@@ -57,10 +57,10 @@ class ConstantsController extends Controller
             $insertData = [];
             foreach ($request->data as $idConstant => $values)
             {
-                foreach ($values as $idLang => $value)
+                foreach ($values as $lang => $value)
                 {
                     $insertData[] = [
-                        'id_lang'  => $idLang,
+                        'lang'     => $lang,
                         'id_const' => $idConstant,
                         'value'    => htmlspecialchars(trim($value))
                     ];
@@ -89,7 +89,7 @@ class ConstantsController extends Controller
 
         foreach ($request->value as $key => $value)
         {
-            ConstantsValue::create(['id_lang' => $key, 'value' => $value, 'id_const' => $id]);
+            ConstantsValue::create(['lang' => $key, 'value' => $value, 'id_const' => $id]);
         }
        // exit(print_arr($request->all()));
         return \App\Utils\JsonResponse::success(['redirect' => route($this->redirectRoute)], trans('admin.save'));

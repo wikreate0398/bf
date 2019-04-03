@@ -151,13 +151,15 @@ var Ajax = {
             stop: function() {
                 var arr = $(idElement).sortable('toArray');
                 var table = $(idElement).attr('data-table');
+
                 jQuery.ajax({
                     type: 'POST',
                     url: '/'+adminArea+'/ajax/sortElement',
                     dataType: 'json',
                     data: {
                         arr: arr,
-                        table: table
+                        table: table,
+                        _token: CSRF_TOKEN
                     },
                     beforeSend: function() {},
                     error: function(XMLHttpRequest, textStatus, errorThrown) {

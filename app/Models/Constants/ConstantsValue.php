@@ -11,13 +11,18 @@ class ConstantsValue extends Model
 	protected $table = 'constants_value';
 
 	protected $fillable = [
-        'id_lang',
+        'lang',
         'id_const',
         'value'
     ];
 
 	protected $casts = [
-	    'id_lang'  => 'integer',
         'id_const' => 'integer',
+        'value'    => 'content'
     ];
+
+    public function constant()
+    {
+        return $this->hasOne('App\Models\Constants\Constants', 'id', 'id_const');
+    }
 }

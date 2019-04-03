@@ -37,15 +37,14 @@ class Pages
         }
         else
         {
-            $url = \Request::segment(2) ? \Request::segment(2) : '/';
-            $query = $query->where('url', $url);
+            $query = $query->where('url', self::uriName());
         }
         return $query->first();
     }
 
-    public function uriName()
+    public static function uriName()
     {
-        return !request()->segment(2) ? '/' : request()->segment(2);
+        return \Request::segment(2) ? \Request::segment(2) : '/';
     }
 
     public function getUriByType($type)

@@ -22,7 +22,7 @@
 								<th style="width:5%;"><i class="fa fa-cogs" aria-hidden="true"></i></th>
 							</tr>
 						</tbody>
-						<tbody id="sort-items" data-table="{{ $table }}" data-action="{{ route('depth_sort') }}">
+						<tbody id="sort-items" data-table="{{ $table }}" data-action="{{ route('sortElement') }}">
 							@foreach($data as $item)
 								<tr id="<?=$item['id']?>">
 									<td style="width:50px; text-align:center;" class="handle"> </td>

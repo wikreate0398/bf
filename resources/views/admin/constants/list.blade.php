@@ -54,7 +54,7 @@
 									<div class="form-group">
 										<label class="col-md-12 control-label">Value {{ $language->short }}</label>
 										<div class="col-md-12">
-											<textarea name="value[{{ $language->id }}]" class="form-control"></textarea>
+											<textarea name="value[{{ $language->short }}]" class="form-control"></textarea>
 										</div>
 									</div>
 								@endforeach
@@ -98,9 +98,9 @@
 										@foreach(Language::get() as $key => $language)
 											<div class="col-md-4">
 												<span style="display: block;" class="label label-info">{{ $language->name }}</span>
-												<textarea name="data[{{ $constant->id }}][{{ $language->id }}]"
-														  class="form-control"
-														  style="max-width: 100%; min-width: 100%; min-height: 55px;">{{ @$constant->constants_value->keyBy('id_lang')[$language->id]['value'] }}</textarea>
+												<textarea name="data[{{ $constant->id }}][{{ $language->short }}]"
+														  class="form-control {{ $constant->editor ? 'ckeditor' : '' }}"
+														  style="max-width: 100%; min-width: 100%; min-height: 55px;">{{ @$constant->constants_value->keyBy('lang')[$language->short]['value'] }}</textarea>
 											</div>
 										@endforeach
 									</div>

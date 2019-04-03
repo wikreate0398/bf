@@ -78,7 +78,6 @@ Route::group(['prefix' => $adminPath, 'namespace' => 'Admin', 'middleware' => 'a
         });
     }
 
-
     Route::group(['prefix' => 'banners'], function() {
         Route::get('/', 'BannerController@show')->name('admin_banner');
         Route::get('{id}/edit', 'BannerController@showeditForm');
@@ -126,12 +125,64 @@ Route::group(['prefix' => $adminPath, 'namespace' => 'Admin', 'middleware' => 'a
 });
 
 
-
-Route::get('/', 'HomeController@index')->middleware('lang');
-
-Route::group(['prefix' => '{lang}', 'middleware' => 'lang'], function() {
-
+Route::get('/', 'HomeController@index')->middleware(['lang']);
+Route::group(['prefix' => '{lang}', 'middleware' => ['lang']], function() {
     Route::get('/', 'HomeController@index');
 
+    Route::group(['middlewars' => 'guest'], function(){
+        Route::post('register', 'Auth\RegisterController@register')->name('register');
+        Route::get('finish-registration', 'Auth\RegisterController@finish_registration')->name('finish_registration');
+        Route::get('registration-confirm/{confirmation_hash}', 'Auth\RegisterController@confirmation')->name('registration_confirm');
+        Route::post('login', 'Auth\LoginController@login')->name('login');
+        Route::post('reset-password', 'Auth\ForgotPasswordController@sendResetPassword')->name('send_reset_pass');
+
+        Route::group(['prefix' => 'profile', 'namespace' => 'User', 'middleware' => 'web_auth'], function() {
+            Route::get('personal-data', 'ProfileController@personalData')->name('personal_data');
+            Route::post('personal-data', 'ProfileController@savePersonalData')->name('save_personal_data');
+
+            Route::get('change-password', 'ProfileController@changePass')->name('change_pass');
+            Route::post('change-password', 'ProfileController@savePassword')->name('save_new_password');
+
+            Route::group(['prefix' => 'register'], function() {
+                Route::get('offers-placed', 'RegisterController@offersPlaced')->name('offers_placed');
+            });
+        });
+    });
+
+    Route::group(['prefix' => 'cart', 'namespace' => 'Cart'], function() {
+        Route::get('empty', 'CartController@empty_cart')->name('empty_cart');
+        Route::get('view/{url?}', 'CartController@view')->name('view_cart');
+        Route::get('delete/{id}', 'CartController@delete')->name('delete_cart_item');
+    });
+
+    $classicalAuctionUrl = Pages::pageData('classical-auctions')->url;
+    Route::get($classicalAuctionUrl, 'Auctions\ClassicAuctionController@index');
+    Route::get("{$classicalAuctionUrl}/{url}", 'Auctions\ClassicAuctionController@show');
+    Route::post("{$classicalAuctionUrl}/add-bid/{id}", 'Auctions\ClassicAuctionController@addBid')->middleware('web_auth');
+
+    $classicalAuctionUrl = Pages::pageData('specific-auctions')->url;
+    Route::get($classicalAuctionUrl, 'Auctions\SpecificAuctionController@index');
+    Route::get("{$classicalAuctionUrl}/{url}", 'Auctions\SpecificAuctionController@show');
+    Route::post("{$classicalAuctionUrl}/add-bid/{id}", 'Auctions\SpecificAuctionController@addBid')->middleware('web_auth');
+
+    /*
+     * Routes for authorized users
+     */
+    Route::group(['middleware' => ['web_auth']], function(){
+        Route::get('logout', function(){
+            Auth::guard('web')->logout();
+            return  redirect('/');
+        })->name('logout');
+    });
+
+
+    /*
+     * If not exist route
+     */
     Route::get('{any}', 'HomeController@page');
 });
+
+
+
+//Auth::routes();
+

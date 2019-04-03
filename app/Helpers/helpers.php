@@ -22,6 +22,30 @@ if (!function_exists('key_to_id')) {
     }
 }
 
+function generate_id($length=6)
+{
+    $number = '';
+    for ($i=$length; $i--; $i>0) {
+        $number .= mt_rand(0,9);
+    }
+    return $number;
+}
+
+function random_str(
+    $length=6,
+    $keyspace = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()_+'
+) {
+    $str = '';
+    $max = mb_strlen($keyspace, '8bit') - 1;
+    if ($max < 1) {
+        throw new Exception('$keyspace must be at least two characters long');
+    }
+    for ($i = 0; $i < $length; ++$i) {
+        $str .= $keyspace[random_int(0, $max)];
+    }
+    return $str;
+}
+
 function sortValue($arr){
     if (empty($arr)) return;
 
@@ -276,6 +300,14 @@ function uri($segment)
     return request()->segment($segment);
 }
 
+function isActiveLink($route)
+{
+    if($route == \Request::url())
+    {
+        return true;
+    }
+}
+
 function lang()
 {
     return \App::getLocale();
@@ -288,6 +320,11 @@ function setUri($uri){
 function priceString($price){ 
     if (empty($price)) return '0.00'; 
     return number_format($price, 0, '.', ' ');
+}
+
+function bigNumberFormat($number)
+{
+    return number_format($number, '0', ',', ',');
 }
 
 function toFloat($s) {

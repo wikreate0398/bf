@@ -7,3 +7,31 @@
     margin-bottom: 30px;
     text-align: center;
 }
+
+
+#ajax-notify{
+    min-width: 350px;
+    display: none;
+}
+
+.inner{
+    font-size: 14px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    padding-right: 20px;
+}
+
+#ajax-notify.notify-success{
+    background-color: rgb(149, 220, 73);
+    color: #62632A;
+}
+
+#ajax-notify.notify-danger{
+    background: #ea6a6a;
+    color: #fff;
+}
+
+.req{
+    color: #ea6a6a;
+}
+

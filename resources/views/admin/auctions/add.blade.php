@@ -34,6 +34,7 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="tab_1"> 
 							@include('admin.utils.input', ['label' => 'Name', 'lang' => true, 'name' => 'name', 'req' => true])
+							@include('admin.utils.input', ['label' => 'Name part 2', 'lang' => true, 'name' => 'name2'])
 
 							@include('admin.utils.input', ['label' => 'Link', 'name' => 'url', 'help' => 'Without http://www и.т.п just an English phrase, without spaces, reflecting a menu item, for example Our approach - our-approach'])
 

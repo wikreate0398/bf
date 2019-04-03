@@ -5,25 +5,27 @@
     <section class="home" style="background-image: url('/uploads/uploads/{{ setting('home_background') }}');">
         <div class="container">
             <div class="row">
-                <h2>Cu noi poți economisi  <span>peste 90%</span>   <br>
-                    la achitarea serviciilor și produselor</h2>
+                <h2>{!! html_entity_decode(\Constant::get('HOME_TITLE')) !!}</h2>
 
                 <div class="providers">
                     @foreach($evouchers as $evoucher)
-                        <a href="#"><img src="/uploads/evouchers/{{ $evoucher["image"] }}" alt="{{ $evoucher["name_$lang"] }}"></a>
+                        <img src="/uploads/evouchers/{{ $evoucher["image"] }}" alt="{{ $evoucher["name_$lang"] }}">
                     @endforeach
                 </div>
-                <a href="#" class="button">VEZI MAI MULTE</a>
+                <div class="home_button">
+                    {!! html_entity_decode(\Constant::get('HOME_BTN')) !!}
+                </div>
+                {{--<a href="#" class="button">VEZI MAI MULTE</a>--}}
             </div>
         </div>
     </section>
     @if(setting('extend_homepage'))
     <section class="amount_economy">
         <div class="container">
-            <h3>Clienții noștri au economisit până acum:</h3>
+            <h3>{{ \Constant::get('CUSTOMER_HOME') }}</h3>
             <div class="currency_ammount">
                 <div id="amount_digits" data-content="297927797"></div>
-                <span class="currency">Lei</span>
+                <span class="currency">{{ \Constant::get('LEI') }}</span>
             </div>
 
         </div>
@@ -32,7 +34,7 @@
     <section class="top_sales">
         <div class="container">
 
-            <h3>Top-ul reducerilor acordate:</h3>
+            <h3>{{ \Constant::get('TOP_DISCOUNTS') }}</h3>
             <div class="sale_content">
 
                 <div class="sale_item">
@@ -80,7 +82,7 @@
 
     <section class="testimonials">
         <div class="container">
-            <h3>Clientii nostri</h3>
+            <h3>{{ \Constant::get('OUR_CLIENTS') }}</h3>
 
             <div id="dg-container" class="testimonials_galery dg-container">
                 <div class="dg-wrapper">
@@ -106,16 +108,9 @@
                                     <p>{!! nl2br($testimonial["review_$lang"]) !!}</p>
                                 </div>
                             @endif
-
                         </div>
                     @endforeach
-
-
                 </div>
-
-
-
-
                 <nav>
                     <div class="dg-prev nav"></div>
                     <div class="dg-next nav"></div>

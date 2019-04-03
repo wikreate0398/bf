@@ -18,7 +18,7 @@ class JsonResponse
 	}
 
 	static function error($array = [], $flashMessage = false)
-	{  
+	{
         return self::showResponse(false, $array, $flashMessage); 
 	}
 

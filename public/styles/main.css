@@ -49,6 +49,8 @@ body.menu_opened {
     overflow: hidden!important
 }
 
+
+
 body.menu_opened header .aditional,
 body.menu_opened header .header_mobile,
 body.menu_opened header .page_title {
@@ -67,8 +69,25 @@ body.menu_opened section::before {
     height: 100%;
     opacity: .9;
     background-color: #000;
-    z-index: 19;
+    z-index: 19;header .head._2 .center ul li
     transition: .3s
+}
+
+body.menu_opened header::before {
+    opacity: 1;
+}
+
+header::before {
+    background-color: rgba(0,0,0,0.9);
+    height: 103%;
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+    left: 0;
+    width: 100%;
+    margin: auto;
+    top: 0;
+    right: 0;
 }
 
 body.modal-open header .menu_mobile {
@@ -287,7 +306,7 @@ header .head._1 .right ul li:first-of-type {
 header .head._1 .right ul li a {
     position: relative;
     font-size: 12px;
-    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 header .head._1 .right ul li a i.user_register {
@@ -314,7 +333,8 @@ header .head._2 .left img.logo {
 }
 
 header .head._2 .center ul li {
-    margin: 25px 12px
+    margin: 25px 12px;
+    white-space: nowrap;
 }
 
 header .head._2 .center ul li:last-of-type {
@@ -358,7 +378,8 @@ header .head._2 .center ul li:hover svg.analitics_result g {
 header .head._2 .center ul li a {
     position: relative;
     display: block;
-    transition: color .3s ease-in-out
+    transition: color .3s ease-in-out;
+    text-transform: uppercase;
 }
 
 header .head._2 .center ul li a::before {
@@ -575,11 +596,11 @@ header.registered .head._3 .content {
 }
 
 header.registered .head._3 .content .left {
-    width: 50%
+    width: 25%
 }
 
 header.registered .head._3 .content .right {
-    width: 50%;
+    width: 75%;
     justify-content: flex-end
 }
 
@@ -716,10 +737,23 @@ header .modal {
     padding-bottom: 100px
 }
 
+.close_modal{
+    position: absolute;
+    right: -25px;
+    top: -25px;
+    background-image: url('../img/close2.png');
+    background-repeat: no-repeat;
+    -webkit-background-size: contain;
+    background-size: contain;
+    width:18px;
+    height: 18px;
+    cursor: pointer;
+}
+
 header .modal .modal-dialog {
     margin: auto;
     width: 470px;
-    padding: 60px 79px!important;
+    padding: 40px 79px!important;
     display: block;
     background-color: #fff
 }
@@ -729,14 +763,14 @@ header .modal .modal-dialog i.login,
 header .modal .modal-dialog i.register {
     display: block;
     margin: 0 auto 30px;
-    height: 78px;
+    height: 40px;
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat
 }
 
 header .modal .modal-dialog i.register {
-    width: 78px;
+    width: 40px;
     background-image: url(/img/register_modal.svg)
 }
 
@@ -772,7 +806,7 @@ header .modal .modal-dialog form {
     width: 100%
 }
 
-header .modal .modal-dialog form input[type=text] {
+header .modal .modal-dialog form input.input-control {
     font-size: 14px;
     color: #A5A5A5;
     width: 100%;
@@ -784,10 +818,10 @@ header .modal .modal-dialog form input[type=text] {
     outline: 0
 }
 
-header .modal .modal-dialog form input[type=text]:-moz-placeholder,
-header .modal .modal-dialog form input[type=text]:-ms-input-placeholder,
-header .modal .modal-dialog form input[type=text]::-moz-placeholder,
-header .modal .modal-dialog form input[type=text]::-webkit-input-placeholder {
+header .modal .modal-dialog form input.input-control:-moz-placeholder,
+header .modal .modal-dialog form input.input-control:-ms-input-placeholder,
+header .modal .modal-dialog form input.input-control::-moz-placeholder,
+header .modal .modal-dialog form input.input-control::-webkit-input-placeholder {
     color: #A5A5A5
 }
 
@@ -899,7 +933,8 @@ header .menu_mobile.open {
 }
 
 header .menu_mobile.open .close_menu {
-    right: -40px
+    right: -40px;
+    cursor: pointer;
 }
 
 header .menu_mobile .close_menu {
@@ -1165,7 +1200,8 @@ header .menu_mobile .menu .checkout_menu {
 
 header .menu_mobile .menu .checkout_menu ul li {
     position: relative;
-    margin-bottom: 30px
+    margin-bottom: 30px;
+    text-transform: uppercase;
 }
 
 header .menu_mobile .menu .checkout_menu ul li:first-of-type {
@@ -1215,7 +1251,7 @@ header .menu_mobile .menu .checkout_menu ul li span.personal_register::before {
     transition: .3s
 }
 
-section.home a.button::before,
+section.home a.button::before, section.home .home_button a::before,
 section.home::before,
 section.testimonials .dg-container nav .nav::before {
     content: "";
@@ -1296,7 +1332,8 @@ header .menu_mobile .menu .checkout_menu ul li #personal_register ul li a i.wall
         width: 25px;
         height: 21px;
         position: relative;
-        z-index: 2
+        z-index: 2;
+        cursor: pointer;
     }
     header .head .content .left .menu_btn span {
         width: 25px;
@@ -1401,7 +1438,7 @@ section.home h2 {
     padding: 0 10px
 }
 
-section.home h2 span {
+section.home h2 span, section.home h2 strong {
     color: #95DC49
 }
 
@@ -1415,7 +1452,7 @@ section.home .providers img {
     max-height: 75px;
 }
 
-section.home a.button {
+section.home a.button, section.home .home_button a {
     border: 2px solid #95DC49;
     padding: 14px 73px 12px;
     display: table;
@@ -1430,19 +1467,20 @@ section.home a.button {
     box-shadow: 0 0 1px transparent;
     position: relative;
     transition-property: color, border;
-    transition-duration: .3s
+    transition-duration: .3s;
+    text-transform: uppercase;
 }
 
-section.home a.button:hover {
+section.home a.button:hover, section.home .home_button a:hover {
     color: #fff;
     border: 2px solid transparent
 }
 
-section.home a.button:hover::before {
+section.home a.button:hover::before, section.home .home_button a:hover::before {
     transform: scale(1)
 }
 
-section.home a.button::before {
+section.home a.button::before, section.home .home_button a::before {
     position: absolute;
     z-index: -1;
     top: 0;
@@ -1899,7 +1937,7 @@ section.testimonials .dg-container nav .nav::before {
 @media only screen and (max-width:767px) {
     section.home h2 {
         font-size: 32px;
-        line-height: 40px
+        line-height: 40px;
     }
     section.home h2 span {
         color: #E5F13F
@@ -2098,7 +2136,8 @@ section.licitatii_specifice .alert p::before {
 
 section.licitatii_specifice .alert p a {
     font-size: 14px;
-    color: #A2ABB5
+    color: #23527c;
+    text-decoration: underline;
 }
 
 section.licitatii_specifice span.title_page {
@@ -2217,8 +2256,16 @@ section.licitatii_specifice .tab-content .table-body .product_item .item .img {
     margin: auto;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: contain
+    background-size: contain;
+    position: relative;
 }
+
+.special__label{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 
 section.licitatii_specifice .tab-content .table-body .product_item .item span {
     display: block;
@@ -3688,11 +3735,12 @@ section.change_pass form label {
     height: 66px;
     border-radius: 8px;
     border: 1px solid #A5A5A5;
-    background-color: #fff
+    background-color: #fff;
+    margin-bottom: 40px;
 }
 
-section.change_pass form label:first-child {
-    margin-bottom: 40px
+section.change_pass form .form__inner label:last-child {
+    margin-bottom: 5px
 }
 
 section.change_pass form label span {
@@ -3729,7 +3777,8 @@ section.change_pass form button {
     color: #fff;
     font-weight: 500;
     border: none;
-    outline: 0
+    outline: 0;
+    text-transform: uppercase;
 }
 
 @media only screen and (max-width:992px) {
@@ -4062,7 +4111,8 @@ section.checkout .tab-content .table-body .result_item .item .img {
     margin: auto;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: contain
+    background-size: contain;
+    position: relative;
 }
 
 section.checkout .tab-content .table-body .result_item .item span {
@@ -4652,5 +4702,20 @@ footer .copyright p {
     }
 }
 
+.disable__offers{
+    opacity: 0.5;
+    pointer-events: none;
+    cursor:no-drop;
+}
 
+.alert_warning{
+    border: 1px solid #ededed;
+    border-left: 3px solid #EA700D;
+    padding: 10px;
+    margin-top: 35px;
+}
+
+.alert_warning p a, .alert_warning p a:hover{
+    color: #337ab7;
+}
 /*# sourceMappingURL=main.css.map*/

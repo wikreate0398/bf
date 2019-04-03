@@ -6,7 +6,7 @@ use Closure;
 
 class Lang
 {
-    private $currentLang;
+    private $currentLang = 'en';
 
     private $languages_array;
 
@@ -66,10 +66,7 @@ class Lang
         {
             $this->currentLang = self::getHttpAcceptLang();
         }
-        else
-        {
-            $this->currentLang = 'ru';
-        }
+
         $this->putAndSave();
     }
 

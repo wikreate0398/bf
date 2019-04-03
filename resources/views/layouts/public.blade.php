@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="/styles/main.css?v={{ time() }}">
     <link rel="stylesheet" href="/styles/style.css?v={{ time() }}">
+    <link rel="stylesheet" href="/styles/loader.css?v={{ time() }}">
     <link rel="stylesheet" href="/styles/circle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
@@ -22,7 +23,7 @@
 
 <!-- <header id="header_not_registered"></header>  -->
 <header @if (Auth::check()) id="header_registred" @else id="header_not_registered" @endif
-        class="@if(@$page_data->page_type != 'home') blue @endif @if (Auth::check()) registered @endif"
+        class="@if(@$page_data->page_type != 'home' or Auth::check()) blue @endif @if (Auth::check()) registered @endif"
         @if(@$page_data->page_type == 'home') style="position: absolute;" @endif >
 
     <div class="head _1">
@@ -30,7 +31,7 @@
             <div class="content">
                 <div class="left">
                     <div class="language">
-                        <span class="language_select">RU</span>
+                        <span class="language_select">{{ $lang }}</span>
                         <i>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.984 6.453">
                                 <g id="right-arrow_1_" data-name="right-arrow (1)" transform="translate(10.984 -101.478) rotate(90)">
@@ -59,24 +60,42 @@
                     </span>
                 </div>
                 <div class="right">
-                    <ul>
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#register">
-                                <i class="user_register"></i>
-                                REGISTER
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#login">
-                                <i class="login_square"></i>
-                                LOGIN
-                            </a>
-                        </li>
-                    </ul>
+                    @if(Auth::check())
+                        <ul>
+                            <li>
+                                <a href="{{ route('personal_data', ['lang' => $lang]) }}">
+                                    <i class="user_register"></i>
+                                    {{ Auth::user()->account_number }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('logout', ['lang' => $lang]) }}" title="Log-out">
+                                    <i class="login_square"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    @else
+                        <ul>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#register">
+                                    <i class="user_register"></i>
+                                    {{ \Constant::get('REGISTER') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#login">
+                                    <i class="login_square"></i>
+                                    {{ \Constant::get('LOGIN') }}
+                                </a>
+                            </li>
+                        </ul>
+                    @endif
+
                 </div>
             </div>
         </div>
     </div>
+
     <div class="head _2">
         <div class="container">
             <div class="content">
@@ -85,8 +104,18 @@
                 </div>
                 <div class="center">
                     <ul>
-                        <li id="licitatii_specifice"><a href="/pages/licitatii_specifice.html">LICITATII SPECIFICE</a></li>
-                        <li id="licitatii_clasice"><a href="/pages/licitatii_specifice.html">LICITATII CLASICE</a></li>
+                        @php
+                            $classicAuctions = Pages::pageData('classical-auctions');
+                            $specificAuctions = Pages::pageData('specific-auctions');
+                        @endphp
+                        <li id="licitatii_specifice"
+                            class="{{ ($specificAuctions['url'] == \Request::segment(2)) ? 'active' : '' }}">
+                            <a href="{{ setUri($specificAuctions['url']) }}">{{ $specificAuctions["name_$lang"] }}</a>
+                        </li>
+                        <li id="licitatii_clasice"
+                            class="{{ ($classicAuctions['url'] == \Request::segment(2)) ? 'active' : '' }}">
+                            <a href="{{ setUri($classicAuctions['url']) }}">{{ $classicAuctions["name_$lang"] }}</a>
+                        </li>
                         <li id="results"><a href="/pages/results.html">
                                 <svg class="analitics_result" xmlns="http://www.w3.org/2000/svg" width="24.651" height="24.651" viewBox="0 0 24.651 24.651">
                                     <g id="analytics_1_" data-name="analytics (1)" opacity="0.5">
@@ -125,10 +154,99 @@
                             </a></li>
                     </ul>
                 </div>
-                <div class="right"></div>
+                <div class="right">
+                    @if(Auth::check())
+                        <ul>
+                            <li>
+                                <a href="{{ route('view_cart', ['lang' => $lang]) }}">
+                                    <span class="shopping_cart">
+                                      <span>0</span>
+                                    </span>
+                                    11.09 {{ \Constant::get('LEI') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="Log-out">
+                                    <i class="wallet"></i>
+                                    11.09 {{ \Constant::get('LEI') }}
+                                </a>
+                            </li>
+                        </ul>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
+
+    @if(Auth::check() && \Request::segment(2) == 'profile')
+        <div class="head _3">
+            <div class="container">
+                <div class="content">
+                    <div class="left">
+                        <ul>
+                            <li>
+                                <a href="{{ route('personal_data', ['lang' => $lang]) }}">
+                                    <i class="user_logged_2"></i>
+                                </a>
+                            </li>
+                            <li id="checkout">
+                                <a href="/pages/registered/checkout_empty.html">
+                                    <i class="checkout"></i>
+                                    {{ \Constant::get('CHECKOUT') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="right">
+                        <ul>
+                            <li id="change_pass" class="{{ isActiveLink(route('personal_data', ['lang' => $lang])) ? 'active' : '' }}">
+                                <a href="{{ route('personal_data', ['lang' => $lang]) }}">
+                                    {{ \Constant::get('PERSONAL_DATA') }}
+                                </a>
+                            </li>
+
+                            <li id="change_pass" class="{{ isActiveLink(route('change_pass', ['lang' => $lang])) ? 'active' : '' }}">
+                                <a href="{{ route('change_pass', ['lang' => $lang]) }}">
+                                    {{ \Constant::get('CHANGE_PASS') }}
+                                </a>
+                            </li>
+                            <li id="registru_personal" class="{{ isActiveLink(route('offers_placed', ['lang' => $lang])) ? 'active' : '' }}">
+                                <a href="{{ route('offers_placed', ['lang' => $lang]) }}" class="personal_page">
+                                    {{ \Constant::get('PLACED_OFFERS') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="head _4">
+            <div class="container">
+                <div class="content">
+                    <div class="right">
+                        <ul>
+                            <li id="oferte_plasate_2">
+                                <a href="/pages/registered/oferte_plasate_2.html">
+                                    <i class="checkout"></i>
+                                </a>
+                            </li>
+                            <li id="oferte_plasate_1">
+                                <a href="/pages/registered/oferte_plasate_1.html">
+                                    <i class="wallet"></i>
+                                </a>
+                            </li>
+                            <li id="oferte_plasate">
+                                <a href="/pages/registered/oferte_plasate.html">
+                                    {{ \Constant::get('PLACED_OFFERS') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 
     <div class="head header_mobile">
         <div class="container">
@@ -157,15 +275,11 @@
                         </i>
 
                         <ul class="language_list _2">
-                            <li class="active" data-type="mobile-header">
-                                <a href="#ro">RO</a> <!-- RO -->
-                            </li>
-                            <li class="" data-type="mobile-header">
-                                <a href="#ru">RU</a>
-                            </li>
-                            <li class="" data-type="mobile-header">
-                                <a href="#en">EN</a>
-                            </li>
+                            @foreach(\Language::get() as $item)
+                                <li class="{{ ($item->short==$lang) ? 'active' : '' }}" data-type='mobile-header'>
+                                    <a href="<?=setLangUri($item->short)?>">{{ $item->short }}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -176,34 +290,71 @@
     <div class="menu_mobile">
         <span class="close_menu"></span>
 
-        <div class="personal_info">
-            <ul>
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#register">
-                        <i class="user_register"></i>
-                        REGISTER
-                    </a>
-                </li>
-                <li>
-                    <a href="#" title="Log-out" data-toggle="modal" data-target="#login">
-                        <i class="login_square"></i>
-                        LOGIN
-                    </a>
-                </li>
-            </ul>
+        <div class="personal_info @if(Auth::check()) registered @endif">
+            @if(Auth::check())
+                <ul>
+                    <li>
+                        <a href="{{ route('personal_data', ['lang' => $lang]) }}">
+                            <i class="user_register"></i>
+                            {{ Auth::user()->account_number }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('logout', ['lang' => $lang]) }}" title="Log-out">
+                            <i class="login_square"></i>
+                        </a>
+                    </li>
+                </ul>
+            @else
+                <ul>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#register">
+                            <i class="user_register"></i>
+                            {{ \Constant::get('REGISTER') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" title="Log-out" data-toggle="modal" data-target="#login">
+                            <i class="login_square"></i>
+                            {{ \Constant::get('LOGIN') }}
+                        </a>
+                    </li>
+                </ul>
+            @endif
         </div>
 
         <div class="menu">
             <div class="country">
-      <span>
-       <i class="location"></i>
-       MOLDOVA
-     </span>
+              <span>
+               <i class="location"></i>
+               MOLDOVA
+             </span>
             </div>
+
+            @if(Auth::check())
+                <div class="purchase">
+                    <ul>
+                        <li>
+                            <a href="#">
+                              <span class="shopping_cart">
+                                <span>2</span>
+                              </span>
+                                11.09 {{ \Constant::get('LEI') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" title="Log-out">
+                                <i class="wallet"></i>
+                                11.09 {{ \Constant::get('LEI') }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            @endif
             <div class="licitatii">
                 <ul>
-                    <li><a href="/pages/licitatii_specifice.html">LICITATII SPECIFICE</a></li>
-                    <li><a href="/pages/licitatii_specifice.html">LICITATII CLASICE</a></li>
+                    <li class="{{ ($specificAuctions['url'] == \Request::segment(2)) ? 'active' : '' }}"><a href="{{ setUri($specificAuctions['url']) }}">{{ $specificAuctions["name_$lang"] }}</a></li>
+                    <li class="{{ ($classicAuctions['url'] == \Request::segment(2)) ? 'active' : '' }}"><a href="{{ setUri($classicAuctions['url']) }}">{{ $classicAuctions["name_$lang"] }}</a></li>
                     <li>
                         <a href="/pages/results.html">
                             <svg class="analitics_result" xmlns="http://www.w3.org/2000/svg" width="24.651" height="24.651" viewBox="0 0 24.651 24.651">
@@ -244,54 +395,72 @@
                     </li>
                 </ul>
             </div>
+
+            @if(Auth::check())
+                <div class="checkout_menu">
+                    <ul>
+                        <li>
+                            <a href="/pages/registered/checkout_empty.html">
+                                <i class="checkout"></i>
+                                {{ \Constant::get('CHECKOUT') }}
+                            </a>
+                        </li>
+                        <li>
+                            <span class="personal_register" type="button" data-toggle="collapse" data-target="#personal_register">{{ \Constant::get('PERSONAL_REGISTER') }}</span>
+                            <div id="personal_register" class="collapse">
+                                <ul>
+                                    <li><a href="/pages/registered/oferte_plasate_2.html"><i class="checkout"></i></a></li>
+                                    <li><a href="/pages/registered/oferte_plasate_1.html"><i class="wallet"></i></a></li>
+                                    <li><a href="/pages/registered/oferte_plasate.html">{{ \Constant::get('PLACED_OFFERS') }}</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="{{ route('change_pass', ['lang' => $lang]) }}">{{ \Constant::get('CHANGE_PASS') }}</a></li>
+
+                        <li><a href="{{ route('personal_data', ['lang' => $lang]) }}">{{ \Constant::get('PERSONAL_DATA') }}</a></li>
+
+
+                    </ul>
+                </div>
+            @endif
         </div>
     </div>
-
 
     <!-- Modal Register -->
     <div class="modal fade" id="register" role="dialog">
         <div class="modal-dialog">
-
+            <div class="close_modal" onclick="$('.modal').modal('hide');"></div>
             <i class="register"></i>
-            <h4>CREATE NEW ACCOUNT</h4>
-            <form action="">
-                <input type="text" name="name" placeholder="Name">
-                <input type="text" name="email" placeholder="E-mail">
-                <input type="text" name="password" placeholder="Password">
-                <input type="text" name="repeat_password" placeholder="Repeat password">
+            <h4>{{ \Constant::get('CREATE_NEW_ACCOUNT') }}</h4>
+            <form method="POST" class="ajax__submit" action="{{ route('register', ['lang' => lang()]) }}">
+                {{ csrf_field() }}
+                <input type="text" class="input-control" name="name" placeholder="Name *">
+                <input type="text" class="input-control" name="email" placeholder="E-mail *">
+                <input type="password" class="input-control" autocomplete="off" name="password" placeholder="Password *">
+                <input type="password" class="input-control" autocomplete="off" name="password_confirmation" placeholder="Repeat password *">
                 <label for="terms_coditions">
                     <input type="checkbox" name="terms" id="terms_coditions">
                     <span class="check"></span>
                     @php $terms = Pages::pageData('terms'); @endphp
-                    De acord cu <a target="_blank" href="{{ setUri($terms["url"]) }}">{{ $terms["name_$lang"] }}</a>
+                    {{ \Constant::get('AGREE_WITH') }} <a target="_blank" href="{{ setUri($terms["url"]) }}">{{ $terms["name_$lang"] }}</a>&nbsp;<span class="req">*</span>
                 </label>
-                <button>TRIMITE</button>
-                <div class="message succes">
-                    <span class="title">Inregistrare reusita!</span>
-                    <span class="description">Va rugam sa accesati link-ul de activare dinposta Dvs. electronica in decurs
-        de 48 ore.</span>
-                </div>
+                <button type="submit">{{ \Constant::get('SEND') }}</button>
             </form>
-
         </div>
     </div>
 
     <!-- Modal Login -->
     <div class="modal fade" id="login" role="dialog">
         <div class="modal-dialog">
-
+            <div class="close_modal" onclick="$('.modal').modal('hide');"></div>
             <i class="login"></i>
-            <h4>LOGIN</h4>
-            <form action="">
-                <input type="text" placeholder="Email">
-                <input type="text" placeholder="Password">
-                <a href="" class="forgot_pass"  data-dismiss="modal" data-toggle="modal" data-target="#forgot_pass">Ai uitat parola?</a>
-                <button>TRIMITE</button>
-                <div class="message succes">
-                    <span class="title">Inregistrare reusita!</span>
-                    <span class="description">Va rugam sa accesati link-ul de activare dinposta Dvs. electronica in decurs
-        de 48 ore.</span>
-                </div>
+            <h4>{{ \Constant::get('LOGIN') }}</h4>
+            <form method="POST" class="ajax__submit" action="{{ route('login', ['lang' => lang()]) }}" data-redirect="{{ \Request::url() }}">
+                {{ csrf_field() }}
+                <input type="text" name="email" class="input-control" placeholder="Email *">
+                <input type="password" name="password" class="input-control" placeholder="Password *">
+                <a href="" class="forgot_pass"  data-dismiss="modal" data-toggle="modal" data-target="#forgot_pass">{{ \Constant::get('FORGOT_PASS') }}</a>
+                <button type="submit">{{ \Constant::get('SEND') }}</button>
             </form>
         </div>
     </div>
@@ -299,17 +468,13 @@
     <!-- Modal Login -->
     <div class="modal fade" id="forgot_pass" role="dialog">
         <div class="modal-dialog">
-
+            <div class="close_modal" onclick="$('.modal').modal('hide');"></div>
             <i class="forgot_pass"></i>
-            <h4>RECUPERARE PAROLA</h4>
-            <form action="">
-                <input type="text" placeholder="Email">
-                <button>TRIMITE</button>
-                <div class="message succes">
-                    <span class="title">Inregistrare reusita!</span>
-                    <span class="description">Va rugam sa accesati link-ul de activare dinposta Dvs. electronica in decurs
-        de 48 ore.</span>
-                </div>
+            <h4>{{ \Constant::get('PASSWORD_RECOVERY') }}</h4>
+            <form method="POST" class="ajax__submit" action="{{ route('send_reset_pass', ['lang' => lang()]) }}">
+                {{ csrf_field() }}
+                <input type="text" name="email" class="input-control" placeholder="Email *">
+                <button type="submit">{{ \Constant::get('SEND') }}</button>
             </form>
         </div>
     </div>
@@ -323,10 +488,15 @@
         <div class="row">
             <div class="col-md-4 col-sm-9 col-sm-5">
                 <div class="socials">
-                    <a href="#"><img src="/img/footer/facebook.png" alt=""></a>
-                    <a href="#"><img src="/img/footer/youtube.png" alt=""></a>
+                    @if(\Constant::get('FACEBOOK'))
+                        <a target="_blank" href="{{ \Constant::get('FACEBOOK') }}"><img src="/img/footer/facebook.png" alt=""></a>
+                    @endif
+
+                    @if(\Constant::get('YOUTUBE'))
+                        <a target="_blank" href="{{ \Constant::get('YOUTUBE') }}"><img src="/img/footer/youtube.png" alt=""></a>
+                    @endif
                 </div>
-                <p><a href="/">BlackFridayTop.com</a> este un magazine online care are menireasa va ajute sa economisiti in fiecare zi participind la licitatii pentru produse de mare interes.</p>
+                <p><a href="/">{{ ucfirst(\Request::server('SERVER_NAME')) }}</a> {{ \Constant::get('BF_IS') }}</p>
             </div>
             <div class="col-md-8">
                 <div class="row">
@@ -342,7 +512,6 @@
                             </ul>
                         </div>
                     @endforeach
-
                 </div>
             </div>
         </div>
@@ -351,13 +520,17 @@
 
     <div class="container">
         <div class="copyright">
-            <p>Copyright <span id="year"></span></p>
+            <p>Copyright <span id="year">{{ date('Y') }}</span></p>
             <script type="text/javascript">
                 document.getElementById('year').innerHTML = new Date().getFullYear();
             </script>
         </div>
     </div>
 </footer>
+
+<div id="ajax-notify">
+    <div class="inner"></div>
+</div>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -366,8 +539,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
 
-<script src="/scripts/main.js?v={{ time() }}"></script>
+<script>
+</script>
 
+<script src="/scripts/main.js?v={{ time() }}"></script>
+<script src="/scripts/ajax.js?v={{ time() }}"></script>
+<script src="/scripts/notify.js?v={{ time() }}"></script>
 
 </body>
 </html>

@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Blackfridaytopup'),
 
     /*
     |--------------------------------------------------------------------------
@@ -208,7 +208,7 @@ return [
         'DB' => Illuminate\Support\Facades\DB::class,
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
         'Event' => Illuminate\Support\Facades\Event::class,
-        'File' => Illuminate\Support\Facades\File::class,
+        'File' => Illuminate\Support\FacadesCollection\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
         'Lang' => Illuminate\Support\Facades\Lang::class,
@@ -231,9 +231,11 @@ return [
         'Language' => App\Utils\Language::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'ImageOptimizer'  => Spatie\LaravelImageOptimizer\ImageOptimizerFacade::class,
+
         'LogsReportAgent' => App\Utils\LogsReportAgent::class,
         'JsonResponse'    => App\Utils\JsonResponse::class,
-        'Pages'    => App\Utils\Pages::class
+        'Pages'    => App\Utils\Pages::class,
+        'Constant' => App\Utils\Constants::class,
     ],
 
 ];

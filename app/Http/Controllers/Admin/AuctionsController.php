@@ -19,7 +19,7 @@ class AuctionsController extends Controller
 
     private $redirectRoute = 'specific_admin_auctions';
 
-    private $returnDataFields = ['name', 'description', 'seo_keywords', 'seo_description', 'seo_title'];
+    private $returnDataFields = ['name', 'name2', 'description', 'seo_keywords', 'seo_description', 'seo_title'];
 
     private $requiredFields = ['product_type', 'auction_type', 'name_en'];
 
@@ -84,8 +84,13 @@ class AuctionsController extends Controller
     public function create()
     {
         $this->input = $this->prepareData();
-        //exit(print_arr($this->input));
-         $this->model->create($this->input);
+
+        if(!is_array($this->input))
+        {
+            return \JsonResponse::error(['messages' => $this->input]);
+        }
+
+        $this->model->create($this->input);
         return \App\Utils\JsonResponse::success(['redirect' => route($this->redirectRoute)], trans('admin.save')); 
     }
 
@@ -105,6 +110,12 @@ class AuctionsController extends Controller
     {
         $data        = $this->model->findOrFail($id);
         $this->input = $this->prepareData($data);
+
+        if(!is_array($this->input))
+        {
+            return \JsonResponse::error(['messages' => $this->input]);
+        }
+
         $data->fill($this->input)->save();
         return \App\Utils\JsonResponse::success(['redirect' => route($this->redirectRoute)], trans('admin.save')); 
     }
@@ -114,7 +125,7 @@ class AuctionsController extends Controller
         $input          = \Language::returnData($this->returnDataFields);
         if($this->validation($input) != true)
         {
-            return \JsonResponse::error(['messages' => trans('admin.req_fields')]);
+            return trans('admin.req_fields');
         }
 
         $uploadImage = new UploadImage;
@@ -122,6 +133,16 @@ class AuctionsController extends Controller
 
         if (!empty($image)) {
             $input['image'] = $image;
+
+//            $path = public_path() . '/uploads/'.$this->uploadFolder.'/';
+//            foreach (\Language::get() as $item)
+//            {
+//                $img = \Image::make($path . $image)->insert(public_path().'/img/special_'.$item->short.'.png', 'top-right');
+//
+//                $imageExplode = explode('.', $image);
+//
+//                $img->save($path.'specials/' . $imageExplode[0] . '_' . $item->short . '.' . $imageExplode[1]);
+//            }
         }
 
         if(empty($data->code))

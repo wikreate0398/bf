@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -25,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -34,6 +37,35 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:web')->except('logout');
+    }
+
+    public function login(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                $this->username() => 'required|string',
+                'password' => 'required|string',
+            ]);
+
+            if ($validator->fails())
+            {
+                return \JsonResponse::error(['messages' => \Constant::get('REQ_FIELDS')]);
+            }
+
+            if (Auth::guard('web')->attempt(['email' => $request->input('email'),
+                    'password' => $request->input('password'),
+                    'active'   => 1,
+                    'confirm'  => 1], false) == true)
+            {
+                return \JsonResponse::success(['redirect' => $this->redirectTo], false);
+            }
+            else
+            {
+                return \JsonResponse::error(['messages' => \Constant::get('AUTH_ERR')]);
+            }
+        } catch (validationException $e) {
+            return \JsonResponse::error(['messages' => \Constant::get('AUTH_ERR')]);
+        }
     }
 }

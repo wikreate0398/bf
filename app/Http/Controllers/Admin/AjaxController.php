@@ -17,7 +17,8 @@ class AjaxController extends Controller
     public function __construct() {}
   
     public function depthSort(Request $request)
-    { 
+    {
+
         $input = $request->all(); 
         $arr   = $input['arr']; 
         $table = $input['table']; 

@@ -13,13 +13,7 @@ class Auctions extends Model
 
     protected $table = 'auctions';
 
-    protected $casts = [
-        'personal_bid_limit' => 'integer',
-        'quantity'           => 'integer',
-        'total_bid_limit'    => 'integer'
-    ];
-
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'created_at', 'updated_at'];
 
     protected $fillable = [
         'code',
@@ -32,6 +26,9 @@ class Auctions extends Model
         'name_ru',
         'name_ro',
         'name_en',
+        'name2_ru',
+        'name2_ro',
+        'name2_en',
         'description_ru',
         'description_ro',
         'description_en',
@@ -47,4 +44,39 @@ class Auctions extends Model
         'seo_keywords_ro',
         'seo_keywords_en',
     ];
+
+    protected $casts = [
+        'personal_bid_limit' => 'integer',
+        'quantity'           => 'integer',
+        'total_bid_limit'    => 'integer'
+    ];
+
+    public function scopeList($query)
+    {
+        return $query->select('auctions.*')->orderByRaw('auctions.page_up asc, auctions.id desc')->active();
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('view', 1);
+    }
+
+    public function bids()
+    {
+        return $this->hasMany('App\Models\Auctions\Bids', 'id_auction', 'id')->has('user');
+    }
+
+    public function scopeSumTotalBids($query)
+    {
+        $query->withCount(['bids' => function($query){
+            return $query->where('prepare_id', 0);
+        }]);
+    }
+
+    public function scopeTotalActiveBids($query)
+    {
+        return $query->with(['bids' => function($query){
+            return $query->where('prepare_id', 0);
+        }]);
+    }
 }
