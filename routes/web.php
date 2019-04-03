@@ -155,12 +155,12 @@ Route::group(['prefix' => '{lang}', 'middleware' => ['lang']], function() {
         Route::get('delete/{id}', 'CartController@delete')->name('delete_cart_item');
     });
 
-    $classicalAuctionUrl = Pages::pageData('classical-auctions')->url;
+    $classicalAuctionUrl = \Pages::pageData('classical-auctions')->url;
     Route::get($classicalAuctionUrl, 'Auctions\ClassicAuctionController@index');
     Route::get("{$classicalAuctionUrl}/{url}", 'Auctions\ClassicAuctionController@show');
     Route::post("{$classicalAuctionUrl}/add-bid/{id}", 'Auctions\ClassicAuctionController@addBid')->middleware('web_auth');
 
-    $classicalAuctionUrl = Pages::pageData('specific-auctions')->url;
+    $classicalAuctionUrl = \Pages::pageData('specific-auctions')->url;
     Route::get($classicalAuctionUrl, 'Auctions\SpecificAuctionController@index');
     Route::get("{$classicalAuctionUrl}/{url}", 'Auctions\SpecificAuctionController@show');
     Route::post("{$classicalAuctionUrl}/add-bid/{id}", 'Auctions\SpecificAuctionController@addBid')->middleware('web_auth');
