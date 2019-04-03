@@ -53,7 +53,7 @@ class Auctions extends Model
 
     public function scopeList($query)
     {
-        return $query->select('auctions.*')->orderByRaw('auctions.page_up asc, auctions.id desc')->active();
+        return $query->select('auctions.*')->where('quantity', '>', '0')->orderByRaw('auctions.page_up asc, auctions.id desc')->active();
     }
 
     public function scopeActive($query)
