@@ -17,12 +17,12 @@ class ProfileController extends Controller
     {
         if(!$request->name or !$request->email)
         {
-            return \JsonResponse::error(['messages' => 'Заполните все обязательные поля!']);
+            return \JsonResponse::error(['messages' => \Constant::get('REQ_FIELDS')]);
         }
 
         if(User::withTrashed()->whereEmail($request->email)->where('id', '<>', \Auth::user()->id)->count())
         {
-            return \JsonResponse::error(['messages' => 'Пользователь с таким имейлом уже существует!']);
+            return \JsonResponse::error(['messages' => \Constant::get('USER_EXIST')]);
         }
 
         User::whereId(\Auth::user()->id)->update([
@@ -30,7 +30,7 @@ class ProfileController extends Controller
            'name'  => $request->name
         ]);
 
-        return \JsonResponse::success(['messages' => 'Ваши данные успешно сохранены!', 'reload' => true]);
+        return \JsonResponse::success(['messages' => \Constant::get('DATA_SAVED'), 'reload' => true]);
     }
 
     public function changePass()
@@ -42,23 +42,23 @@ class ProfileController extends Controller
     {
         if(!$request->password or !$request->repeat_password)
         {
-            return \JsonResponse::error(['messages' => 'Заполните все обязательные поля!']);
+            return \JsonResponse::error(['messages' => \Constant::get('REQ_FIELDS')]);
         }
 
         if($request->password != $request->repeat_password)
         {
-            return \JsonResponse::error(['messages' => 'Пароль не совпадает']);
+            return \JsonResponse::error(['messages' => \Constant::get('PASS_NOT_MATCH')]);
         }
 
         if(strlen($request->password) < 8)
         {
-            return \JsonResponse::error(['messages' => 'Пароль должен содержать 8 цифр']);
+            return \JsonResponse::error(['messages' => \Constant::get('PASS_RESTRICTION')]);
         }
 
         User::whereId(\Auth::user()->id)->update([
             'password'     => bcrypt($request->password),
         ]);
 
-        return \JsonResponse::success(['messages' => 'Ваш пароль успешно сохранен!', 'reload' => true]);
+        return \JsonResponse::success(['messages' => \Constant::get('PASS_SAVED'), 'reload' => true]);
     }
 }

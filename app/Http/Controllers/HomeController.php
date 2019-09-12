@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Evouchers;
 use App\Models\Testimonials;
+use App\Models\User;
 
 class HomeController
 {

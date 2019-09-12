@@ -18,6 +18,9 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
 </head>
 <body class="{{ (!setting('extend_homepage') && @$page_data->page_type == 'home') ? 'without_content' : '' }}">
 
@@ -116,7 +119,7 @@
                             class="{{ ($classicAuctions['url'] == \Request::segment(2)) ? 'active' : '' }}">
                             <a href="{{ setUri($classicAuctions['url']) }}">{{ $classicAuctions["name_$lang"] }}</a>
                         </li>
-                        <li id="results"><a href="/pages/results.html">
+                        <li id="results"><a href="{{ route('results', ['lang' => $lang]) }}">
                                 <svg class="analitics_result" xmlns="http://www.w3.org/2000/svg" width="24.651" height="24.651" viewBox="0 0 24.651 24.651">
                                     <g id="analytics_1_" data-name="analytics (1)" opacity="0.5">
                                         <g id="Group_54" data-name="Group 54">
@@ -160,15 +163,15 @@
                             <li>
                                 <a href="{{ route('view_cart', ['lang' => $lang]) }}">
                                     <span class="shopping_cart">
-                                      <span>0</span>
+                                      <span>{{ \App\Models\Order::where('id_user', \Auth::user()->id)->cartStage()->count() }}</span>
                                     </span>
-                                    11.09 {{ \Constant::get('LEI') }}
+                                    {{ \App\Models\Order::where('id_user', \Auth::user()->id)->cartStage()->get()->sum(function($order){ return $order->in_cart ? $order->price : false; }) }} {{ \Constant::get('LEI') }}
                                 </a>
                             </li>
                             <li>
-                                <a href="#" title="Log-out">
+                                <a href="{{ route('transactions', ['lang' => $lang]) }}" title="Wallet">
                                     <i class="wallet"></i>
-                                    11.09 {{ \Constant::get('LEI') }}
+                                    {{ Auth::user()->ballance }} {{ \Constant::get('LEI') }}
                                 </a>
                             </li>
                         </ul>
@@ -190,7 +193,7 @@
                                 </a>
                             </li>
                             <li id="checkout">
-                                <a href="/pages/registered/checkout_empty.html">
+                                <a href="{{ route('view_cart', ['lang' => $lang]) }}">
                                     <i class="checkout"></i>
                                     {{ \Constant::get('CHECKOUT') }}
                                 </a>
@@ -210,7 +213,7 @@
                                     {{ \Constant::get('CHANGE_PASS') }}
                                 </a>
                             </li>
-                            <li id="registru_personal" class="{{ isActiveLink(route('offers_placed', ['lang' => $lang])) ? 'active' : '' }}">
+                            <li id="registru_personal" class="{{ (\Request::segment(3) == 'register') ? 'active' : '' }}">
                                 <a href="{{ route('offers_placed', ['lang' => $lang]) }}" class="personal_page">
                                     {{ \Constant::get('PLACED_OFFERS') }}
                                 </a>
@@ -221,23 +224,23 @@
             </div>
         </div>
 
-        <div class="head _4">
+        <div class="head _4 {{ (\Request::segment(3) == 'register') ? 'open' : '' }}">
             <div class="container">
                 <div class="content">
                     <div class="right">
                         <ul>
-                            <li id="oferte_plasate_2">
-                                <a href="/pages/registered/oferte_plasate_2.html">
+                            <li id="oferte_plasate_2" class="{{ isActiveLink(route('orders', ['lang' => $lang])) ? 'active' : '' }}">
+                                <a href="{{ route('orders', ['lang' => $lang]) }}">
                                     <i class="checkout"></i>
                                 </a>
                             </li>
-                            <li id="oferte_plasate_1">
-                                <a href="/pages/registered/oferte_plasate_1.html">
+                            <li id="oferte_plasate_1" class="{{ isActiveLink(route('transactions', ['lang' => $lang])) ? 'active' : '' }}">
+                                <a href="{{ route('transactions', ['lang' => $lang]) }}">
                                     <i class="wallet"></i>
                                 </a>
                             </li>
-                            <li id="oferte_plasate">
-                                <a href="/pages/registered/oferte_plasate.html">
+                            <li id="oferte_plasate" class="{{ isActiveLink(route('offers_placed', ['lang' => $lang])) ? 'active' : '' }}">
+                                <a href="{{ route('offers_placed', ['lang' => $lang]) }}">
                                     {{ \Constant::get('PLACED_OFFERS') }}
                                 </a>
                             </li>
@@ -335,17 +338,17 @@
                 <div class="purchase">
                     <ul>
                         <li>
-                            <a href="#">
-                              <span class="shopping_cart">
-                                <span>2</span>
-                              </span>
-                                11.09 {{ \Constant::get('LEI') }}
+                            <a href="{{ route('view_cart', ['lang' => $lang]) }}">
+                                <span class="shopping_cart">
+                                  <span>{{ \App\Models\Order::where('id_user', \Auth::user()->id)->cartStage()->count() }}</span>
+                                </span>
+                                {{ \App\Models\Order::where('id_user', \Auth::user()->id)->cartStage()->get()->sum(function($order){ return $order->in_cart ? $order->price : false; }) }} {{ \Constant::get('LEI') }}
                             </a>
                         </li>
                         <li>
-                            <a href="#" title="Log-out">
+                            <a href="{{ route('transactions', ['lang' => $lang]) }}" title="Wallet">
                                 <i class="wallet"></i>
-                                11.09 {{ \Constant::get('LEI') }}
+                                {{ Auth::user()->ballance }} {{ \Constant::get('LEI') }}
                             </a>
                         </li>
                     </ul>
@@ -356,7 +359,7 @@
                     <li class="{{ ($specificAuctions['url'] == \Request::segment(2)) ? 'active' : '' }}"><a href="{{ setUri($specificAuctions['url']) }}">{{ $specificAuctions["name_$lang"] }}</a></li>
                     <li class="{{ ($classicAuctions['url'] == \Request::segment(2)) ? 'active' : '' }}"><a href="{{ setUri($classicAuctions['url']) }}">{{ $classicAuctions["name_$lang"] }}</a></li>
                     <li>
-                        <a href="/pages/results.html">
+                        <a href="{{ route('results', ['lang' => $lang]) }}">
                             <svg class="analitics_result" xmlns="http://www.w3.org/2000/svg" width="24.651" height="24.651" viewBox="0 0 24.651 24.651">
                                 <g id="analytics_1_" data-name="analytics (1)" opacity="0.5">
                                     <g id="Group_54" data-name="Group 54">
@@ -400,26 +403,23 @@
                 <div class="checkout_menu">
                     <ul>
                         <li>
-                            <a href="/pages/registered/checkout_empty.html">
+                            <a href="{{ route('view_cart', ['lang' => $lang]) }}">
                                 <i class="checkout"></i>
                                 {{ \Constant::get('CHECKOUT') }}
                             </a>
-                        </li>
+                        </li> 
                         <li>
                             <span class="personal_register" type="button" data-toggle="collapse" data-target="#personal_register">{{ \Constant::get('PERSONAL_REGISTER') }}</span>
                             <div id="personal_register" class="collapse">
                                 <ul>
                                     <li><a href="/pages/registered/oferte_plasate_2.html"><i class="checkout"></i></a></li>
-                                    <li><a href="/pages/registered/oferte_plasate_1.html"><i class="wallet"></i></a></li>
-                                    <li><a href="/pages/registered/oferte_plasate.html">{{ \Constant::get('PLACED_OFFERS') }}</a></li>
+                                    <li><a href="{{ route('transactions', ['lang' => $lang]) }}"><i class="wallet"></i></a></li>
+                                    <li><a href="{{ route('offers_placed', ['lang' => $lang]) }}">{{ \Constant::get('PLACED_OFFERS') }}</a></li>
                                 </ul>
                             </div>
                         </li>
                         <li><a href="{{ route('change_pass', ['lang' => $lang]) }}">{{ \Constant::get('CHANGE_PASS') }}</a></li>
-
                         <li><a href="{{ route('personal_data', ['lang' => $lang]) }}">{{ \Constant::get('PERSONAL_DATA') }}</a></li>
-
-
                     </ul>
                 </div>
             @endif
@@ -532,8 +532,8 @@
     <div class="inner"></div>
 </div>
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 
+ 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script>
 <script type="text/javascript" src="/scripts/jquery.gallery.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>

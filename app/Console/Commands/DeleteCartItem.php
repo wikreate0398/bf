@@ -3,8 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Models\Auctions\Bids;
+use App\Models\Auctions\Auctions;
 use App\Models\Order;
 use Illuminate\Console\Command;
+use App\Console\Commands\AddToCart; 
+use App\Utils\Auctions\Bids\WinnerBid;
 
 class DeleteCartItem extends Command
 {
@@ -15,7 +18,7 @@ class DeleteCartItem extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'delete_cart_item';
 
     /**
      * The console command description.
@@ -32,7 +35,6 @@ class DeleteCartItem extends Command
     public function __construct(Order $cart)
     {
         parent::__construct();
-
         $this->cart = $cart;
     }
 
@@ -42,14 +44,10 @@ class DeleteCartItem extends Command
      * @return mixed
      */
     public function handle()
-    {
-        Bids::where('prepared_id', $this->cart->bid_prepare_id)
-            ->where('id_user', $this->cart->id_user)
-            ->where('id_auction', $this->cart->id_auction)
-            ->where('price', $this->cart->price)
-            ->orderBy('id asc')
-            ->delete();
-
+    { 
+        \Bus::dispatch(
+            new \App\Console\Commands\CancelCartItem($this->cart)
+        );
         $this->cart->delete();
     }
 }

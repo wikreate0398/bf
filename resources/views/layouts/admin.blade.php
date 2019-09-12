@@ -29,7 +29,7 @@
  
 
 <link rel="stylesheet" type="text/css" href="{{ asset('admin_theme') }}/theme/assets/global/plugins/bootstrap-select/bootstrap-select.min.css"/>
-<link href="{{ asset('css/select2.css') }}" rel="stylesheet" />
+<!-- <link href="{{ asset('css/select2.css') }}" rel="stylesheet" /> -->
 <link rel="stylesheet" type="text/css" href="{{ asset('admin_theme') }}/theme/assets/global/plugins/jquery-multi-select/css/multi-select.css"/>
 
 <link rel="stylesheet" type="text/css" href="{{ asset('admin_theme') }}/theme/assets/global/plugins/jquery-tags-input/jquery.tagsinput.css"/>
@@ -55,7 +55,7 @@
 <link rel="shortcut icon" href="favicon.ico"/>
 <script src="{{ asset('admin_theme') }}/theme/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
 <script src="{{ asset('admin_theme') }}/theme/assets/global/plugins/jstree/dist/jstree.min.js"></script> 
-<script src="{{ asset('js/select2.js') }}"></script> 
+<!-- <script src="{{ asset('js/select2.js') }}"></script>  -->
 <script>   
   $(window).on('load', function() { // makes sure the whole site is loaded 
     setTimeout(function(){
@@ -257,13 +257,22 @@
             </li>
             <?php $menu = adminMenu(); ?>
             <li class="sidebar-search-wrapper"><br></li>
+            <?php $openOrders = \App\Models\Order::where('open', '1')->count(); ?>
             <?php foreach ($menu as $key => $value): ?>
                <?php if (!empty($value['view'])): ?> 
+                  <?php  
+                      $open='';
+                      if($key == 'orders' && $openOrders)
+                      {
+                        $open = "<span class='badge badge-roundless badge-danger'>+{$openOrders}</span>";
+                      }
+                  ?>
                   <?php if (uri(2) == $key) { $active = 'active'; }else{ $active = ''; } ?>   
                   <li class="start <?=$active?>">
                      <a href="<?=@$value['link']?>">
                         <?=$value['icon']?>
                         <span class="title"><?=$value['name']?></span>  
+                        <?=$open?> 
                         <?php if (!empty($active)): ?>
                            <span class="selected"></span>
                         <?php endif ?> 
@@ -276,11 +285,18 @@
                            <?php foreach ($value['childs'] as $key2 => $value2): ?>
                                <?php
                                     $byFullUrl = \Request::path() == rtrim(trim($value2['link'], '/'), '/') ? true : false;
-                               ?>
+                                 
+                                    $open='';
+                                    if($key2 == 'orders-list' && $openOrders)
+                                    {
+                                      $open = "<span class='badge badge-roundless badge-danger'>+{$openOrders}</span>";
+                                    }
+                                ?>
                               <?php if ($byFullUrl) { $active = 'active'; }else{ $active = ''; } ?>
                               <li class="<?=$active?>">
                                  <a href="<?=$value2['link']?>">
                                     <?=$value2['name']?>
+                                    <?=$open?> 
                                  </a>
                               </li>
                            <?php endforeach ?>
@@ -440,7 +456,7 @@
       QuickSidebar.init(); // init quick sidebar
       Demo.init(); // init demo features
       ComponentsPickers.init();
-      ComponentsDropdowns.init(); 
+     // ComponentsDropdowns.init(); 
       ComponentsFormTools2.init();  
     ComponentsFormTools.init();
 

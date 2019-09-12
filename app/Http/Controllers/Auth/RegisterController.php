@@ -71,31 +71,19 @@ class RegisterController extends Controller
         $confirm_hash = md5(microtime());
 
         $user = User::create([
-            'name'         => $request->name,
-            'email'        => $request->email,
-            'confirm_hash' => $confirm_hash,
-            'password'     => bcrypt($request->password),
-            'account_number' => $this->generateAccountNumber()
+            'name'           => $request->name,
+            'email'          => $request->email,
+            'confirm_hash'   => $confirm_hash,
+            'password'       => bcrypt($request->password),
+            'account_number' => generateAccountNumber(),
+            'lang'           => lang()
         ]);
 
-        $user->notify(new ConfirmRegistration($confirm_hash));
+        $user->notify(new ConfirmRegistration($confirm_hash, lang()));
         return \JsonResponse::success([
             'messages' => \Constant::get('REG_SUCCESS')
         ]);
-    }
-
-    private function generateAccountNumber()
-    {
-        $accountNumber = (int) User::select('account_number')->get()->pluck('account_number')->map(function($account_number){
-            return (int) str_replace( '0', '', $account_number);
-        })->max()+1;
-
-        $zeros='';
-        for ($i=0; $i < (12-strlen($accountNumber)); $i++ ){
-            $zeros .= 0;
-        }
-        return $zeros.$accountNumber;
-    }
+    }   
 
     public function finish_registration(Request $request)
     {

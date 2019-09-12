@@ -24,7 +24,9 @@
         <div class="container">
             <h3>{{ \Constant::get('CUSTOMER_HOME') }}</h3>
             <div class="currency_ammount">
-                <div id="amount_digits" data-content="297927797"></div>
+                <div id="amount_digits" data-content="{{ priceString(\App\Models\Order::orderStage()->where('id_status', 2)->get()->sum(function($order){
+                    return $order->retail_price - $order->price;
+                }), 0, '') }}"></div>
                 <span class="currency">{{ \Constant::get('LEI') }}</span>
             </div>
 

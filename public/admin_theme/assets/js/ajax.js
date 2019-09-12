@@ -369,4 +369,38 @@ var Ajax = {
         }); 
     }
 }
- 
+
+ $.fn.removeClassStartingWith = function (filter) {
+    $(this).removeClass(function (index, className) {
+        return (className.match(new RegExp("\\S*" + filter + "\\S*", 'g')) || []).join(' ')
+    });
+    return this;
+};
+
+function onChangeSelect(select, url, id){
+    if (!confirm('Confirm operation')) {
+        return;
+    }
+    $('body').addClass('wait-process');
+    var value = $(select).val();
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: url,
+        data: {'id': id, 'value': value, '_token': CSRF_TOKEN},
+        success: function(jsonRespond) {
+            var refundDate = $(select).closest('td').find('.refund-date');
+            if($(refundDate).length && value != 3){
+                $(refundDate).hide();
+            }else if(jsonRespond.refund_at){ 
+                $(refundDate).show();
+                $(refundDate).text(jsonRespond.refund_at);
+                $(refundDate).removeClassStartingWith('status-').addClass(jsonRespond.class);
+            }
+        },
+
+        complete: function(){
+            $('body').removeClass('wait-process');
+        }
+    });
+}

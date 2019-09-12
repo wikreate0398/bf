@@ -15,7 +15,6 @@ Route::get('page-404', function(){
 	return response()->view('errors.404', [], 404);
 })->name('404');
 
-
 $adminPath = config('admin.path');
 
 Route::get($adminPath . '/login', 'Admin\LoginController@showLoginForm', ['guard' => 'admin'])->name('admin_login');
@@ -64,6 +63,18 @@ Route::group(['prefix' => $adminPath, 'namespace' => 'Admin', 'middleware' => 'a
         Route::post('{id}/update', 'EvouchersController@update');
     });
 
+    Route::group(['prefix' => 'transaction-types'], function() {
+        Route::get('/', 'TransactionTypesController@show')->name('admin_transaction_types');
+        Route::get('{id}/edit', 'TransactionTypesController@showeditForm'); 
+        Route::post('{id}/update', 'TransactionTypesController@update');
+    });
+
+    Route::group(['prefix' => 'email-templates'], function() {
+        Route::get('/', 'EmailTemplatesController@show')->name('admin_email_templates');
+        Route::get('{id}/edit', 'EmailTemplatesController@showeditForm'); 
+        Route::post('{id}/update', 'EmailTemplatesController@update');
+    });
+
     $auctionTypes = ['specific', 'classical'];
     foreach($auctionTypes as $key => $type)
     {
@@ -101,6 +112,39 @@ Route::group(['prefix' => $adminPath, 'namespace' => 'Admin', 'middleware' => 'a
         });
     });
 
+    Route::group(['prefix' => 'statistics'], function() {
+        Route::get('daily-reports', 'StatisticsController@dailyReports')->name('admin_daily_reports');  
+        Route::get('client-history', 'StatisticsController@clientHistory')->name('admin_client_history'); 
+    });
+
+    Route::group(['prefix' => 'orders'], function() {
+        Route::group(['prefix' => 'status', 'namespace' => 'Orders'], function() {
+            Route::get('/', 'OrdersStatusController@show')->name('admin_orders_status');
+            Route::get('{id}/edit', 'OrdersStatusController@showeditForm');
+            Route::get('add', 'OrdersStatusController@showAddForm');
+            Route::post('create', 'OrdersStatusController@create');
+            Route::post('{id}/update', 'OrdersStatusController@update');
+        });
+
+        Route::group(['prefix' => 'orders-list', 'namespace' => 'Orders'], function() {
+            Route::get('/', 'OrdersListController@show')->name('admin_orders_list');
+            Route::get('{id}/edit', 'OrdersListController@showeditForm');
+            Route::get('add', 'OrdersListController@showAddForm');
+            Route::post('create', 'OrdersListController@create');
+            Route::post('{id}/update', 'OrdersListController@update');
+
+            Route::post('{id}/change-status', 'OrdersListController@changeStatus')->name('change_order_status');
+        });  
+    }); 
+
+    Route::group(['prefix' => 'clients'], function() {
+        Route::get('/', 'ClientsController@show')->name('admin_clients');
+        Route::get('{id}/edit', 'ClientsController@showeditForm');
+        Route::get('add', 'ClientsController@showAddForm');
+        Route::post('create', 'ClientsController@create');
+        Route::post('{id}/update', 'ClientsController@update');
+        Route::get('{id}/autologin', 'ClientsController@autologin'); 
+    });
 
 	Route::group(['prefix' => 'profile'], function() { 
 		Route::get('/', 'ProfileController@showForm')->name('profile');
@@ -129,6 +173,11 @@ Route::get('/', 'HomeController@index')->middleware(['lang']);
 Route::group(['prefix' => '{lang}', 'middleware' => ['lang']], function() {
     Route::get('/', 'HomeController@index');
 
+    Route::group(['prefix' => 'results'], function() {
+        Route::get('/', 'ResultsController@index')->name('results');
+        Route::get('{id_result}/bids', 'ResultsController@bids')->name('results_bids'); 
+    });
+  
     Route::group(['middlewars' => 'guest'], function(){
         Route::post('register', 'Auth\RegisterController@register')->name('register');
         Route::get('finish-registration', 'Auth\RegisterController@finish_registration')->name('finish_registration');
@@ -145,13 +194,19 @@ Route::group(['prefix' => '{lang}', 'middleware' => ['lang']], function() {
 
             Route::group(['prefix' => 'register'], function() {
                 Route::get('offers-placed', 'RegisterController@offersPlaced')->name('offers_placed');
+                Route::get('transactions', 'RegisterController@transactions')->name('transactions');
+                Route::get('orders', 'RegisterController@orders')->name('orders');
+               // Route::get('bids', 'RegisterController@bids')->name('register_bids');
             });
         });
     });
 
     Route::group(['prefix' => 'cart', 'namespace' => 'Cart'], function() {
         Route::get('empty', 'CartController@empty_cart')->name('empty_cart');
-        Route::get('view/{url?}', 'CartController@view')->name('view_cart');
+        Route::get('view/{id?}', 'CartController@view')->name('view_cart');
+        Route::post('order/{id}', 'CartController@order')->name('order');
+        Route::get('success/{id}', 'CartController@success')->name('success_cart');
+
         Route::get('delete/{id}', 'CartController@delete')->name('delete_cart_item');
     });
 

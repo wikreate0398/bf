@@ -77,16 +77,27 @@ class AjaxController extends Controller
         $id    = $request->input('id');
         $table = $request->input('table');
 
-        if(Schema::hasColumn($table, 'deleted_at'))
-        {
-            DB::table($table)->where('id', $id)->update(['deleted_at' => \Carbon\Carbon::now()]);
+        if ($table == 'order') {
+            $order = \App\Models\Order::whereId($id)->firstOrFail();
+            $this->dispatch(
+                new \App\Console\Commands\DeleteCartItem(
+                    $order
+                )
+            ); 
         }
-        else{
-            DB::table($table)->where('id', $id)->delete();
-        }
+        else
+        { 
+            if(Schema::hasColumn($table, 'deleted_at'))
+            {
+                DB::table($table)->where('id', $id)->update(['deleted_at' => \Carbon\Carbon::now()]);
+            }
+            else{
+                DB::table($table)->where('id', $id)->delete();
+            }
 
-        if (Schema::hasColumn($table, 'parent_id')) {
-            DB::table($table)->where('parent_id', $id)->update(['parent_id' => 0]);   
+            if (Schema::hasColumn($table, 'parent_id')) {
+                DB::table($table)->where('parent_id', $id)->update(['parent_id' => 0]);   
+            }
         }
 
         return \App\Utils\JsonResponse::success(['message' => trans('admin.delete_true')]);

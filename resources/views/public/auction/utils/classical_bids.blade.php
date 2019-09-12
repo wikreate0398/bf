@@ -16,9 +16,7 @@
                 </div>
             @endforeach
         </div>
-
         <!---- Обрати внимание что последний элемент имеет класс "last" -->
-
         <div class="pagination">
             <a href="#" class="arrow_l" onclick="TableNav.prev(); return false;">
                 <i></i>

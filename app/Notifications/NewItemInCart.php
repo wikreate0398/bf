@@ -6,12 +6,13 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use App\Models\EmailTemplates;
 
 class NewItemInCart extends Notification
 {
     use Queueable;
 
-    private $auction;
+    private $auction; 
 
     /**
      * Create a new notification instance.
@@ -20,7 +21,7 @@ class NewItemInCart extends Notification
      */
     public function __construct($auction)
     {
-        $this->auction = $auction;
+        $this->auction = $auction; 
     }
 
     /**
@@ -41,15 +42,14 @@ class NewItemInCart extends Notification
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
-    {
-        $subject = sprintf('You\'ve got a new message from %s!', config('app.name'));
+    {  
+        $emailTemplate = EmailTemplates::where('var', 'item_in_cart')->first(); 
+        $message = str_replace(['{USERNAME}'], [$notifiable->name], $emailTemplate["message_{$notifiable->lang}"]);
 
         return (new MailMessage)
-            ->subject($subject)
-            ->from(\Constant::get('EMAIL'))
-            ->greeting("Congratulations {$notifiable->name}!")
-            ->line('You have received a new item in the cart')
-            ->line('Thank you for using our application!');
+            ->subject($emailTemplate["theme_{$notifiable->lang}"])
+            ->from(\Constant::get('EMAIL')) 
+            ->line(new \Illuminate\Support\HtmlString($message));
     }
 
     /**

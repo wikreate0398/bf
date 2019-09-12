@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'confirm', 'confirm_hash', 'active', 'account_number'
+        'name', 'email', 'password', 'confirm', 'confirm_hash', 'active', 'account_number', 'ballance', 'lang'
     ];
 
     /**
@@ -31,7 +31,8 @@ class User extends Authenticatable
 
     protected $casts = [
         'confirm' => 'integer',
-        'active'  => 'integer'
+        'active'  => 'integer',
+        'ballance' => 'float'
     ];
 
     public function bids()
@@ -51,4 +52,22 @@ class User extends Authenticatable
             return $query->where('prepare_id', 0)->where('id_auction', $idAuction);
         }]);
     }
+
+    public function order()
+    {
+        return $this->hasMany('App\Models\Order', 'id_user', 'id');
+    }
+
+    public function scopeFilter($query)
+    {
+        if(request()->q)
+        {
+            $searchQuery = request()->q;
+            $query->where('name', 'like', '%'.$searchQuery.'%')
+                  ->orWhere('email', 'like', '%'.$searchQuery.'%')
+                  ->orWhere('account_number', 'like', '%'.$searchQuery.'%');
+        } 
+
+        return $query;
+    } 
 }

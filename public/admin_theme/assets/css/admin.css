@@ -368,3 +368,33 @@ select option:disabled {
 .nw{
     white-space: nowrap;
 }
+
+.status-canceled, .status-refund{
+    color: #D50000 !important;
+}
+
+.status-progress{
+    color: orange !important;
+}
+
+.status-delivered{
+    color: green !important;
+}
+
+.wait-process::after{
+  content: "";
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: fixed;
+  background:rgba(0,0,0,.4);
+  background-image: url('/img/status.gif');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80px;
+}
+ 
+.open-order{
+  background-color: #ededed;
+}

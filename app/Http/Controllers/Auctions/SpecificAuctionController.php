@@ -11,14 +11,12 @@ use App\Utils\Auctions\AuctionState;
 use App\Models\Auctions\BidStatus;
 use App\Utils\Auctions\Bids\BidItems;
 use App\Utils\Auctions\Bids\SpecificBids;
+use App\Utils\Ballance; 
 
 class SpecificAuctionController extends AuctionsController
 {
     public function __construct()
-    {
-        $auction = Auctions::whereId(3)->totalActiveBids()->first();
-        $this->makeOrder($auction);
-
+    { 
         self::$auction_type = 'specific';
     }
 
@@ -45,7 +43,7 @@ class SpecificAuctionController extends AuctionsController
 
         if(!$request->integer && !$request->decimal)
         {
-            return \JsonResponse::error(['messages' => 'Введите сумму']);
+            return \JsonResponse::error(['messages' => \Constant::get('ENTER_AMOUNT')]);
         }
 
         $price = toFloat($request->integer . '.' . $request->decimal);
@@ -53,14 +51,23 @@ class SpecificAuctionController extends AuctionsController
         Bids::create([
             'id_user'    => Auth::user()->id,
             'id_auction' => $id,
-            'price'      => $price
+            'price'      => $price, 
+            'bid_cost'   => setting('bid_price')
         ]);
 
-        if($auction->total_bid_limit == Bids::where('id_auction', $id)->count())
+        (new Ballance($user))
+            ->transactionType('bid_payment')
+            ->setPrice(setting('bid_price'))
+            ->setProductCode($auction->code)
+            ->off();
+
+        $redirect = setUri(\Request::segment(2) . '/' . $auction->url);
+        if($auction->total_bid_limit == Bids::where('id_auction', $id)->where('prepare_id', '0')->count())
         {
-            $this->makeOrder($auction);
+            $idOrder = $this->addToCart($auction->id); 
+            $redirect = route('view_cart', ['lang' => $lang, 'id' => $idOrder]);
         }
 
-        return \JsonResponse::success(['messages' => 'Ставка успешно добавлена', 'reload' => true]);
-    }
+        return \JsonResponse::success(['messages' => \Constant::get('BID_ADDED'), 'redirect' => $redirect]);
+    } 
 }

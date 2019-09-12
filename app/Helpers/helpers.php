@@ -22,6 +22,17 @@ if (!function_exists('key_to_id')) {
     }
 }
 
+function savePercent($retail, $price)
+{
+    return percentFormat(100 - (($price/100)*$retail));
+}
+
+function percentFormat($percent=null)
+{
+    if (empty($percent)) return '0'; 
+    return number_format($percent, 1, '.', ' ');
+}
+
 function generate_id($length=6)
 {
     $number = '';
@@ -192,6 +203,63 @@ function adminMenu()
             ]
         ],
 
+        'clients' => [
+            'name' => 'Clients',
+            'icon' => '<i class="fa fa-users" aria-hidden="true"></i>',
+            'link' => '/'.config('admin.path').'/clients/',
+            'view' => true,
+            'edit' => 'Edit'
+        ],
+
+        'orders' => [
+            'name'   => 'Orders',
+            'icon'   => '<i class="fa fa-cart-arrow-down" aria-hidden="true"></i>',
+            'link'   => '/'.config('admin.path').'/orders/',
+            'view'   => true,
+            'edit'   => 'Редактировать',
+            'childs' => [
+                'orders-list' => [
+                    'name' => 'Sales',
+                    'icon' => '<i class="fa fa-book" aria-hidden="true"></i>',
+                    'link' => '/'.config('admin.path').'/orders/orders-list/',
+                    'view' => true,
+                    'edit' => 'Редактировать'
+                ],
+
+                'status' => [
+                    'name' => 'Orders status',
+                    'icon' => '<i class="fa fa-book" aria-hidden="true"></i>',
+                    'link' => '/'.config('admin.path').'/orders/status/',
+                    'view' => true,
+                    'edit' => 'Редактировать'
+                ], 
+            ]
+        ],
+
+        'statistics' => [
+            'name'   => 'Statistics',
+            'icon'   => '<i class="fa fa-bar-chart" aria-hidden="true"></i>',
+            'link'   => '/'.config('admin.path').'/statistics',
+            'view'   => true,
+            'edit'   => 'Редактировать',
+            'childs' => [
+                'daily-reports' => [
+                    'name' => 'Daily reports',
+                    'icon' => '<i class="fa fa-book" aria-hidden="true"></i>',
+                    'link' => '/'.config('admin.path').'/statistics/daily-reports/',
+                    'view' => true,
+                    'edit' => 'Редактировать'
+                ],
+
+                'client-history' => [
+                    'name' => 'Client History',
+                    'icon' => '<i class="fa fa-book" aria-hidden="true"></i>',
+                    'link' => '/'.config('admin.path').'/statistics/client-history/',
+                    'view' => true,
+                    'edit' => 'Редактировать'
+                ], 
+            ]
+        ],  
 
         'front-page' => [
             'name'   => 'Front page',
@@ -219,13 +287,29 @@ function adminMenu()
             'edit' => 'Edit'
         ],
 
+        'transaction-types' => [
+            'name' => 'Transaction types',
+            'icon' => '<i class="fa fa-money" aria-hidden="true"></i>',
+            'link' => '/'.config('admin.path').'/transaction-types/',
+            'view' => true,
+            'edit' => 'Edit'
+        ], 
+
+        'email-templates' => [
+            'name' => 'Email Templates',
+            'icon' => '<i class="fa fa-paper-plane-o" aria-hidden="true"></i>',
+            'link' => '/'.config('admin.path').'/email-templates/',
+            'view' => true,
+            'edit' => 'Edit'
+        ], 
+
         'banners' => [
             'name' => 'Banners',
             'icon' => '<i class="fa fa-file-image-o" aria-hidden="true"></i>',
             'link' => '/'.config('admin.path').'/banners/',
             'view' => true,
             'edit' => 'Edit'
-        ],
+        ], 
 
         'settings' => [
             'name' => 'Settings',
@@ -253,6 +337,7 @@ function adminMenu()
         ], 
     ]; 
 }
+ 
 
 //function auctionType($type){
 //    $types = [
@@ -317,9 +402,9 @@ function setUri($uri){
     return '/' . lang() . '/' . $uri;
 }
 
-function priceString($price){ 
-    if (empty($price)) return '0.00'; 
-    return number_format($price, 0, '.', ' ');
+function priceString($price, $zecimals = 0, $space = ' '){ 
+    if (empty($price)) return '0'; 
+    return number_format($price, $zecimals, '.', $space);
 }
 
 function bigNumberFormat($number)
@@ -461,4 +546,219 @@ function montName($date)
             break;
     }
     return date('d ' . $m . ' Y', $date);
+}
+
+function format_by_count($count, $form1, $form2, $form3)
+{
+    $count = abs($count) % 100;
+    $lcount = $count % 10;
+    if ($count >= 11 && $count <= 19) return($form3);
+    if ($lcount >= 2 && $lcount <= 4) return($form2);
+    if ($lcount == 1) return($form1);
+    return $form3;
+}
+
+function strFormat($field, $lang=false)
+{
+
+    if (empty($lang)) {
+        $lang = lang();
+    }  
+
+    $arr = [
+        'days' => [
+            'ru' => [
+                'день',
+                'дня',
+                'дней'
+            ],
+
+            'ro' => [
+                'zi',
+                'zile',
+                'zile'
+            ],
+
+            'en' => [
+                'day',
+                'days',
+                'days'
+            ],
+        ],
+
+        'hours' => [
+            'ru' => [
+                'час',
+                'часа',
+                'часов'
+            ],
+
+            'ro' => [
+                'ora',
+                'ore',
+                'ore'
+            ],
+
+            'en' => [
+                'hours',
+                'hours',
+                'hours'
+            ],
+        ],
+
+        'minutes' => [
+            'ru' => [
+                'минута',
+                'минуты',
+                'минут'
+            ],
+
+            'ro' => [
+                'minut',
+                'minute',
+                'minute'
+            ],
+
+            'en' => [
+                'minute',
+                'minutes',
+                'minutes'
+            ],
+        ],
+
+        'seconds' => [
+            'ru' => [
+                'секунда',
+                'секунды',
+                'секунд'
+            ],
+
+            'ro' => [
+                'secunda',
+                'secunde',
+                'secunde'
+            ],
+
+            'en' => [
+                'second',
+                'seconds',
+                'seconds'
+            ],
+        ]
+    ];
+
+    return $arr[$field][$lang];
+}
+
+function field($key, $lang = false){
+    
+    if (empty($lang)) {
+        $lang = lang();
+    }  
+
+    $translate = array(  
+        'name' => array(
+            'ru' => 'Имя',
+            'ro' => 'Numele',
+            'en' => 'Name'
+        ), 
+
+        'surname' => array(
+            'ru' => 'Фамилия',
+            'ro' => 'Prenume',
+            'en' => 'Surname'
+        ), 
+
+        'denom' => array(
+            'ru' => 'Название',
+            'ro' => 'Denumire',
+            'en' => 'Name'
+        ),  
+
+        'lasts' => array(
+            'ru' => 'Длится',
+            'ro' => 'Dureaza',
+            'en' => 'Lasts'
+        ), 
+
+        'type' => array(
+            'ru' => 'Тип',
+            'ro' => 'Tipul',
+            'en' => 'Type'
+        ), 
+
+        'select' => array(
+            'ru' => 'Выбрать',
+            'ro' => 'Alege',
+            'en' => 'Select'
+        ),  
+  
+        'comment' => array(
+            'ru' => 'Комментарий',
+            'ro' => 'Mesaj',
+            'en' => 'Comment'
+        ),  
+
+        'pass' => array(
+            'ru' => 'пароль',
+            'ro' => 'Parola',
+            'en' => 'Password'
+        ),   
+
+        'repeat_pass' => array(
+            'ru' => 'Подтверждение пароля',
+            'ro' => 'Parola din nou',
+            'en' => 'Repeat password'
+        ),   
+ 
+        'ph_nr' => array(
+            'ru' => 'Номер телефона',
+            'ro' => 'Numarul de tel.',
+            'en' => 'Phone number'
+        ),
+
+        
+        'msg' => array(
+            'ru' => 'Сообщение',
+            'ro' => 'Mesaj',
+            'en' => 'Message'
+        ),  
+
+        'title' => array(
+            'ru' => 'Заголовок',
+            'ro' => 'Subiect',
+            'en' => 'Title'
+        ),  
+  
+        'close' => array(
+            'ru' => 'Закрыть',
+            'ro' => 'închide',
+            'en' => 'Close'
+        ),  
+
+        'avatar' => array(
+            'ru' => 'Аватар',
+            'ro' => 'Avatar',
+            'en' => 'Avatar'
+        ),  
+         
+ 
+    );  
+
+    if (!empty($translate[$key][$lang])) {
+        return $translate[$key][$lang];
+    }
+} 
+
+function generateAccountNumber()
+{
+    $accountNumber = (int) \App\Models\User::select('account_number')->get()->pluck('account_number')->map(function($account_number){
+        return (int) str_replace( '0', '', $account_number);
+    })->max()+1;
+
+    $zeros='';
+    for ($i=0; $i < (12-strlen($accountNumber)); $i++ ){
+        $zeros .= 0;
+    }
+    return $zeros.$accountNumber;
 }

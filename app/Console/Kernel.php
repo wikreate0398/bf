@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\Cron\CartCron::class
     ];
 
     /**
@@ -24,8 +24,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('cart')
+                 ->everyMinute()
+                 ->appendOutputTo(storage_path('logs/cron_commands.log'));
     }
 
     /**

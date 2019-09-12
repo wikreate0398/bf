@@ -29,6 +29,12 @@ class WebAuthenticate
                 return  redirect('/');
             }
         }
+
+        if(Auth::user()->lang != lang())
+        {
+            \App\Models\User::whereId(Auth::user()->id)->update(['lang' => lang()]);
+        }
+         
         return $next($request);
     }
 }

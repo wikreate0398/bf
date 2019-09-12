@@ -6,7 +6,13 @@ $(document).ready(function() {
     $(".close_menu").click(function(){
         $(".menu_mobile").removeClass("open");
         $("body").removeClass("menu_opened");
-    })
+    });
+
+    $('.confirm-action').click(function(e){
+        if (!confirm($(this).attr('data-confirm'))) {
+            e.preventDefault();
+        }
+    });
 
     $(".language_select").text($(".language_list li.active[data-type='mobile-header']").text());
     $(".language_select").text($(".language_list li.active[data-type='desktop-header']").text());

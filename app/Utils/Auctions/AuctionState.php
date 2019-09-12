@@ -25,7 +25,9 @@ class AuctionState
         $arr = [
             'auth_error'                  => \Constant::get('PLEASE_LOGIN'),
             'exceeded_personal_bid_limit' => \Constant::get('EXCEEDED_PERSONAL_BID_LIMIT'),
-            'bid_limit'                   => \Constant::get('EXCEEDED_BID_LIMIT')
+            'bid_limit'                   => \Constant::get('EXCEEDED_BID_LIMIT'),
+            'no_ballance'                 => 'Что бы сделать ставку необходимо пополнить свой баланс минимум на ' . setting('bid_price') . ' Лея',
+            'no_qty'                      => 'Товара нет в наличии'
         ];
 
         return $arr[$key];
@@ -46,6 +48,16 @@ class AuctionState
         elseif($this->auction->bids_count >= $this->auction->total_bid_limit)
         {
             $this->_setErrorCode('bid_limit');
+            return;
+        }
+        elseif ($this->user->ballance < setting('bid_price'))
+        {
+            $this->_setErrorCode('no_ballance');
+            return;
+        }
+        elseif (!$this->auction->quantity)
+        {
+            $this->_setErrorCode('no_qty');
             return;
         }
         return true;

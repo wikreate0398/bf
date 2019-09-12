@@ -21,12 +21,12 @@
     padding-right: 20px;
 }
 
-#ajax-notify.notify-success{
+#ajax-notify.notify-success, .alert-success{
     background-color: rgb(149, 220, 73);
     color: #62632A;
 }
 
-#ajax-notify.notify-danger{
+#ajax-notify.notify-danger, .alert-error{
     background: #ea6a6a;
     color: #fff;
 }
@@ -35,3 +35,19 @@
     color: #ea6a6a;
 }
 
+.status-canceled, .status-refund{
+    color: #D50000 !important;
+}
+
+.status-progress{
+    color: orange !important;
+}
+
+.status-delivered{
+    color: green !important;
+}
+
+#countdown span{
+    margin-right: 5px;
+    display: inline-block;
+}

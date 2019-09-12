@@ -54,7 +54,12 @@ class AuctionsController extends Controller
     public function show()
     { 
         $data = [
-            'data'   => $this->model->orderByRaw('page_up asc, id desc')->where('auction_type', self::$auction_type)->get(),
+            'data'   => $this->model->orderByRaw('page_up asc, id desc')
+                                    ->where('auction_type', self::$auction_type)
+                                    ->with(['orders' => function($query){
+                                        return $query->where('id_status', 2);
+                                    }])
+                                    ->get(),
             'table'  => $this->model->getTable(),
             'method' => $this->method
         ]; 

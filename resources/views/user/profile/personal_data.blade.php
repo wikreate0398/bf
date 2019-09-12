@@ -12,7 +12,7 @@
                     </label>
 
                     <label for="">
-                        <span class="placeholder">Email *</span>
+                        <span class="placeholder">E-mail *</span>
                         <input  type="email" name="email" autocomplete="off" value="{{ Auth::user()->email }}">
                     </label>
                 </div>

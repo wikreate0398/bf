@@ -66,6 +66,11 @@ class Auctions extends Model
         return $this->hasMany('App\Models\Auctions\Bids', 'id_auction', 'id')->has('user');
     }
 
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order', 'id_auction', 'id')->withTrashed();
+    }
+
     public function scopeSumTotalBids($query)
     {
         $query->withCount(['bids' => function($query){

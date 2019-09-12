@@ -22,6 +22,14 @@
 				@if(!empty($help))
 					<span class="help-block">{{ $help }}</span>
 				@endif
+
+				@if(!empty($const))
+					<div class="alert alert-info" style="margin-top: 15px;">
+						@foreach($const as $key => $value)
+							<code>{<?=$value?>}</code>
+						@endforeach 
+					</div>
+				@endif
 			</div>
 		</div>
 	@endforeach

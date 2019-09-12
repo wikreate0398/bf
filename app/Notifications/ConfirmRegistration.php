@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use App\Models\EmailTemplates;
 
 class ConfirmRegistration extends Notification
 {
@@ -13,14 +14,18 @@ class ConfirmRegistration extends Notification
 
     private $confirmation_link;
 
+    private $lang;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($confirm_hash)
+    public function __construct($confirm_hash, $lang)
     {
         $this->confirmation_link = url(route('registration_confirm', ['lang' => \App::getLocale(), 'confirmation_hash' => $confirm_hash]));
+
+        $this->lang = $lang;
     }
 
     /**
@@ -41,15 +46,13 @@ class ConfirmRegistration extends Notification
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
-    {
-        $subject = sprintf('You\'ve got a new message from %s!', config('app.name'));
-        return (new MailMessage)
-                    ->subject($subject)
-                    ->from(\Constant::get('EMAIL'))
-                    ->greeting("Hello {$notifiable->name}!")
-                    ->line('Welcome to our portal. Confirm your account')
-                    ->action('Confirm', $this->confirmation_link)
-                    ->line('Thank you for using our application!');
+    { 
+        $emailTemplate = EmailTemplates::where('var', 'confirm_registration')->first();
+        $message = str_replace(['{CONFIRMATION_LINK}', '{USERNAME}'], [$this->confirmation_link, $notifiable->name], $emailTemplate["message_{$this->lang}"]);
+        return (new MailMessage) 
+                    ->subject($emailTemplate["theme_{$this->lang}"])
+                    ->from(\Constant::get('EMAIL')) 
+                    ->line(new \Illuminate\Support\HtmlString($message)) ;
     }
 
     /**

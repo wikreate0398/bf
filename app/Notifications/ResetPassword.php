@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use App\Models\EmailTemplates;
 
 class ResetPassword extends Notification
 {
@@ -41,13 +42,16 @@ class ResetPassword extends Notification
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
-    {
-        $subject = sprintf('You\'ve got a new message from %s!', config('app.name'));
+    {  
+        $emailTemplate = EmailTemplates::where('var', 'reset_password')->first(); 
+        $message = str_replace(['{USERNAME}', '{NEW_PASSWORD}'], 
+                               [$notifiable->name, "<strong>{$this->new_pass}</strong>"], 
+                               $emailTemplate["message_{$notifiable->lang}"]);
+
         return (new MailMessage)
-                    ->subject($subject)
-                    ->from(\Constant::get('EMAIL'))
-                    ->greeting("Hello {$notifiable->name}!")
-                    ->line(new \Illuminate\Support\HtmlString('Your new password <b>' . $this->new_pass.'</b>'));
+                    ->subject($emailTemplate["theme_{$notifiable->lang}"])
+                    ->from(\Constant::get('EMAIL')) 
+                    ->line(new \Illuminate\Support\HtmlString($message));
     }
 
     /**

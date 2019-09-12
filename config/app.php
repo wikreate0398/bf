@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Chisinau',
 
     /*
     |--------------------------------------------------------------------------
@@ -169,6 +169,8 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Balping\BladeFunction\BladeFunctionServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
 
         /*
          * Application Service Providers...
@@ -236,6 +238,7 @@ return [
         'JsonResponse'    => App\Utils\JsonResponse::class,
         'Pages'    => App\Utils\Pages::class,
         'Constant' => App\Utils\Constants::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

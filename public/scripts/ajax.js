@@ -41,7 +41,9 @@ var Ajax = function() {
                         window.location = $(form).attr('data-redirect');
                     } else{
                         if (jsonResponse.redirect !== undefined) {
-                            window.location = jsonResponse.redirect;
+                            setTimeout(function () {
+                                window.location = jsonResponse.redirect;
+                            }, 1500); 
                         }
 
                         if (jsonResponse.reload == true) {
@@ -49,7 +51,7 @@ var Ajax = function() {
                                 Notify.setStatus('success').setMessage(jsonResponse.messages).show();
                                 setTimeout(function () {
                                     window.location.reload(true);
-                                }, 3000);
+                                }, 1500);
                             }else{
                                 window.location.reload(true);
                             }

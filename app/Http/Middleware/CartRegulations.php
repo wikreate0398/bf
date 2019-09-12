@@ -17,7 +17,7 @@ class CartRegulations
     public function handle($request, Closure $next)
     {
         if(!\Auth::check() or !Order::where('id_user', \Auth::user()->id)->where('in_cart', '1')->count())
-        {
+        { 
             return redirect()->route('empty_cart', ['lang' => lang()]);
         }
 

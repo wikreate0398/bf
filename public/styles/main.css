@@ -3393,8 +3393,8 @@ section.oferte_plasate._1 .tab-content .table-head .item[data-number="3"] {
 }
 
 section.oferte_plasate._1 .tab-content .table-head .item[data-number="4"] {
-    text-align: left;
-    width: 31.21%
+    text-align: center;
+    width: 17.21%
 }
 
 section.oferte_plasate._1 .tab-content .table-body .result_item .item[data-number="1"] {
@@ -3412,8 +3412,8 @@ section.oferte_plasate._1 .tab-content .table-body .result_item .item[data-numbe
 }
 
 section.oferte_plasate._1 .tab-content .table-body .result_item .item[data-number="4"] {
-    text-align: left;
-    width: 31.21%
+    text-align: center;
+    width: 17.21%
 }
 
 section.oferte_plasate._2 .tab-content .table-head .item[data-number="1"] {
@@ -3422,38 +3422,42 @@ section.oferte_plasate._2 .tab-content .table-head .item[data-number="1"] {
 }
 
 section.oferte_plasate._2 .tab-content .table-head .item[data-number="2"] {
-    width: 24.16%
+    width: 7.73%; 
 }
 
 section.oferte_plasate._2 .tab-content .table-head .item[data-number="3"] {
-    width: 7.73%
+    width: 23.16%
 }
 
 section.oferte_plasate._2 .tab-content .table-head .item[data-number="4"] {
-    width: 10.06%;
-    text-align: left
+    width: 7.73%
 }
 
 section.oferte_plasate._2 .tab-content .table-head .item[data-number="5"] {
-    width: 9.2%;
+    width: 8.06%;
     text-align: left
 }
 
 section.oferte_plasate._2 .tab-content .table-head .item[data-number="6"] {
-    width: 11.86%;
+    width: 9.2%;
+    text-align: left
+}
+
+section.oferte_plasate._2 .tab-content .table-head .item[data-number="7"] {
+    width: 10.86%;
     text-align: center;
     padding: 0 10px
 }
 
-section.oferte_plasate._2 .tab-content .table-head .item[data-number="7"] {
-    width: 12.98%;
+section.oferte_plasate._2 .tab-content .table-head .item[data-number="8"] {
+    width: 11.98%;
     text-align: center;
     color: #0070C0;
     padding: 0 10px
 }
 
-section.oferte_plasate._2 .tab-content .table-head .item[data-number="8"] {
-    width: 11.86%;
+section.oferte_plasate._2 .tab-content .table-head .item[data-number="9"] {
+    width: 10.86%;
     text-align: center;
     padding: 0 10px
 }
@@ -3464,37 +3468,42 @@ section.oferte_plasate._2 .tab-content .table-body .result_item .item[data-numbe
 }
 
 section.oferte_plasate._2 .tab-content .table-body .result_item .item[data-number="2"] {
-    width: 24.16%
-}
-
-section.oferte_plasate._2 .tab-content .table-body .result_item .item[data-number="3"] {
     width: 7.73%
 }
 
+section.oferte_plasate._2 .tab-content .table-body .result_item .item[data-number="3"] {
+    width: 23.16%
+}
+
 section.oferte_plasate._2 .tab-content .table-body .result_item .item[data-number="4"] {
-    width: 10.06%;
-    text-align: left
+    width: 7.73%;
+    text-align: center;
 }
 
 section.oferte_plasate._2 .tab-content .table-body .result_item .item[data-number="5"] {
-    width: 9.2%;
+    width: 8.06%;
     text-align: left
 }
 
 section.oferte_plasate._2 .tab-content .table-body .result_item .item[data-number="6"] {
-    width: 11.86%;
-    text-align: center;
-    padding: 0 10px
+    width: 9.2%;
+    text-align: left
 }
 
 section.oferte_plasate._2 .tab-content .table-body .result_item .item[data-number="7"] {
-    width: 12.98%;
+    width: 10.86%;
     text-align: center;
     padding: 0 10px
 }
 
 section.oferte_plasate._2 .tab-content .table-body .result_item .item[data-number="8"] {
-    width: 11.86%;
+    width: 11.98%;
+    text-align: center;
+    padding: 0 10px
+}
+
+section.oferte_plasate._2 .tab-content .table-body .result_item .item[data-number="9"] {
+    width: 10.86%;
     text-align: center;
     padding: 0 10px
 }
@@ -3608,7 +3617,8 @@ section.oferte_plasate .tab-content .table-body .result_item span.unity {
     line-height: 34px;
     font-size: 14px;
     color: #1D2632;
-    font-weight: 500
+    font-weight: 500;
+    margin:auto;
 }
 
 section.oferte_plasate .tab-content .table-body .result_item p {
@@ -3973,7 +3983,7 @@ section.checkout .prodcts_navigation .counts_code .code {
     font-size: 14px;
     color: #666;
     font-weight: 400;
-    padding-right: 20px
+    padding-right: 21px
 }
 
 section.checkout .prodcts_navigation .counts_code .code::before {
@@ -4003,8 +4013,8 @@ section.checkout .prodcts_navigation .counts_code .pieces::before {
     bottom: 0;
     margin: auto;
     left: -30px;
-    width: 16px;
-    height: 16px;
+    width: 19px;
+    height: 19px;
     background-image: url(/img/products/icon_time_red.png);
     background-repeat: no-repeat;
     background-size: contain
@@ -4719,3 +4729,24 @@ footer .copyright p {
     color: #337ab7;
 }
 /*# sourceMappingURL=main.css.map*/
+
+ 
+.pagination li a{
+    padding: 6px 12px !important;
+    border:1px solid #DBDDDE !important;
+    border-radius: 0px !important;
+    color: #404040  !important;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
+    background: #95DC49;
+    border:1px solid #95DC49 !important;
+}
+
+.pagination li{
+    margin: 0 5px;  
+}
+
+.pagination li span{
+    border-radius: 0px !important;  
+}

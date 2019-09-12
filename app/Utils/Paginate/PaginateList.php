@@ -44,9 +44,24 @@ class PaginateList implements PaginateInterface
         }
     }
 
-    public function current()
+    public function current($id=false)
     {
-        return $this->items->first();
+        if (!$id) 
+        {
+            $current = $this->items->first();
+        }
+        else
+        { 
+            $current = @$this->items->keyBy('id')[$id]; 
+        }
+
+        if (!$current) 
+        {
+            return false;
+        }
+
+        $this->addCurrentIndex($current->id);
+        return $current; 
     }
 
     public function next()

@@ -19,7 +19,7 @@ class SpecificBids implements BidTypesInterface
 {
     private $bidItems;
 
-    private $type;
+    private $type = 'unique_small';
 
     private $uniqueBid;
 

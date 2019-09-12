@@ -7,7 +7,9 @@ use App\Models\Auctions\Auctions;
 use App\Models\User;
 use App\Utils\Auctions\AuctionState;
 use App\Models\Auctions\Bids;
-use App\Utils\Paginate\PaginateList;
+use App\Utils\Paginate\PaginateList; 
+use App\Utils\Auctions\Bids\WinnerBid;
+use App\Console\Commands\AddToCart; 
 
 class AuctionsController extends Controller
 {
@@ -58,14 +60,12 @@ class AuctionsController extends Controller
         return view('public/auction/show', $this->show_data);
     }
 
-    public function makeOrder(Auctions $auction)
-    {
-        if($auction->bids->count())
-        {
-            $specificOrderClass = new \App\Console\Commands\OrderTypes\SpecificOrder($auction);
-            $this->dispatch($specificOrderClass);
-            $auction->quantity--;
-            $auction->save();
-        }
+    public function addToCart($idAuction)
+    { 
+        $auction   = Auctions::active()->whereId($idAuction)->totalActiveBids()->first();
+        $winnerBid = (new WinnerBid($auction, $auction->bids))->get();   
+        $auction->quantity--;
+        $auction->save();   
+        return $this->dispatch(new AddToCart($auction, $winnerBid));
     }
 }

@@ -43,7 +43,7 @@
                         <div class="col-lg-7 rigth_part">
                             <div class="action_block">
                                 <div class="price_per_action">
-                                    <p>{{ \Constant::get('COST_REG_OFFER') }}</p>
+                                    <p>{{ str_replace('{BID_PRICE}', setting('bid_price'), \Constant::get('COST_REG_OFFER')) }}</p>
                                 </div>
                                 <form method="POST" class="ajax__submit" action="{{ setUri(\Request::segment(2) . '/add-bid/' . $auction->id) }}">
                                     {{ csrf_field() }}
