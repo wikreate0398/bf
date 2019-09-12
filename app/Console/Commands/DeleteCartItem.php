@@ -46,7 +46,7 @@ class DeleteCartItem extends Command
     public function handle()
     { 
         \Bus::dispatch(
-            new \App\Console\Commands\CancelCartItem($this->cart)
+            new \App\Console\Commands\CloseCartItem($this->cart)
         );
         $this->cart->delete();
     }

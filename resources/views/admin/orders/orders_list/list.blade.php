@@ -75,7 +75,7 @@
 						<th>Value, MDL</th>
 						<th>Delivery</th>
 						<th>Status</th>
-						<th style="width:5%; text-align: center"><i class="fa fa-cogs" aria-hidden="true"></i></th>
+						<!-- <th style="width:5%; text-align: center"><i class="fa fa-cogs" aria-hidden="true"></i></th> -->
 					</tr>
 					</tbody>
 					<tbody>
@@ -121,12 +121,10 @@
 									{{ $order->refund_at ? $order->refund_at->format('d.m.Y H:i') : '' }}
 								</small> 
 							</td>
-							<td style="width: 5px; white-space: nowrap">  
-								<a class="btn btn-danger btn-xs" data-toggle="modal" href="#deleteModal_{{ $table }}_{{ $order['id'] }}"><i class="fa fa-trash-o "></i></a>
-								<!-- Modal -->
-							@include('admin.utils.delete', ['id' => $order['id'], 'table' => $table])
-							<!-- Modal -->
-							</td>
+							<!-- <td style="width: 5px; white-space: nowrap">  
+								<a class="btn btn-danger btn-xs" data-toggle="modal" href="#deleteModal_{{ $table }}_{{ $order['id'] }}"><i class="fa fa-trash-o "></i></a> 
+								@include('admin.utils.delete', ['id' => $order['id'], 'table' => $table]) 
+							</td> -->
 						</tr>
 					@endforeach
 					</tbody>

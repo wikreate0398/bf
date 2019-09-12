@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="oferte_plasate _1">
-        <div class="container" style="min-height: 350px;-">
+        <div class="container" style="min-height: 350px;">
 
             @if($transactions->count())
                 <div class="tab-content">

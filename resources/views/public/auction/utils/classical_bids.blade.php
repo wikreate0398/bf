@@ -1,4 +1,4 @@
-@if(Auth::check() && $user->bids->count())
+@if(Auth::check() && $auction->bids->count())
     <div class="result_of_bids type_b"
          id="table_nav"
          data-table="{{ json_encode([
@@ -6,10 +6,10 @@
                                          'user_bids'          => $user->bids->count(),
                                          'per_page'           => 10
                                      ]) }}">
-        <div class="count">{{ $user->bids->count() }}/{{ $auction->personal_bid_limit }}</div>
+        <div class="count">{{ $auction->bids->count() }}/{{ $auction->personal_bid_limit }}</div>
 
         <div class="table_nav_content">
-            @foreach($user->bids as $bid)
+            @foreach($auction->bids as $bid)
                 <div class="table_item">
                     <div class="item" data-number="1">{{ $bid->created_at->format('d.m.Y') }} <span>{{ $bid->created_at->format('H:i') }}</span></div>
                     <div class="item" data-number="2">{{ $bid->price }} {{ \Constant::get('LEI') }}</div>

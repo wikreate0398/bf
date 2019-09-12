@@ -57,7 +57,7 @@ class OrdersListController extends Controller
         $order            = Order::whereId($id)->firstOrFail(); 
         $order->id_status = $request->value;
         $order->save();
-        if ($request->value == 3) // if refund
+        if ($request->value == 3) // refund
         {
             $order->refund_at = date('Y-m-d H:i:s');
             $order->save();
@@ -70,11 +70,28 @@ class OrdersListController extends Controller
                 ->replenish();
 
             $returnData = ['refund_at' => $order->refund_at->format('d.m.Y H:i'), 'class' => $order->status->class];
-        }
 
-        if (in_array($request->value, [3, 4])) {
+            \Bus::dispatch(
+                new \App\Console\Commands\CloseCartItem($order)
+            );
+        }
+        elseif ($request->value == 4) // cancel
+        {
+            (new Ballance($order->user))
+                ->transactionType('cancel_payment')
+                ->setPrice($order->price)
+                ->setProductCode($order->auction->code)
+                ->setOrderId($order->id)
+                ->replenish();
+
             \Bus::dispatch(
                 new \App\Console\Commands\CancelCartItem($order)
+            );
+        } 
+        elseif ($request->value == 5) // reject
+        {
+            \Bus::dispatch(
+                new \App\Console\Commands\CloseCartItem($order)
             );
         }
 

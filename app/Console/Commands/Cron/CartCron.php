@@ -44,9 +44,9 @@ class CartCron extends Command
             if($cart->created_at->addHours(48) <= \Carbon\Carbon::now())
             {  
                 \Bus::dispatch(
-                    new \App\Console\Commands\CancelCartItem($cart)
+                    new \App\Console\Commands\CloseCartItem($cart)
                 );
-                $cart->id_status = 4;
+                $cart->id_status = 5;
                 $cart->in_cart   = 0;
                 $cart->save();
                 $cart->user->notify(new ChangedOrderStatus($cart));

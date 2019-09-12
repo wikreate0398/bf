@@ -2,7 +2,7 @@
 
 @section('content')
         <section class="oferte_plasate">
-        <div class="container">
+        <div class="container" style="min-height: 350px;">
 
             @if($bids->count())
                 <div class="tab-content">
@@ -38,7 +38,7 @@
                 {{ $bids->links() }}  
 
             @else
-                <div class="alert _2">
+                <div class="alert alert-error">
                     <p>{{ \Constant::get('NO_BIDS') }}</p>
                 </div>
             @endif

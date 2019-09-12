@@ -6,8 +6,9 @@ use App\Models\Auctions\Bids;
 use App\Models\Auctions\Auctions;
 use App\Models\Order;
 use Illuminate\Console\Command;
-use App\Console\Commands\AddToCart; 
-use App\Utils\Auctions\Bids\WinnerBid;
+use App\Utils\Ballance;
+use App\Models\User;
+use App\Notifications\ReturnBidCost;
 
 class CancelCartItem extends Command
 {
@@ -44,22 +45,20 @@ class CancelCartItem extends Command
      * @return mixed
      */
     public function handle()
-    { 
-        $getBid = Bids::where('prepare_id', $this->cart->bid_prepare_id)
-                      ->where('id_user', $this->cart->id_user)
-                      ->where('id_auction', $this->cart->id_auction) 
-                      ->whereRaw('CAST(price as DECIMAL) = CAST('.$this->cart->price.' as DECIMAL)')
-                      ->orderByRaw('id asc')
-                      ->first();
+    {  
+        $getBids = Bids::where('prepare_id', $this->cart->bid_prepare_id)->withTrashed()->get()->groupBy('id_user');
 
-        if ($getBid) {
-            $getBid->delete();  
-        } 
+        foreach ($getBids as $idUser => $userBids) {
+            $user   = User::whereId($idUser)->withTrashed()->first(); 
+            $amount = $userBids->sum('bid_cost');
+            (new Ballance($user))
+                ->transactionType('return_bid')
+                ->setPrice($amount)
+                ->setProductCode($this->cart->auction->code)
+                ->setOrderId($this->cart->id)
+                ->replenish(); 
 
-        if(Bids::where('prepare_id', $this->cart->bid_prepare_id)->where('id_auction', $this->cart->id_auction)->count())
-        {    
-            $winnerBid = (new WinnerBid($this->cart->auction, $this->cart->bids))->get();   
-            \Bus::dispatch(new AddToCart($this->cart->auction, $winnerBid, $this->cart->bid_prepare_id));  
-        }   
+            $user->notify(new ReturnBidCost($this->cart, $this->cart->auction, $amount));
+        }
     }
 }

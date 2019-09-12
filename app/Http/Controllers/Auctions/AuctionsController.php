@@ -40,6 +40,8 @@ class AuctionsController extends Controller
         $this->auction  = Auctions::active()->sumTotalBids()->totalActiveBids()->where('url', $url)->firstOrFail();
         $this->user     = User::whereId(@\Auth::user()->id)->proposedBids($this->auction->id)->first();
 
+        //exit(print_arr($this->auction->toArray()));
+
         $pagination = $paginateonList->addItems($this->auctions)->addCurrentIndex($this->auction->id);
 
         $this->show_data = [
