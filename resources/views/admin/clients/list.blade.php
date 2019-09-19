@@ -55,7 +55,35 @@
 							<td>{{ $item->ballance }}</td>
 							<td>{{ $item->email }}</td>
 							<td style="width: 5px; white-space: nowrap">
-								 
+								<a class="btn btn-xs btn-warning" data-toggle="modal" href="#send_letter_{{ $item['id'] }}">
+									<i class="fa fa-envelope" aria-hidden="true"></i>
+								</a>
+
+								<div id="send_letter_{{ $item['id'] }}" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+								   <div class="modal-dialog">
+								      <div class="modal-content">
+								         <div class="modal-header">
+								            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+								            <h4 class="modal-title">Send message</h4>
+								         </div>
+								         <form action="/{{ $method }}/{{ $item['id'] }}/send-letter" class="ajax__submit form-horizontal"> 
+									         <div class="modal-body">
+									         	{{ csrf_field() }}
+									        	@include('admin.utils.input', ['label' => 'Theme', 'req' => true, 'name' => 'theme', 'data' => ['theme' => '☆ ' . config('app.name') . ': New Message']])  
+									        	@include('admin.utils.textarea', ['label' => 'Message', 'req' => true, 'name' => 'message'])
+									         </div>
+									         <div class="modal-footer">
+									            <button type="button" data-dismiss="modal" class="btn default">Cancel</button>
+									            <button type="submit"  
+									                    class="btn green">
+									               	Send
+									            </button>
+									         </div>
+								         </form>
+								      </div>
+								   </div>
+								</div>
+
 								<a href="/{{ $method }}/{{ $item['id'] }}/autologin/" target="_blank" class="btn btn-primary btn-xs">
 									<i class="fa fa-sign-in" aria-hidden="true"></i>
 								</a> 

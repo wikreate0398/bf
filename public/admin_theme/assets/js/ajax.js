@@ -50,7 +50,7 @@ $(document).ready(function(){
 });
 
 function serializeForm(form, button, action, button_txt){
-	
+	 
     $.ajax({
         url: action,
         type: 'POST',
@@ -396,6 +396,13 @@ function onChangeSelect(select, url, id){
                 $(refundDate).show();
                 $(refundDate).text(jsonRespond.refund_at);
                 $(refundDate).removeClassStartingWith('status-').addClass(jsonRespond.class);
+            }
+
+            if($(select).hasClass('order-status-select')){
+                var option     = $(select).find('option:selected');
+                var statuClass = $(option).data('order-class');
+                $(select).after('<div class="'+statuClass+'">'+$(option).text()+'</div>');
+                $(select).remove();
             }
         },
 

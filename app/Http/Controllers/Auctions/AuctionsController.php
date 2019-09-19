@@ -26,9 +26,10 @@ class AuctionsController extends Controller
     public function __construct() {}
 
     public function index()
-    {
+    {  
         $data = [
-            'auctions' => Auctions::list()->sumTotalBids()->where('auction_type', self::$auction_type)->get()
+            'auctions' => Auctions::list()->sumTotalBids()->where('auction_type', self::$auction_type)->get(), 
+            'banner' => (new \Banner)->type('page')->page(\Pages::pageData(self::$auction_type . '-auctions')->id)->get()
         ];
 
         return view('public/auction/list', $data);
@@ -51,14 +52,15 @@ class AuctionsController extends Controller
             'next'         => $pagination->next(),
             'currentIndex' => $pagination->currentKey(),
             'user'         => $this->user,
-            'auctionState' => new AuctionState($this->auction, $this->user)
+            'auctionState' => new AuctionState($this->auction, $this->user),
+            'banner'       => (new \Banner)->type('product')->page($this->auction->id)->get() 
         ];
 
         if(\Auth::check() && $this->user->bids->count())
         {
             $this->add_show_data();
         }
-
+         
         return view('public/auction/show', $this->show_data);
     }
 

@@ -2061,8 +2061,15 @@ section.testimonials .dg-container nav .nav::before {
     }
 }
 
+.main-wrapper{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 section.licitatii_specifice .banner,
-section.product_inner .banner {
+section.product_inner .banner, .banner {
+    display: block;
     height: 250px;
     border-radius: 5px;
     overflow: hidden;
@@ -2101,6 +2108,10 @@ section.licitatii_specifice .alert {
     margin-bottom: 20px
 }
 
+.alert.a-warning{
+    border: 1px solid #EA700D !important;
+}
+
 section.licitatii_specifice .alert._2 {
     border-radius: 0 0 5px 5px
 }
@@ -2132,6 +2143,15 @@ section.licitatii_specifice .alert p::before {
     background-position: center;
     background-repeat: no-repeat;
     transform: translateX(-26px)
+}
+
+.alert.a-warning p{
+    color: #EA700D !important;
+}
+
+.alert.a-warning p::before{
+    content: '';
+    background-image: url(/img/licitatii_specifice/alert-warning.png) !important; 
 }
 
 section.licitatii_specifice .alert p a {
@@ -2346,7 +2366,7 @@ section.licitatii_specifice .tab-content .table-body .product_item .item p {
         border: none
     }
     section.licitatii_specifice .tab-content .table-head {
-        display: none
+        display: none !important
     }
     section.licitatii_specifice .tab-content .table-body {
         display: -webkit-flex;
@@ -3592,7 +3612,7 @@ section.oferte_plasate .tab-content .table-body .result_item span.price {
     color: #EA700D
 }
 
-section.oferte_plasate .tab-content .table-body .result_item span.blue {
+section.oferte_plasate .tab-content .table-body .result_item span.blue, small.blue {
     color: #0070C0;
     font-weight: 500
 }

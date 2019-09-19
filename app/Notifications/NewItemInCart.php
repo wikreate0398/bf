@@ -12,7 +12,7 @@ class NewItemInCart extends Notification
 {
     use Queueable;
 
-    private $auction; 
+    private $auction;  
 
     /**
      * Create a new notification instance.
@@ -45,8 +45,8 @@ class NewItemInCart extends Notification
     {  
         $emailTemplate = EmailTemplates::where('var', 'item_in_cart')->first(); 
         $message = str_replace(['{USERNAME}'], [$notifiable->name], $emailTemplate["message_{$notifiable->lang}"]);
-
-        return (new MailMessage)
+ 
+        return (new MailMessage) 
             ->subject($emailTemplate["theme_{$notifiable->lang}"])
             ->from(\Constant::get('EMAIL')) 
             ->line(new \Illuminate\Support\HtmlString($message));

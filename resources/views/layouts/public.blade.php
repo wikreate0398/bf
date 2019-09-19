@@ -412,7 +412,7 @@
                             <span class="personal_register" type="button" data-toggle="collapse" data-target="#personal_register">{{ \Constant::get('PERSONAL_REGISTER') }}</span>
                             <div id="personal_register" class="collapse">
                                 <ul>
-                                    <li><a href="/pages/registered/oferte_plasate_2.html"><i class="checkout"></i></a></li>
+                                    <li><a href="{{ route('orders', ['lang' => $lang]) }}"><i class="checkout"></i></a></li>
                                     <li><a href="{{ route('transactions', ['lang' => $lang]) }}"><i class="wallet"></i></a></li>
                                     <li><a href="{{ route('offers_placed', ['lang' => $lang]) }}">{{ \Constant::get('PLACED_OFFERS') }}</a></li>
                                 </ul>
@@ -480,8 +480,10 @@
     </div>
 
 </header>
-
-@yield('content')
+ 
+<a class="main-wrapper" @if(@$banner->link) href="{{ $banner->link }}" target="_blank" @endif style="display: block; {{ !empty($banner->image_background) ? 'background-image: url(/uploads/banners/'.$banner->image_background.');' : '' }}">
+    @yield('content')
+</a>
 
 <footer id="footer" style="@if(!setting('extend_homepage') && @$page_data->page_type == 'home') background-image: url('/uploads/uploads/{{ setting('home_background') }}'); @else background-image: url('/img/footer/footer.png'); @endif">
     <div class="container">

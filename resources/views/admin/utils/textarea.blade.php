@@ -1,6 +1,6 @@
 @if(empty($lang))
 <div class="form-group">
-	<label class="control-label col-md-12">{{ $label }}</label> 
+	<label class="control-label col-md-12">{{ $label }} {!! @$req ? '<span class="req">*</span>' : '' !!}</label> 
 	<div class="col-md-12"> 
 		<textarea name="{{ $name }}" class="form-control {{ !empty($ckeditor) ? 'ckeditor' : '' }}">{{ !empty($data[@$name]) ? $data[@$name] : '' }}</textarea>
 		@if(!empty($help))

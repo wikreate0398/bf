@@ -75,6 +75,28 @@
 			</div>
 		</div>
 	@endif
+	
+	<div class="row">
+		<div class="col-md-12">
+			 
+	 		<form action="" class="row">
+				<input type="hidden" name="filter" value="1">
+				<div class="col-md-2">
+					<input type="text" class="form-control" value="{{ request()->q }}" placeholder="Search..." name="q">
+				</div>
+ 
+				<div class="col-md-2">
+					<button type="submit" class="btn btn-info">Search</button>
+					@if(request()->filter)
+						<a href="{{ route('admin_constants') }}" class="btn btn-danger">Reset</a>
+					@endif
+				</div>
+			</form>
+ 
+		</div>
+	</div>
+
+	<br><br>
 
 	<div class="row">
 		<form action="/{{ $method }}/create" class="ajax__submit form-horizontal">

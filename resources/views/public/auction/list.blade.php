@@ -3,12 +3,20 @@
 @section('content')
     <section class="licitatii_specifice">
         <div class="container">
-
-            <a href="#" class="banner" style="background-image: url('/img/licitatii_specifice/banner.png');"></a>
+             
+            @include('public.utils.top_banner')
 
             {{--<div class="alert">--}}
                 {{--<p> 12.04.2018: Licitația UL13258 a fost anulată. Toate plațile de înregistrare a ofertelor de preț au fost returnate.</p>--}}
             {{--</div>--}}
+
+
+            @if(Session::has('flash_message'))
+                <div class="alert a-warning">
+                    <p>{{ Session::get('flash_message') }}</p> 
+                    @php Session::forget('flash_message') @endphp
+                </div> 
+            @endif
 
             <span class="title_page">
 				<i></i>

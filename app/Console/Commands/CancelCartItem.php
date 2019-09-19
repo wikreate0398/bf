@@ -59,6 +59,6 @@ class CancelCartItem extends Command
                 ->replenish(); 
 
             $user->notify(new ReturnBidCost($this->cart, $this->cart->auction, $amount));
-        }
+        } 
     }
 }

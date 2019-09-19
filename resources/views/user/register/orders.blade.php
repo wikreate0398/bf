@@ -21,7 +21,12 @@
                     @foreach($orders as $order)
                         <div class="result_item">
                             <div class="item" data-number="1">
-                                {{ $order->ordered_at->format('d.m.Y') }} <br> {{ $order->ordered_at->format('H:i') }}
+                                @if($order->ordered_at)
+                                    {{ $order->ordered_at->format('d.m.Y') }} <br> {{ $order->ordered_at->format('H:i') }}
+                                @else
+                                    {{ $order->created_at->format('d.m.Y') }} <br> {{ $order->created_at->format('H:i') }} <br>
+                                    <small class="blue">(added to cart)</small>
+                                @endif  
                             </div>
                             <div class="item" data-number="2">
                                 {{ $order->rand }}

@@ -40,7 +40,7 @@ class OrdersListController extends Controller
     public function show()
     {  
         $data = [
-            'data'    => $this->model->orderStage()->filter()->get(),
+            'data'    => $this->model->orderStage()->where('id_status', '!=', 5)->filter()->get(),
             'table'   => $this->model->getTable(),
             'method'  => $this->method,
             'status'  => OrderStatus::orderByRaw('page_up asc, id desc')->get(),
@@ -87,6 +87,10 @@ class OrdersListController extends Controller
             \Bus::dispatch(
                 new \App\Console\Commands\CancelCartItem($order)
             );
+
+            // change auction qty
+            $order->auction->quantity = $order->auction->quantity + $order->qty;
+            $order->auction->save();
         } 
         elseif ($request->value == 5) // reject
         {

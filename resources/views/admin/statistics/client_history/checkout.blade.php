@@ -18,7 +18,7 @@
 				<td class="nw">
 					{{ $order->rand }}
 				</td>	
-				<td class="nw">{{ $order->ordered_at->format('d.m.Y H:i') }}</td>
+				<td class="nw">{{ $order->ordered_at ? $order->ordered_at->format('d.m.Y H:i') : '--' }}</td>
 				<td class="nw">
 					<a href="{{ route('admin_clients') }}/{{ $order->user->id }}/edit" target="_blank">{{ $order->user->account_number }}</a>
 				</td> 

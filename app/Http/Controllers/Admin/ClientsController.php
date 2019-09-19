@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Utils\UploadImage;  
+use App\Notifications\SendLetter;
 
 class ClientsController extends Controller
 {
@@ -101,6 +102,13 @@ class ClientsController extends Controller
 
         $data->fill($this->input)->save();
         return \App\Utils\JsonResponse::success(['redirect' => route($this->redirectRoute)], trans('admin.save')); 
+    }
+
+    public function sendLetter($id, Request $request)
+    { 
+        $user = $this->model->findOrFail($id);
+        $user->notify(new SendLetter($request->theme, $request->message));
+        return \App\Utils\JsonResponse::success(['reload' => true], 'Message sent successfully'); 
     }
 
     private function validation($input)

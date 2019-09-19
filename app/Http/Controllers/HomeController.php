@@ -20,6 +20,9 @@ class HomeController
     {
         $data = \Pages::pageData();
         if(!$data) abort('404');
-        return view('public/page', ['data' => $data]);
+        return view('public/page', [
+            'data'   => $data,
+            'banner' => (new \Banner)->type('page')->page($data->id)->get()  
+        ]);
     }
 }

@@ -20,7 +20,7 @@ $adminPath = config('admin.path');
 Route::get($adminPath . '/login', 'Admin\LoginController@showLoginForm', ['guard' => 'admin'])->name('admin_login');
 Route::post($adminPath . '/login', 'Admin\LoginController@login', ['guard' => 'admin'])->name('admin_run_login'); 
 
-Route::group(['prefix' => $adminPath, 'namespace' => 'Admin', 'middleware' => 'admin'], function() { 
+Route::group(['prefix' => $adminPath, 'namespace' => 'Admin', 'middleware' => ['admin', 'web']], function() { 
 	Route::get('/', function(){
 		return redirect()->route('admin_menu');
 	});
@@ -143,6 +143,7 @@ Route::group(['prefix' => $adminPath, 'namespace' => 'Admin', 'middleware' => 'a
         Route::get('add', 'ClientsController@showAddForm');
         Route::post('create', 'ClientsController@create');
         Route::post('{id}/update', 'ClientsController@update');
+        Route::post('{id}/send-letter', 'ClientsController@sendLetter');
         Route::get('{id}/autologin', 'ClientsController@autologin'); 
     });
 
@@ -169,8 +170,8 @@ Route::group(['prefix' => $adminPath, 'namespace' => 'Admin', 'middleware' => 'a
 });
 
 
-Route::get('/', 'HomeController@index')->middleware(['lang']);
-Route::group(['prefix' => '{lang}', 'middleware' => ['lang']], function() {
+Route::get('/', 'HomeController@index')->middleware(['lang', 'web']);
+Route::group(['prefix' => '{lang}', 'middleware' => ['lang', 'web']], function() {
     Route::get('/', 'HomeController@index');
 
     Route::group(['prefix' => 'results'], function() {

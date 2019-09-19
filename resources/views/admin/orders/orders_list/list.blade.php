@@ -108,14 +108,21 @@
 			                    @endif 
 							</td>
 							<td> 
-								<select onchange="onChangeSelect(this, '{{ route('change_order_status', ['id' => $order->id]) }}', {{ $order->id }})" class="form-control">
-									@foreach($status as $item)
-										<option {{ ($order->id_status == $item->id) ? 'selected' : '' }} 
-											    value="{{ $item->id }}">
-											{{ $item->name_en }}
-										</option>
-									@endforeach
-								</select>
+								@if($order->id_status == 1)
+									<select onchange="onChangeSelect(this, '{{ route('change_order_status', ['id' => $order->id]) }}', {{ $order->id }})" class="form-control order-status-select">
+										@foreach($status as $item)
+											@if($item->id != 5)
+												<option data-order-class="{{ $item->class }}" 
+													    {{ ($order->id_status == $item->id) ? 'selected' : '' }} 
+												    value="{{ $item->id }}">
+													{{ $item->name_en }}
+												</option>
+											@endif 
+										@endforeach
+									</select>
+								@else
+									<div class="{{ $order->status->class }}">{{ $order->status->name_en }}</div>
+								@endif
 								<small class="refund-date {{ $order->status->class }}"
 									   style="{{ ($order->id_status == 3 && $order->refund_at) ? '' : 'display:none;' }}">
 									{{ $order->refund_at ? $order->refund_at->format('d.m.Y H:i') : '' }}
@@ -131,7 +138,7 @@
 				</table>
 			@else
 				<div class="alert alert-warning">No orders</div>
-			@endif
+			@endif 
 		</div>
 	</div>
 @stop

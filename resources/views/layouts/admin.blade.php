@@ -356,20 +356,19 @@
          </div>
          <!-- END PAGE HEADER-->
 
-         <!-- BEGIN PAGE CONTENT-->
-   
+         <!-- BEGIN PAGE CONTENT--> 
 
             @if(Session::has('admin_flash_message'))
                <div class="row">
                   <div class="col-md-12">
                      <div class="alert alert-success" style="margin-top: 20px;">
                         <p>{{ Session::get('admin_flash_message') }}</p>
+                        @php Session::forget('admin_flash_message') @endphp
                      </div> 
                   </div>
                </div>
             @endif 
-
-
+ 
             @yield('content')
          <!-- END PAGE CONTENT-->
       </div>

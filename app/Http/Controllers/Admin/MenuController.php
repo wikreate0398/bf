@@ -54,7 +54,7 @@ class MenuController extends Controller
     }
 
     public function showeditForm($id)
-    { 
+    {  
         return view('admin.menu.edit', ['method' => $this->method, 'data' => Menu::findOrFail($id)]);
     }
 

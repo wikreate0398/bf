@@ -13,7 +13,9 @@
 		@endphp
 		<div class="col-sm-12 col-md-3 thumbnail__item">
 			<div class="thumbnail">
-				<img src="/uploads/banners/{{ $image }}" alt="" style="width: 100%; height: 200px;">
+				<div>
+					<img src="/uploads/banners/{{ $image }}" alt="" style="width: 100%; height: 200px; object-fit: contain;">
+				</div>
 				<div class="caption">
 					<h3>{{ $item->name }}</h3>
 

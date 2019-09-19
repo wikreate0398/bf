@@ -11,7 +11,7 @@ use App\Notifications\NewItemInCart;
 
 class AddToCart extends Command
 {
-    protected $auction, $winnerBid, $prepareId;
+    protected $auction, $winnerBid, $preparedId;
 
     /**
      * The name and signature of the console command.
@@ -33,13 +33,13 @@ class AddToCart extends Command
      * @return void
      */
 
-    public function __construct($auction, $winnerBid, $prepareId = null)
+    public function __construct($auction, $winnerBid, $preparedId = null)
     {
         parent::__construct(); 
 
         $this->auction   = $auction;   
         $this->winnerBid = $winnerBid;
-        $this->prepareId = $prepareId;
+        $this->preparedId = $preparedId;
     }
 
     /**
@@ -49,28 +49,30 @@ class AddToCart extends Command
      */
     public function handle()
     {
+        $prepareId = $this->preparedId ? $this->preparedId : $this->getneratePrepareId();
         $order = Order::create([
             'id_user'         => $this->winnerBid->id_user,
             'id_auction'      => $this->auction->id,
             'price'           => $this->winnerBid->price,
             'retail_price'    => $this->auction->retail_price,
-            'bid_prepare_id'  => $this->getPrepareId(),
+            'bid_prepare_id'  => $prepareId,
             'rand'            => generate_id() 
         ]);
 
-        Bids::where('id_auction', $this->auction->id)->where('prepare_id', '0')->update(['prepare_id' => $this->getPrepareId()]);
-
+        if (!$this->preparedId) 
+        {
+            Bids::where('id_auction', $this->auction->id)
+            ->where('prepare_id', '0')
+            ->update(['prepare_id' => $prepareId]);
+        } 
+        
         $user = User::whereId($this->winnerBid->id_user)->first();
         $user->notify(new NewItemInCart($this->auction));
         return $order->id;
     }   
 
-    private function getPrepareId()
-    {
-        if(!$this->prepareId)
-        {
-            $this->prepareId = generate_id();
-        }
-        return $this->prepareId;
+    private function getneratePrepareId()
+    { 
+        return generate_id();
     }
 }

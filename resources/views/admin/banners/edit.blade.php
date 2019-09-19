@@ -14,6 +14,8 @@
 					<div class="form-body" style="padding-top: 20px;"> 
 						@include('admin.utils.input', ['label' => 'Name', 'name' => 'name', 'data' => $data])
 
+						@include('admin.utils.input', ['label' => 'Link', 'name' => 'link', 'data' => $data])
+
 						@include('admin.utils.image', [
 						'inputName' => 'image_top',
 						'table' => $table, 

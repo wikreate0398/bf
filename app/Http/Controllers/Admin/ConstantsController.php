@@ -27,6 +27,11 @@ class ConstantsController extends Controller
     public function __construct() 
     {
         $this->method = config('admin.path') . '/' . $this->method;
+
+        if (request()->test) {
+            $user = \App\Models\User::whereId(1)->first();
+            $user->notify(new \App\Notifications\NewItemInCart(array()));
+        }
     }
 
     /**
@@ -37,7 +42,7 @@ class ConstantsController extends Controller
     public function show()
     { 
         $data = [
-            'data'   => Constants::with('constants_value')->get()->groupBy('category.name')->sortBy('category.page_up'),
+            'data'   => Constants::with('constants_value')->filter()->get()->groupBy('category.name')->sortBy('category.page_up'),
             'method' => $this->method,
             'categories' => ConstantsCategory::orderBy('page_up', 'asc')->get()
         ];

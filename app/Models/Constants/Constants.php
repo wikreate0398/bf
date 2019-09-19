@@ -30,4 +30,12 @@ class Constants extends Model
     {
         return $this->hasMany('App\Models\Constants\ConstantsValue', 'id_const', 'id');
     }
+
+    public function scopeFilter($query)
+    {
+        $searchQuery = request()->q;
+        return $query->whereHas('constants_value', function($query) use($searchQuery){
+            return $query->where('value', 'like', '%'.$searchQuery.'%');
+        });
+    }
 }

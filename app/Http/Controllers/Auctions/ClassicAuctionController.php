@@ -24,7 +24,7 @@ class ClassicAuctionController extends AuctionsController
 
     public function add_show_data() {}
 
-    public function addBid($lang, $id, Request $request)
+    public function addBid($lang, $id, Request $request, $flashMessage = '')
     {
         $user         = User::whereId(\Auth::user()->id)->proposedBids($id)->first();
         $auction      = Auctions::active()->whereId($id)->totalActiveBids()->firstOrFail();
@@ -57,11 +57,24 @@ class ClassicAuctionController extends AuctionsController
     
         $redirect = setUri(\Request::segment(2) . '/' . $auction->url);
         if($auction->total_bid_limit == Bids::where('id_auction', $id)->where('prepare_id', '0')->count())
-        { 
-            $idOrder = $this->addToCart($auction->id); 
-            $redirect = route('view_cart', ['lang' => $lang, 'id' => $idOrder]);
+        {
+            $idOrder = $this->addToCart($auction->id);  
+            $order   = Order::whereId($idOrder)->first(); 
+            if (@$order->id_user == Auth::user()->id) 
+            {
+                $redirect = route('view_cart', ['lang' => $lang, 'id' => $idOrder]);
+            }
+            else
+            {
+                $flashMessage = 'Вы оставили последнюю ставку однако победитель уже установлен.'; 
+                if ($order->auction->quantity <= 0) 
+                {
+                    $classicAuctions = Pages::pageData('classical-auctions');
+                    $redirect        = setUri($classicAuctions['url']);
+                }
+            }
         }
 
-        return \JsonResponse::success(['messages' => \Constant::get('BID_ADDED'), 'redirect' => $redirect]);
+        return \JsonResponse::success(['messages' => \Constant::get('BID_ADDED'), 'redirect' => $redirect], $flashMessage);
     }
 }

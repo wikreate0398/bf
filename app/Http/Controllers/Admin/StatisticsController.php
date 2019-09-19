@@ -79,8 +79,8 @@ class StatisticsController extends Controller
                                                 ->merge($eWallet->keys())
                                                 ->sort(function($a, $b){ 
                                                   return strtotime($b) - strtotime($a);
-                                                });
-        
+                                                })->unique();
+         
         if (request()->filter) 
         {
           $from = request()->from;

@@ -4,7 +4,7 @@
     <section class="product_inner">
         <div class="content">
             <div class="container">
-                <a href="#" class="banner" style="background-image: url('/img/licitatii_specifice/banner.png');"></a>
+                @include('public.utils.top_banner')
 
                 <div class="prodcts_navigation">
                     @if($prev)
@@ -78,14 +78,20 @@
                                         </div>
                                     @endif
                                 </form>
-                            </div>
+                            </div> 
+
+                            @if(Session::has('flash_message'))   
+                                <div class="alert a-warning">
+                                    <p>{{ Session::get('flash_message') }}</p> 
+                                    @php Session::forget('flash_message') @endphp
+                                </div> 
+                            @endif
 
                             @if($auction->auction_type == 'classical')
                                 @include('public.auction.utils.classical_bids')
                             @else
                                 @include('public.auction.utils.specific_bids')
-                            @endif
-
+                            @endif 
                         </div>
                     </div>
                 </div>
