@@ -481,9 +481,9 @@
 
 </header>
  
-<a class="main-wrapper" @if(@$banner->link) href="{{ $banner->link }}" target="_blank" @endif style="display: block; {{ !empty($banner->image_background) ? 'background-image: url(/uploads/banners/'.$banner->image_background.');' : '' }}">
+<div class="main-wrapper" @if(@$banner->link) href="{{ $banner->link }}" target="_blank" @endif style="display: block; {{ !empty($banner->image_background) ? 'background-image: url(/uploads/banners/'.$banner->image_background.');' : '' }}">
     @yield('content')
-</a>
+</div>
 
 <footer id="footer" style="@if(!setting('extend_homepage') && @$page_data->page_type == 'home') background-image: url('/uploads/uploads/{{ setting('home_background') }}'); @else background-image: url('/img/footer/footer.png'); @endif">
     <div class="container">
