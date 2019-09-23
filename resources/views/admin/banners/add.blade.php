@@ -18,7 +18,7 @@
 
 					@include('admin.utils.image', ['inputName' => 'image_top', 'label' => 'Image Top'])
 
-					@include('admin.utils.image', ['inputName' => 'image_side', 'label' => 'Image Side'])
+					<!-- @include('admin.utils.image', ['inputName' => 'image_side', 'label' => 'Image Side']) -->
 
 					@include('admin.utils.image', ['inputName' => 'image_background', 'label' => 'Image Background'])
 

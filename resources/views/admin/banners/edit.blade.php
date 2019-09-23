@@ -24,13 +24,13 @@
 						'label' => 'Image Top',
 						'filename' => $data['image_top']])
 
-						@include('admin.utils.image', [
+						<!-- @include('admin.utils.image', [
 						'inputName' => 'image_side',
 						'table' => $table,
 						'folder' => $folder,
 						'id' => $data['id'],
 						'label' => 'Image Side',
-						'filename' => $data['image_side']])
+						'filename' => $data['image_side']]) -->
 
 						@include('admin.utils.image', [
 						'inputName' => 'image_background',

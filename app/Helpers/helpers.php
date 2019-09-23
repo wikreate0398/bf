@@ -27,10 +27,10 @@ function savePercent($retail, $price)
     return percentFormat(100 - (($price/100)*$retail));
 }
 
-function percentFormat($percent=null)
+function percentFormat($percent=null, $zecimals = 1)
 {
     if (empty($percent)) return '0'; 
-    return number_format($percent, 1, '.', ' ');
+    return number_format($percent, $zecimals, '.', ' ');
 }
 
 function generate_id($length=6)

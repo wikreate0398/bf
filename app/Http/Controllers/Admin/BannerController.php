@@ -147,17 +147,17 @@ class BannerController extends Controller
 
         $uploadImage      = new UploadImage;
         $image_top        = $uploadImage->upload('image_top', $this->uploadFolder);
-        $image_side       = $uploadImage->upload('image_side', $this->uploadFolder);
+        ..$image_side       = $uploadImage->upload('image_side', $this->uploadFolder);
         $image_background = $uploadImage->upload('image_background', $this->uploadFolder);
 
         if(!empty($image_top))
         {
             $input['image_top'] = $image_top;
         }
-        if(!empty($image_side))
-        {
-            $input['image_side']  = $image_side;
-        }
+        // if(!empty($image_side))
+        // {
+        //     $input['image_side']  = $image_side;
+        // }
         if(!empty($image_background))
         {
             $input['image_background'] = $image_background;

@@ -32,54 +32,33 @@
 
         </div>
     </section>
+    
+    @if($discounts->count())
+        <section class="top_sales">
+            <div class="container">
 
-    <section class="top_sales">
-        <div class="container">
-
-            <h3>{{ \Constant::get('TOP_DISCOUNTS') }}</h3>
-            <div class="sale_content">
-
-                <div class="sale_item">
-
-                    <div class="c100 p12">
-                        <span>-12%</span>
-                        <div class="slice">
-                            <div class="bar"></div>
-                            <div class="fill"></div>
+                <h3>{{ \Constant::get('TOP_DISCOUNTS') }}</h3>
+                <div class="sale_content">
+                    
+                    @foreach($discounts as $order)
+                        <div class="sale_item"> 
+                            <div class="c100 p12">
+                                <span>-{{ savePercent($order->auction->retail_price, $order->price) }}%</span>
+                                <div class="slice">
+                                    <div class="bar"></div>
+                                    <div class="fill"></div>
+                                </div>
+                            </div>
+                            <span class="title">{{ $order->auction["name_$lang"] }}</span>
+                            <span class="code">COD {{ $order->auction["code"] }}</span>
                         </div>
-                    </div>
-                    <span class="title">500 lei e-voucher</span>
-                    <span class="code">COD UI 15</span>
-                </div>
+                    @endforeach 
 
-                <div class="sale_item">
-                    <div class="c100 p35">
-                        <span>-35%</span>
-                        <div class="slice">
-                            <div class="bar"></div>
-                            <div class="fill"></div>
-                        </div>
-                    </div>
-                    <span class="title">500 lei e-voucher</span>
-                    <span class="code">COD UI 15</span>
-                </div>
-
-                <div class="sale_item">
-                    <div class="c100 p56">
-                        <span>-56%</span>
-                        <div class="slice">
-                            <div class="bar"></div>
-                            <div class="fill"></div>
-                        </div>
-                    </div>
-                    <span class="title">500 lei e-voucher</span>
-                    <span class="code">COD UI 15</span>
                 </div>
 
             </div>
-
-        </div>
-    </section>
+        </section>
+    @endif
 
 
     <section class="testimonials">
