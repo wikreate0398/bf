@@ -237,7 +237,7 @@ return [
         'LogsReportAgent' => App\Utils\LogsReportAgent::class,
         'JsonResponse'    => App\Utils\JsonResponse::class,
         'Pages'    => App\Utils\Pages::class,
-        'Banner'   => App\Utils\Banner::class, 
+        'Banner'   => App\Utils\BannerUtil::class,
         'Constant' => App\Utils\Constants::class,
         'Excel'    => Maatwebsite\Excel\Facades\Excel::class,
     ],

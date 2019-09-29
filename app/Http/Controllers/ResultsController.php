@@ -23,7 +23,7 @@ class ResultsController
         $bids  = Bids::where('prepare_id', $order->bid_prepare_id)->withTrashed()->get(); 
 
         $excel = \App::make('excel');
-        return Excel::create('licitation_' . $order->created_at->format('d_m_y_H_i'), function($excel) use($order, $bids, $lang) {
+        return $excel->create('licitation_' . $order->created_at->format('d_m_y_H_i'), function($excel) use($order, $bids, $lang) {
 
             $excel->getDefaultStyle()
                 ->getAlignment()
@@ -68,6 +68,6 @@ class ResultsController
                     $cells->setBackground('#D8D8D8');
                 }); 
             });
-        })->download(); 
+        })->export('xls');
     }
 }

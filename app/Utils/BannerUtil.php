@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use \App\Models\Banner\Banner;
 use \App\Models\Banner\BannerPages;
 
-class Banner
+class BannerUtil
 {  
     private $type;
 
