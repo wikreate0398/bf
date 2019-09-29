@@ -74,7 +74,7 @@ class Order extends Model
 
     public function scopeLastDays($query, $days = 7)
     {
-        return $query->where('in_cart', '0')->whereDate('created_at', '>=', \Carbon\Carbon::now()->subDays($days));
+        return $query->where('in_cart', '0')->whereDate('ordered_at', '>=', \Carbon\Carbon::now()->subDays($days));
     }
 
     public function scopeCartStage($query)
