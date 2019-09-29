@@ -169,7 +169,7 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Balping\BladeFunction\BladeFunctionServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
+        // Maatwebsite\Excel\ExcelServiceProvider::class,
 
 
         /*
@@ -239,7 +239,7 @@ return [
         'Pages'    => App\Utils\Pages::class,
         'Banner'   => App\Utils\BannerUtil::class,
         'Constant' => App\Utils\Constants::class,
-        'Excel'    => Maatwebsite\Excel\Facades\Excel::class,
+        //'Excel'    => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
