@@ -18,7 +18,7 @@ class HomeController
             'discounts'    => Order::where('id_status', 2) 
                                    ->orderByRaw('retail_price desc, price asc')
                                    ->with('auction')
-                                   ->limit(3)
+                                   ->limit(2)
                                    ->get()  
         ]; 
  

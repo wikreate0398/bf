@@ -26,8 +26,10 @@ $(document).ready(function() {
         languageSelect.text(languageActive);
     });
 
+    var maxSaleSlidesToShow = ($('.sale_item').length > 3) ? 3 : $('.sale_item').length;
+
     $('.sale_content').slick({
-        slidesToShow: 3,
+        slidesToShow: maxSaleSlidesToShow,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 5000,
