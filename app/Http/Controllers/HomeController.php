@@ -37,6 +37,7 @@ class HomeController
 
     public function test()
     {
-        return view('public/test', []);
+        $user = User::where('email', 'fleancu.daniel@gmail.com')->first();
+        $user->notify(new \App\Notifications\ConfirmRegistration('test', lang())); 
     }
 }
