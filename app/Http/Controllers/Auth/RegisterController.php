@@ -81,7 +81,7 @@ class RegisterController extends Controller
 
         $user->notify(new ConfirmRegistration($confirm_hash, lang()));
         return \JsonResponse::success([
-            'messages' => \Constant::get('REG_SUCCESS')
+            'messages' => htmlspecialchars_decode(\Constant::get('REG_SUCCESS'))
         ]);
     }   
 
