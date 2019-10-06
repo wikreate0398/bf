@@ -5,6 +5,7 @@
     <title>Home</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" integrity="sha384-PmY9l28YgO4JwMKbTvgaS7XNZJ30MK9FAZjjzXtlqyZCqBY6X6bXIkM++IkyinN+" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&amp;subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
@@ -539,13 +540,12 @@
 <script type="text/javascript" src="/scripts/jquery.gallery.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
-
-<script>
-</script>
-
+ 
 <script src="/scripts/main.js?v={{ time() }}"></script>
 <script src="/scripts/ajax.js?v={{ time() }}"></script>
 <script src="/scripts/notify.js?v={{ time() }}"></script>
+<!-- 
+<script src="/scripts/app.js?v={{ time() }}"></script>  -->
 
 </body>
 </html>

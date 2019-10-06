@@ -34,4 +34,9 @@ class HomeController
             'banner' => (new \Banner)->type('page')->page($data->id)->get()  
         ]);
     }
+
+    public function test()
+    {
+        return view('public/test', []);
+    }
 }

@@ -28,34 +28,38 @@ $(document).ready(function() {
 
     var maxSaleSlidesToShow = ($('.sale_item').length > 3) ? 3 : $('.sale_item').length;
 
-    $('.sale_content').slick({
-        slidesToShow: maxSaleSlidesToShow,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 5000,
-        arrow: false,
-        prevArrow:'<i class="fa fa-angle-left arrow arrowL" aria-hidden="true"></i>',
-        nextArrow:'<i class="fa fa-angle-right arrow arrowR" aria-hidden="true"></i>',
-        // settings: "unslick",
-        responsive: [
-            {
-                breakpoint: 992,
-                settings: {
-                    arrows: true,
-                    slidesToShow: 2
+    if ($('.sale_content').length) { 
+        $('.sale_content').slick({
+            slidesToShow: maxSaleSlidesToShow,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            arrow: false,
+            prevArrow:'<i class="fa fa-angle-left arrow arrowL" aria-hidden="true"></i>',
+            nextArrow:'<i class="fa fa-angle-right arrow arrowR" aria-hidden="true"></i>',
+            // settings: "unslick",
+            responsive: [
+                {
+                    breakpoint: 992,
+                    settings: {
+                        arrows: true,
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 767,
+                    settings: {
+                        arrows: true,
+                        slidesToShow: 1
+                    }
                 }
-            },
-            {
-                breakpoint: 767,
-                settings: {
-                    arrows: true,
-                    slidesToShow: 1
-                }
-            }
-        ]
-    });
+            ]
+        });
+    }
 
-    $('#dg-container').gallery();
+    if ($('#dg-container').length) { 
+        $('#dg-container').gallery();
+    }
 
     var parent = document.getElementById("amount_digits");
     if($(parent).length)

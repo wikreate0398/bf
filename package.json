@@ -12,10 +12,18 @@
   "devDependencies": {
     "axios": "^0.16.2",
     "bootstrap-sass": "^3.3.7",
-    "cross-env": "^5.0.1",
+    "cross-env": "^5.2.1",
     "jquery": "^3.1.1",
-    "laravel-mix": "^1.0",
+    "laravel-mix": "^1.7.2",
     "lodash": "^4.17.4",
     "vue": "^2.1.10"
+  },
+  "dependencies": {
+    "laravel-echo": "^1.6.1",
+    "pusher-js": "^5.0.2",
+    "socket.io-client": "^2.3.0"
+  },
+  "resolutions": {
+    "ajv": "6.8.1"
   }
 }
