@@ -22,7 +22,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
-<body class="{{ (!setting('extend_homepage') && @$page_data->page_type == 'home') ? 'without_content' : '' }}">
+<body class="{{ (!setting('extend_homepage') && @$page_data->page_type == 'home') ? 'without_content' : '' }} @if(@$page_data->page_type != 'home') no-home @endif">
 
 <!-- <header id="header_not_registered"></header>  -->
 <header @if (Auth::check()) id="header_registred" @else id="header_not_registered" @endif
@@ -103,7 +103,7 @@
         <div class="container">
             <div class="content">
                 <div class="left">
-                    <a href="/"> <img src="/img/logo.png" class="logo" alt="logo"></a>
+                    <a href="/"> <img src="/img/logo{{ (@Pages::pageData()->page_type == 'home') ? '_white' : '' }}.png" class="logo" alt="logo"></a>
                 </div>
                 <div class="center">
                     <ul>
@@ -531,10 +531,8 @@
 </footer>
 
 <div id="ajax-notify">
-    <div class="inner"></div>
-</div>
-
- 
+    <div class="notify-inner"></div>
+</div> 
  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script>
 <script type="text/javascript" src="/scripts/jquery.gallery.js"></script>

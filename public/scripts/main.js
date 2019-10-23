@@ -2,7 +2,8 @@ $(document).ready(function() {
     $(".menu_btn").click(function(){
         $(".menu_mobile").addClass("open");
         $("body").addClass("menu_opened");
-    })
+    });
+
     $(".close_menu").click(function(){
         $(".menu_mobile").removeClass("open");
         $("body").removeClass("menu_opened");
@@ -13,6 +14,19 @@ $(document).ready(function() {
             e.preventDefault();
         }
     });
+
+    $(window).scroll(function(e){
+        var body = e.target.body, scrollT = $(this).scrollTop(); 
+        if (scrollT > 600) {
+            $('header').addClass('fixed-header');
+            $('.fixed-header').css({
+                'top': "0",
+                'opacity': '1'
+            }); 
+        }else{ 
+            $('header').removeClass('fixed-header');
+        } 
+    }); 
 
     $(".language_select").text($(".language_list li.active[data-type='mobile-header']").text());
     $(".language_select").text($(".language_list li.active[data-type='desktop-header']").text());

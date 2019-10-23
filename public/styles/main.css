@@ -135,16 +135,30 @@ header {
     font-weight: 500
 }
 
+.fixed-header{
+    position: fixed !important;  
+    background-color: #1D2632 !important; 
+    opacity: 0;  
+}
+
 header.blue .head._1,
 header.blue .head._2,
 header.blue .head.header_mobile {
-    background-color: #1D2632
+   /* background-color: #1D2632*/
+}
+
+.no-home header.blue .head._2{
+    background: #fff;
 }
 
 header .head a {
     font-size: 14px;
     color: rgba(255, 255, 255, .5);
     text-decoration: none
+}
+
+.no-home header .head a{
+    color: #262626;
 }
 
 header .head ul {
@@ -163,6 +177,10 @@ header .head.header_mobile {
 header .head .content {
     color: rgba(255, 255, 255, .5);
     justify-content: space-between
+}
+
+.no-home header .head .content{
+    color: #262626;
 }
 
 header .head .content .left {
@@ -202,6 +220,10 @@ header .head .language span.language_select {
     text-transform: uppercase;
 }
 
+.no-home header .head .language span.language_select{
+    color: #262626;
+}
+
 header .head .language i {
     position: relative;
     top: -2px;
@@ -215,6 +237,10 @@ header .head .language i svg {
 
 header .head .language i svg path.cls-1 {
     fill: #fff
+}
+
+.no-home header .head .language i svg path.cls-1{
+    fill:#262626;
 }
 
 header .head .language ul {
@@ -241,6 +267,11 @@ header .head._3 .left ul li:last-of-type a::before {
     left: 0;
     transition-duration: .3s;
     transition-timing-function: ease-in-out
+}
+
+.no-home header .head._2 .center ul li a::before,
+.no-home header .head._3 .left ul li:last-of-type a::before{
+    background-color: #262626;
 }
 
 header .head .language ul li {
@@ -273,6 +304,10 @@ header .head._1 {
     border-bottom: 1px solid rgba(255, 255, 255, .2)
 }
 
+.no-home header .head._1 {
+    background: #F2F2F2 !important; 
+}
+
 header .head._1 .left a {
     margin-left: 27px
 }
@@ -285,6 +320,10 @@ header .head._1 .center span {
     display: block
 }
 
+.no-home header .head._1 .center span{
+    color: #262626;
+}
+
 header .head._1 .center span i.location {
     width: 13px;
     height: 18px;
@@ -293,6 +332,10 @@ header .head._1 .center span i.location {
     position: absolute;
     background-image: url(/img/location-point.svg);
     background-repeat: no-repeat
+}
+
+.no-home header .head._1 .center span i.location{
+    background-image: url(/img/location-point_black.png);
 }
 
 header .head._1 .right ul li {
@@ -328,8 +371,13 @@ header .head._1 .right ul li a i.login_square {
     background-repeat: no-repeat
 }
 
+.no-home header .head._1 .right ul li a i.login_square{
+    background-image: url(/img/login-square-bk.svg);
+}
+
 header .head._2 .left img.logo {
-    margin-top: 6px
+    margin-top: 6px;
+    height: 77px;
 }
 
 header .head._2 .center ul li {
@@ -349,6 +397,11 @@ header .head._2 .center ul li:last-of-type a::before {
 header .head._2 .center ul li.active a,
 header .head._2 .center ul li:hover a {
     color: #fff
+}
+
+header .head._2 .center ul li.active a,
+header .head._2 .center ul li:hover a{
+    color: #262626;
 }
 
 header .head._2 .center ul li.active a::before,
@@ -633,6 +686,10 @@ header.registered .head._1 .right ul li a i.user_register {
     background-image: url(/img/user_logged.png)
 }
 
+.no-home header.registered .head._1 .right ul li a i.user_register{
+    background-image: url(/img/user_logged_bk.png)
+}
+
 header.registered .head._1 .right ul li a i.login_square {
     left: 0;
     position: relative
@@ -662,6 +719,10 @@ header.registered .head._2 .right ul li a span.shopping_cart {
     background-repeat: no-repeat
 }
 
+.no-home header.registered .head._2 .right ul li a span.shopping_cart{
+    background-image: url(/img/shopping-cart_black.png);
+}
+
 header.registered .head._2 .right ul li a span.shopping_cart span {
     position: absolute;
     display: block;
@@ -686,6 +747,10 @@ header.registered .head._2 .right ul li a i.wallet {
     position: absolute;
     background-image: url(/img/wallet.png);
     background-repeat: no-repeat
+}
+
+.no-home header.registered .head._2 .right ul li a i.wallet{
+    background-image: url(/img/wallet_black.png);
 }
 
 header .page_title {
