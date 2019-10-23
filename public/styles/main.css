@@ -361,6 +361,10 @@ header .head._1 .right ul li a i.user_register {
     background-repeat: no-repeat
 }
 
+.no-home header .head._1 .right ul li a i.user_register{
+    background-image: url(/img/add-user-bk.svg);
+}
+
 header .head._1 .right ul li a i.login_square {
     display: block;
     left: -30px;
