@@ -424,9 +424,63 @@
                 </div>
             @endif
         </div>
-    </div>
+    </div> 
+</header>
+ 
+<div class="main-wrapper" @if(@$banner->link) href="{{ $banner->link }}" target="_blank" @endif style="display: block; {{ !empty($banner->image_background) ? 'background-image: url(/uploads/banners/'.$banner->image_background.');' : '' }}">
+    @yield('content')
+</div>
 
-    <!-- Modal Register -->
+<footer id="footer" style="@if(!setting('extend_homepage') && @$page_data->page_type == 'home') background-image: url('/uploads/uploads/{{ setting('home_background') }}');  @endif">
+
+    <div class="footer-section1"> 
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-9 col-sm-5">
+                    <div class="socials">
+                        @if(\Constant::get('FACEBOOK'))
+                            <a target="_blank" class="fb" href="{{ \Constant::get('FACEBOOK') }}"></a>
+                        @endif
+
+                        @if(\Constant::get('YOUTUBE'))
+                            <a target="_blank" class="ytb" href="{{ \Constant::get('YOUTUBE') }}"> </a>
+                        @endif
+                    </div>
+                    <p><a href="/">{{ ucfirst(\Request::server('SERVER_NAME')) }}</a> {{ \Constant::get('BF_IS') }}</p>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        @foreach(tree(Pages::bottom()) as $menu)
+                            <div class="col-md-3 col-sm-3 col-md-offset-3 col-xs-6">
+                                <ul>
+                                    <li class="title">{{ $menu["name_$lang"] }}</li>
+                                    @if(!empty($menu['childs']))
+                                        @foreach($menu['childs'] as $childs)
+                                            <li><a href="{{ setUri($childs['url']) }}">{{ $childs["name_$lang"] }}</a></li>
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr> 
+    <div class="footer-section2"> 
+        <div class="container">
+            <div class="copyright">
+                <p>Copyright <span id="year">{{ date('Y') }}</span></p>
+                <script type="text/javascript">
+                    document.getElementById('year').innerHTML = new Date().getFullYear();
+                </script>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Modal Register -->
     <div class="modal fade" id="register" role="dialog">
         <div class="modal-dialog">
             <div class="close_modal" onclick="$('.modal').modal('hide');"></div>
@@ -478,57 +532,7 @@
             </form>
         </div>
     </div>
-
-</header>
  
-<div class="main-wrapper" @if(@$banner->link) href="{{ $banner->link }}" target="_blank" @endif style="display: block; {{ !empty($banner->image_background) ? 'background-image: url(/uploads/banners/'.$banner->image_background.');' : '' }}">
-    @yield('content')
-</div>
-
-<footer id="footer" style="@if(!setting('extend_homepage') && @$page_data->page_type == 'home') background-image: url('/uploads/uploads/{{ setting('home_background') }}'); @else background-image: url('/img/footer/footer.png'); @endif">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-sm-9 col-sm-5">
-                <div class="socials">
-                    @if(\Constant::get('FACEBOOK'))
-                        <a target="_blank" href="{{ \Constant::get('FACEBOOK') }}"><img src="/img/footer/facebook.png" alt=""></a>
-                    @endif
-
-                    @if(\Constant::get('YOUTUBE'))
-                        <a target="_blank" href="{{ \Constant::get('YOUTUBE') }}"><img src="/img/footer/youtube.png" alt=""></a>
-                    @endif
-                </div>
-                <p><a href="/">{{ ucfirst(\Request::server('SERVER_NAME')) }}</a> {{ \Constant::get('BF_IS') }}</p>
-            </div>
-            <div class="col-md-8">
-                <div class="row">
-                    @foreach(tree(Pages::bottom()) as $menu)
-                        <div class="col-md-3 col-sm-3 col-md-offset-3 col-xs-6">
-                            <ul>
-                                <li class="title">{{ $menu["name_$lang"] }}</li>
-                                @if(!empty($menu['childs']))
-                                    @foreach($menu['childs'] as $childs)
-                                        <li><a href="{{ setUri($childs['url']) }}">{{ $childs["name_$lang"] }}</a></li>
-                                    @endforeach
-                                @endif
-                            </ul>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
-
-    <div class="container">
-        <div class="copyright">
-            <p>Copyright <span id="year">{{ date('Y') }}</span></p>
-            <script type="text/javascript">
-                document.getElementById('year').innerHTML = new Date().getFullYear();
-            </script>
-        </div>
-    </div>
-</footer>
 
 <div id="ajax-notify">
     <div class="notify-inner"></div>

@@ -32,7 +32,7 @@ class SpecificAuctionController extends AuctionsController
     }
 
     public function addBid($lang, $id, Request $request, $flashMessage = '')
-    {  
+    {   
         $user    = User::whereId(\Auth::user()->id)->proposedBids($id)->first();
         $auction = Auctions::active()->whereId($id)->totalActiveBids()->firstOrFail();
         $auctionState = new AuctionState($auction, $user);

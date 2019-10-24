@@ -33,7 +33,7 @@ var Ajax = function() {
                     }else{
                         message += '<p>' + jsonResponse.messages + '</p>';
                     }
-
+ 
                     Notify.setStatus('danger').setMessage(message).show();
 
                 } else {
@@ -48,7 +48,7 @@ var Ajax = function() {
 
                         if (jsonResponse.reload == true) {
                             if(jsonResponse.messages !== undefined){
-                                Notify.setStatus('success').setMessage(jsonResponse.messages).show();
+                                Notify.setStatus('success').setMessage(jsonResponse.messages).show(); 
                                 setTimeout(function () {
                                     window.location.reload(true);
                                 }, 1500);

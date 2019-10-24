@@ -28,8 +28,8 @@ var Notify = function () {
 
     this.show = function () {
         $('#ajax-notify').removeClass('notify-success').removeClass('notify-danger');
-        $('#ajax-notify').addClass('notify-' + self.status);
-        $('#ajax-notify .inner').html(self.message);
+        $('#ajax-notify').addClass('notify-' + self.status); 
+        $('#ajax-notify .notify-inner').html(self.message);
         $.fancybox.open({
             src  : '#ajax-notify',
             type : 'inline'

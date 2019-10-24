@@ -130,7 +130,7 @@ header {
     left: 0;
     margin: auto;
     width: 100%;
-    z-index: 1100;
+    z-index: 100;
     font-family: Montserrat, sans-serif;
     font-weight: 500
 }
@@ -139,6 +139,8 @@ header {
     position: fixed !important;  
     background-color: #1D2632 !important; 
     opacity: 0;  
+    -webkit-box-shadow: 0px 0px 17px rgba(0,0,0,.2);
+    box-shadow: 0px 0px 17px rgba(0,0,0,.2);
 }
 
 header.blue .head._1,
@@ -149,6 +151,7 @@ header.blue .head.header_mobile {
 
 .no-home header.blue .head._2{
     background: #fff;
+    border-bottom: 1px solid #F2F2F2 !important
 }
 
 header .head a {
@@ -263,7 +266,7 @@ header .head .language ul {
 
 header .head._2 .center ul li a::before,
 header .head._3 .left ul li:last-of-type a::before {
-    background-color: #95DC49;
+    background-color: #fff;
     left: 0;
     transition-duration: .3s;
     transition-timing-function: ease-in-out
@@ -380,7 +383,7 @@ header .head._1 .right ul li a i.login_square {
 }
 
 header .head._2 .left img.logo {
-    margin-top: 6px;
+    padding: 5px 0;
     height: 77px;
 }
 
@@ -403,9 +406,13 @@ header .head._2 .center ul li:hover a {
     color: #fff
 }
 
-header .head._2 .center ul li.active a,
-header .head._2 .center ul li:hover a{
+.no-home header .head._2 .center ul li.active a,
+.no-home header .head._2 .center ul li:hover a{
     color: #262626;
+}
+
+header .head._2 .center ul li:hover a{
+    color: #fff;
 }
 
 header .head._2 .center ul li.active a::before,
@@ -413,7 +420,7 @@ header .head._2 .center ul li:hover a::before {
     bottom: -10px;
     opacity: 1
 }
-
+ 
 header .head._2 .center ul li.active.active a::before,
 header .head._2 .center ul li.active:last-of-type a::before,
 header .head._2 .center ul li:hover.active a::before,
@@ -464,7 +471,7 @@ header .head._2 .center ul li a svg.analitics_result g {
 header .head._3 {
     height: 58px;
     line-height: 58px;
-    background-color: #EAEDF1;
+    background-color: #f2f2f2;
     position: relative;
     z-index: 2
 }
@@ -547,7 +554,7 @@ header .head._3 .right ul li a:hover {
 header .head._4 {
     height: 47px;
     line-height: 40px;
-    background-color: #EAEDF1;
+    background-color: #f2f2f2;
     position: relative;
     z-index: 1;
     margin-top: -47px;
@@ -799,7 +806,7 @@ header .page_title .aditional_title i.registru_personal {
     background-image: url(/img/wallet_2.png)
 }
 
-header .modal {
+.modal {
     min-height: 100vh;
     overflow: auto;
     padding-top: 20vh;
@@ -819,7 +826,7 @@ header .modal {
     cursor: pointer;
 }
 
-header .modal .modal-dialog {
+.modal .modal-dialog {
     margin: auto;
     width: 470px;
     padding: 40px 79px!important;
@@ -827,9 +834,9 @@ header .modal .modal-dialog {
     background-color: #fff
 }
 
-header .modal .modal-dialog i.forgot_pass,
-header .modal .modal-dialog i.login,
-header .modal .modal-dialog i.register {
+.modal .modal-dialog i.forgot_pass,
+.modal .modal-dialog i.login,
+.modal .modal-dialog i.register {
     display: block;
     margin: 0 auto 30px;
     height: 40px;
@@ -838,22 +845,22 @@ header .modal .modal-dialog i.register {
     background-repeat: no-repeat
 }
 
-header .modal .modal-dialog i.register {
+.modal .modal-dialog i.register {
     width: 40px;
     background-image: url(/img/register_modal.svg)
 }
 
-header .modal .modal-dialog i.login {
+.modal .modal-dialog i.login {
     width: 89px;
     background-image: url(/img/login_modal.svg)
 }
 
-header .modal .modal-dialog i.forgot_pass {
+.modal .modal-dialog i.forgot_pass {
     width: 85px;
     background-image: url(/img/forgot_pass.svg)
 }
 
-header .modal .modal-dialog h4 {
+.modal .modal-dialog h4 {
     font-size: 16px;
     color: #1D2632;
     font-weight: 500;
@@ -861,7 +868,7 @@ header .modal .modal-dialog h4 {
     text-align: center
 }
 
-header .modal .modal-dialog a.forgot_pass {
+.modal .modal-dialog a.forgot_pass {
     display: table;
     margin-top: 20px;
     margin-bottom: 35px;
@@ -871,11 +878,11 @@ header .modal .modal-dialog a.forgot_pass {
     color: #004EB9
 }
 
-header .modal .modal-dialog form {
+.modal .modal-dialog form {
     width: 100%
 }
 
-header .modal .modal-dialog form input.input-control {
+.modal .modal-dialog form input.input-control {
     font-size: 14px;
     color: #A5A5A5;
     width: 100%;
@@ -887,14 +894,14 @@ header .modal .modal-dialog form input.input-control {
     outline: 0
 }
 
-header .modal .modal-dialog form input.input-control:-moz-placeholder,
-header .modal .modal-dialog form input.input-control:-ms-input-placeholder,
-header .modal .modal-dialog form input.input-control::-moz-placeholder,
-header .modal .modal-dialog form input.input-control::-webkit-input-placeholder {
+.modal .modal-dialog form input.input-control:-moz-placeholder,
+.modal .modal-dialog form input.input-control:-ms-input-placeholder,
+.modal .modal-dialog form input.input-control::-moz-placeholder,
+.modal .modal-dialog form input.input-control::-webkit-input-placeholder {
     color: #A5A5A5
 }
 
-header .modal .modal-dialog form label {
+.modal .modal-dialog form label {
     font-size: 14px;
     color: #A5A5A5;
     font-weight: 400;
@@ -903,13 +910,13 @@ header .modal .modal-dialog form label {
     align-items: center
 }
 
-header .modal .modal-dialog form label a {
+.modal .modal-dialog form label a {
     color: #004EB6;
     font-weight: 500;
     margin-left: 3px
 }
 
-header .modal .modal-dialog form label span.check {
+.modal .modal-dialog form label span.check {
     position: relative;
     height: 13px;
     width: 13px;
@@ -919,7 +926,7 @@ header .modal .modal-dialog form label span.check {
     border-radius: 2px
 }
 
-header .modal .modal-dialog form label span.check:after {
+.modal .modal-dialog form label span.check:after {
     content: "";
     display: none;
     position: absolute;
@@ -937,22 +944,22 @@ header .modal .modal-dialog form label span.check:after {
     transform: rotate(45deg)
 }
 
-header .modal .modal-dialog form label input[type=checkbox] {
+.modal .modal-dialog form label input[type=checkbox] {
     opacity: 0;
     position: absolute;
     left: 0;
     background-color: transparent
 }
 
-header .modal .modal-dialog form label input[type=checkbox]:checked~.check {
+.modal .modal-dialog form label input[type=checkbox]:checked~.check {
     background-color: #F2F2F2
 }
 
-header .modal .modal-dialog form label input[type=checkbox]:checked~.check:after {
+.modal .modal-dialog form label input[type=checkbox]:checked~.check:after {
     display: block
 }
 
-header .modal .modal-dialog form .message {
+.modal .modal-dialog form .message {
     width: 100%;
     padding: 10px 20px;
     background-color: rgba(149, 220, 73, .65);
@@ -960,22 +967,22 @@ header .modal .modal-dialog form .message {
     margin-top: 30px
 }
 
-header .modal .modal-dialog form .message span {
+.modal .modal-dialog form .message span {
     font-size: 14px;
     color: #62632A;
     display: block
 }
 
-header .modal .modal-dialog form .message span.title {
+.modal .modal-dialog form .message span.title {
     margin-bottom: 3px;
     font-weight: 500
 }
 
-header .modal .modal-dialog form .message span.description {
+.modal .modal-dialog form .message span.description {
     font-weight: 400
 }
 
-header .modal .modal-dialog form button {
+.modal .modal-dialog form button {
     font-size: 14px;
     color: #fff;
     font-weight: 500;
@@ -2880,8 +2887,22 @@ section.product_inner .product .rigth_part .action_block .submit_offer button {
     font-size: 14px;
     color: #fff;
     font-weight: 500;
-    background-color: #95DC49;
-    padding: 14px 42px 12px
+    background-color: #262626;
+    padding: 13.5px 41px 12px;
+    border: 1px solid #262626;
+    -webkit-transition: .2s all;
+    -o-transition: .2s all;
+    transition: .2s all;
+} 
+
+section.product_inner .product .rigth_part .action_block .submit_offer button:hover .ball-pulse>div{
+    background-color: #262626;
+}
+
+section.product_inner .product .rigth_part .action_block .submit_offer button:hover{
+    background-color: #fff;
+    color: #262626;
+    border: 1px solid #262626;
 }
 
 section.product_inner .product .rigth_part .result_of_bids {
@@ -3867,7 +3888,7 @@ section.change_pass form label input {
 
 section.change_pass form button {
     width: 230px;
-    background-color: #95DC49;
+    background-color: #262626;
     height: 44px;
     line-height: 44px;
     text-align: center;
@@ -3878,6 +3899,16 @@ section.change_pass form button {
     border: none;
     outline: 0;
     text-transform: uppercase;
+}
+
+section.change_pass form button:hover .ball-pulse>div{
+    background-color: #262626;
+}
+
+section.change_pass form button:hover{
+    background-color: #fff;
+    color: #262626;
+    border: 1px solid #262626;
 }
 
 @media only screen and (max-width:992px) {
@@ -4494,7 +4525,7 @@ section.checkout .buy_product_block form .options button {
     width: 230px;
     height: 45px;
     line-height: 45px;
-    background-color: #95DC49;
+    background-color: #262626;
     border: none;
     box-shadow: none;
     font-size: 14px;
@@ -4502,6 +4533,16 @@ section.checkout .buy_product_block form .options button {
     font-weight: 500;
     text-align: center;
     outline: 0
+}
+
+section.checkout .buy_product_block form .options button:hover .ball-pulse>div{
+    background-color: #262626;
+}
+
+section.checkout .buy_product_block form .options button:hover{
+    background-color: #fff;
+    color: #262626;
+    border: 1px solid #262626;
 }
 
 @media only screen and (max-width:1199px) {
@@ -4700,6 +4741,10 @@ footer::before {
     z-index: -1
 }
 
+.no-home footer::before{
+    background-color: #F2F2F2 !important;
+} 
+
 footer .socials a {
     display: inline-block;
     margin-right: 17px
@@ -4710,6 +4755,30 @@ footer .socials a img {
     width: 30px
 }
 
+.socials a{
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;  
+}
+
+.socials a.fb{
+    background-image: url(../img/footer/facebook.png); 
+}
+
+.socials a.ytb{
+    background-image: url(../img/footer/youtube.png); 
+} 
+
+.no-home .socials a.fb{
+    background-image: url(../img/footer/facebook_bk.png); 
+}
+
+.no-home .socials a.ytb{
+    background-image: url(../img/footer/youtube_bk.png); 
+}
+
 footer p {
     margin-top: 30px;
     font-size: 14px;
@@ -4718,6 +4787,7 @@ footer p {
     line-height: 26px;
     letter-spacing: .3px
 }
+ 
 
 footer p a {
     color: rgba(255, 255, 255, .5);
@@ -4743,7 +4813,7 @@ footer ul li:last-of-type {
 }
 
 footer ul li.title {
-    font-size: 24px;
+    font-size: 20px;
     color: rgba(255, 255, 255, .5);
     font-weight: 500;
     margin-bottom: 25px
@@ -4754,6 +4824,16 @@ footer ul li a {
     color: rgba(255, 255, 255, .5);
     font-weight: 300;
     letter-spacing: .4px;
+    transition: color .2s ease-in-out
+}
+
+.no-home footer p, .no-home footer a, .no-home footer ul li.title{
+    color: #262626;
+}
+
+.no-home footer a:hover{
+    color: #262626;
+    opacity: 0.6 !important;
     transition: color .2s ease-in-out
 }
 
@@ -4828,8 +4908,8 @@ footer .copyright p {
 }
 
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
-    background: #95DC49;
-    border:1px solid #95DC49 !important;
+    background: #262626;
+    border:1px solid #262626 !important;
 }
 
 .pagination li{
@@ -4838,4 +4918,16 @@ footer .copyright p {
 
 .pagination li span{
     border-radius: 0px !important;  
+}
+
+.footer-section1{ 
+    padding-bottom: 30px; 
+}
+
+.footer-section2{
+    background-color: #fff;  
+}
+
+.footer-section2 p{
+    color: #262626;
 }
