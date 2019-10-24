@@ -989,8 +989,18 @@ header .page_title .aditional_title i.registru_personal {
     width: 100%;
     height: 45px;
     line-height: 45px;
-    background-color: #95DC49;
+    background-color: #262626;
     border: none
+}
+
+.modal .modal-dialog form button:hover .ball-pulse>div{
+    background-color: #262626;
+}
+
+.modal .modal-dialog form button:hover{
+    background-color: #fff;
+    color: #262626;
+    border: 1px solid #262626;
 }
 
 header .menu_mobile {
